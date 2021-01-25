@@ -67,70 +67,31 @@ struct RowView: View {
     
     var body: some View {
         HStack(spacing: 0){
-            ZStack{
-                color1
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image(image[0])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
-            ZStack{
-                color2
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image(image[1])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
-            ZStack{
-                color1
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image(image[2])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
-            ZStack{
-                color2
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image(image[3])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
-            ZStack{
-                color1
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: .center)
-                Image(image[4])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
-            ZStack{
-                color2
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image(image[5])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
-            ZStack{
-                color1
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image(image[6])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
-            ZStack{
-                color2
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Image(image[7])
-                    .resizable()
-                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                
-            }
+            SquareView(color: color1, pice: image[0])
+            SquareView(color: color2, pice: image[1])
+            SquareView(color: color1, pice: image[2])
+            SquareView(color: color2, pice: image[3])
+            SquareView(color: color1, pice: image[4])
+            SquareView(color: color2, pice: image[5])
+            SquareView(color: color1, pice: image[6])
+            SquareView(color: color2, pice: image[7])
+
+        }
+    }
+}
+
+struct SquareView: View {
+    var size: CGFloat = 44
+    let color: Color
+    var pice: String
+    var body: some View {
+        ZStack{
+            color
+                .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            Image(pice)
+                .resizable()
+                .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            
         }
     }
 }
