@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var size: CGFloat = 30
-    @State var image = "Chess_plt60"
+
     var body: some View {
         ZStack{
             VStack{
