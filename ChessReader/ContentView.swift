@@ -15,7 +15,22 @@ struct ContentView: View {
             VStack{
                 // text och annat
                 ExtractedView()
-                // knappar och annat
+                VStack{
+                    Button(action: {
+                        //vad knappen gör
+                    }){
+                        Image(systemName: "back")
+                        //hur knappen ser ut
+                    }
+                    Button(action: {
+                        //vad knappen gör
+                    }){
+                        Image(systemName: "forward")
+                        //hur knappen ser ut
+                    }
+                    // knappar och annat
+                }
+                
             }
             
         }
