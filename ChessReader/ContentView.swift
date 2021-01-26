@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var bord: [[String]] = [["blackRock", "blackKnight", "blackBishop", "blackKing", "blackQueen", "blackBishop", "blackKnight", "blackRock"], ["blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn"], ["whiteRock", "whiteKnight", "whiteBishop", "whiteKing", "whiteQueen", "whiteBishop", "whiteKnight", "whiteRock"]]
+    @State var bord: [[String]] = [["BR", "BN", "BB", "BK", "BQ", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["WP","WP","WP","WP","WP","WP","WP","WP"], ["WR", "WN", "WB", "WK", "WQ", "WB", "WN", "WR"]]
     var body: some View {
         GeometryReader{geo in
             ZStack{
