@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-
+    @State var bord: [[String]] = [["blackRock", "blackKnight", "blackBishop", "blackKing", "blackQueen", "blackBishop", "blackKnight", "blackRock"], ["blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn"], ["whiteRock", "whiteKnight", "whiteBishop", "whiteKing", "whiteQueen", "whiteBishop", "whiteKnight", "whiteRock"]]
     var body: some View {
         ZStack{
             VStack{
                 // text och annat
-                BordView()
+                BordView(image: bord)
+                Button("Test"){
+                    if bord[3][3] == "" {
+                        bord[3][3] = bord[1][3]
+                        bord[1][3] = ""
+                    }else{
+                        bord[1][3] = bord[3][3]
+                        bord[3][3] = ""
+                     }
+                }
                 // knappar och annat
             }
             
@@ -30,7 +39,7 @@ struct ContentView_Previews: PreviewProvider {
 
 struct BordView: View {
   
-    @State var image = [["blackRock", "blackKnight", "blackBishop", "blackKing", "blackQueen", "blackBishop", "blackKnight", "blackRock"], ["blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn","blackPawn"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn","whitePawn"], ["whiteRock", "whiteKnight", "whiteBishop", "whiteKing", "whiteQueen", "whiteBishop", "whiteKnight", "whiteRock"]]
+    var image: [[String]]
     var body: some View {
         VStack(spacing: 0){
             RowView(row: 0, image: image[0])
@@ -46,7 +55,6 @@ struct BordView: View {
 }
 
 struct RowView: View {
-    var size: CGFloat = 44
     let row: Int
     let image: [String]
     var color1: Color{
