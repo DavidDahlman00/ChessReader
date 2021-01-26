@@ -15,16 +15,35 @@ struct ContentView: View {
                 VStack{
                     // text och annat
                     BordView(imageSize: 0.92 * geo.size.width / 8, image: bord)
+                    HStack{
+                        Button(action: {
+                            if bord[3][3] == "" {
+                                bord[3][3] = bord[1][3]
+                                bord[1][3] = ""
+                            }else{
+                                bord[1][3] = bord[3][3]
+                                bord[3][3] = ""
+                             }
+                        }) {
+                            Image(systemName: "backward.fill")
+                        }
+                        .foregroundColor(.black)
                         
-                    Button("Test"){
-                        if bord[3][3] == "" {
-                            bord[3][3] = bord[1][3]
-                            bord[1][3] = ""
-                        }else{
-                            bord[1][3] = bord[3][3]
-                            bord[3][3] = ""
-                         }
+                        Button(action: {
+                            if bord[4][3] == "" {
+                                bord[4][3] = bord[6][3]
+                                bord[6][3] = ""
+                            }else{
+                                bord[6][3] = bord[4][3]
+                                bord[4][3] = ""
+                             }
+                        }) {
+                            Image(systemName: "forward.fill")
+                        }
+                        .foregroundColor(.black)
                     }
+                    
+                    
                     // knappar och annat
                 }
                 
