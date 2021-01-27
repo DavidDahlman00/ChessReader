@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    var testText: String = "Test"
     @State var bord: [[String]] = [["BR", "BN", "BB", "BK", "BQ", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["WP","WP","WP","WP","WP","WP","WP","WP"], ["WR", "WN", "WB", "WK", "WQ", "WB", "WN", "WR"]]
     var body: some View {
         GeometryReader{geo in
             ZStack{
+                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 31.0/255.0)
                 VStack{
                     // text och annat
+                    Text(testText)
+                        .foregroundColor(.gray)
+                        .bold()
+                        
                     BordView(imageSize: 0.92 * geo.size.width / 8, image: bord)
                     HStack{
                         Button(action: {
@@ -27,7 +33,7 @@ struct ContentView: View {
                         }) {
                             Image(systemName: "backward.fill")
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.gray)
                         
                         Button(action: {
                             if bord[4][3] == "" {
@@ -40,7 +46,7 @@ struct ContentView: View {
                         }) {
                             Image(systemName: "forward.fill")
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.gray)
                     }
                     
                     
