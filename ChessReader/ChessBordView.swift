@@ -13,11 +13,11 @@ struct ChessBordView : View {
     var body: some View {
         GeometryReader{geo in
             ZStack{
-                Color(red: 171.0/255.0, green: 171.0/255.0, blue: 171.0/255.0)
+                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
                 VStack{
                     // text och annat
                     Text(testText)
-                        .foregroundColor(.black)
+                        .foregroundColor(.gray)
                         .bold()
                         
                     BordView(imageSize: 0.92 * geo.size.width / 8, image: bord)
@@ -33,7 +33,7 @@ struct ChessBordView : View {
                         }) {
                             Image(systemName: "backward.fill")
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.gray)
                         
                         Button(action: {
                             if bord[4][3] == "" {
@@ -47,10 +47,10 @@ struct ChessBordView : View {
                             Image(systemName: "forward.fill")
                         }
                         
-                        .foregroundColor(.black)
+                        .foregroundColor(.gray)
                     }
                     Text(testText)
-                        .foregroundColor(.black)
+                        .foregroundColor(.gray)
                         .bold()
                     
                     
