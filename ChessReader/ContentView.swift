@@ -11,6 +11,7 @@ struct ContentView: View {
     @ObservedObject var gameList = GameList()
     init(){
         UITableView.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.gray]
     }
     
      var body: some View {
@@ -34,9 +35,12 @@ struct ContentView: View {
              
              .foregroundColor(.gray)
              .navigationBarTitle("Chess Reader")
+             
              .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
              
-            }.foregroundColor(.red)
+            }
+            .foregroundColor(.red)
+                
          }
          
      }
@@ -61,3 +65,4 @@ struct ListRowView: View {
         }
     }
 }
+
