@@ -22,7 +22,7 @@ struct ContentView: View {
                 Color(red: 14.0/255.0, green: 14.0/255.0, blue: 31.0/255.0).edgesIgnoringSafeArea(.all)
              List() {
                  ForEach(gameList.entries){ entry in
-                    NavigationLink(destination: ChessBordView()){
+                    NavigationLink(destination: ChessBordView(playedGame: entry)){
                          ListRowView(entry: entry)
                             
                      }
@@ -61,7 +61,7 @@ struct ListRowView: View {
         HStack {
            
             Spacer()
-            Text(entry.game.prefix(20) + "...")
+            Text(entry.game.prefix(30) + "   ")
         }
     }
 }

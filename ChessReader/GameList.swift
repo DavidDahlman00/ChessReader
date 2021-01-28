@@ -15,9 +15,12 @@ class GameList: ObservableObject {
     }
     
     func addMocData() {
-        entries.append(GameListEntry(game: "Saker att göra eller skjutas på måste"))
-        entries.append(GameListEntry(game: "titta på film"))
-        entries.append(GameListEntry(game: "gjort något viktigt"))
-        entries.append(GameListEntry(game: "... men kunde också gjort något annat"))
+        entries.append(GameListEntry(game: "David - Axel", coment: "Best game ever!"))
+        entries.append(GameListEntry(game: "Magnus - Fabiano"))
+        entries.append(GameListEntry(game: "Liren - Ian"))
+        entries.append(GameListEntry(game: "Maxime - Alexander"))
+        entries.append(GameListEntry(game: "Levon - Wesley"))
+        entries.append(GameListEntry(game: "Teimour - Anish"))
+        
     }
 }

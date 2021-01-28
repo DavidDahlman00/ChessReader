@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChessBordView : View {
+    var playedGame : GameListEntry? = nil
     var testText: String = "Test"
     @State var bord: [[String]] = [["BR", "BN", "BB", "BK", "BQ", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["WP","WP","WP","WP","WP","WP","WP","WP"], ["WR", "WN", "WB", "WK", "WQ", "WB", "WN", "WR"]]
     var body: some View {
@@ -16,7 +17,7 @@ struct ChessBordView : View {
                 Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
                 VStack{
                     // text och annat
-                    Text(testText)
+                    Text(playedGame?.game ?? "Unknown Game")
                         .foregroundColor(.gray)
                         .bold()
                         
@@ -49,7 +50,7 @@ struct ChessBordView : View {
                         
                         .foregroundColor(.gray)
                     }
-                    Text(testText)
+                    Text(playedGame?.coment ?? "Nobody coment this game, yet")
                         .foregroundColor(.gray)
                         .bold()
                     
