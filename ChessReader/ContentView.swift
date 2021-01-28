@@ -24,7 +24,7 @@ struct ContentView: View {
              }
              .navigationBarTitle("Chess Reader")
              .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
-         }
+         }.listRowBackground(Color.red)
 
      }
 }
