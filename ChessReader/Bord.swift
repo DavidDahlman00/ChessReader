@@ -6,17 +6,19 @@
 //
 
 import Foundation
-struct Bord {
-    var playerToGo: String = "white"
-    func movList(bord: [[String]], row: Int, col: Int) -> [[Int]] {
-        if playerToGo == "white"{
-            if ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR", "LP"].contains(bord[row][col]) {
-            
-            }
-        }
-        return [[1]]
-    }
-    
-    
-}
 
+class Bord: ObservableObject {
+
+     @Published var bord : [[String]]
+
+    
+
+    init() {
+
+        bord = [["BR", "BN", "BB", "BK", "BQ", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["WP","WP","WP","WP","WP","WP","WP","WP"], ["WR", "WN", "WB", "WK", "WQ", "WB", "WN", "WR"]]
+
+    }
+
+    
+
+}
