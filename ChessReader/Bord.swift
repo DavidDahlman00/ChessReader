@@ -10,7 +10,7 @@ struct Bord {
     var playerToGo: String = "white"
     func movList(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         if playerToGo == "white"{
-            if ["WR", "WN", "WB", "WK", "WQ", "WB", "WN", "WR", "WP"].contains(bord[row][col]) {
+            if ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR", "LP"].contains(bord[row][col]) {
             
             }
         }
