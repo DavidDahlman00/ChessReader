@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5180DFE725C4216200DF9B74 /* Bord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5180DFE625C4216200DF9B74 /* Bord.swift */; };
+		5180DFEC25C42C8900DF9B74 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5180DFEB25C42C8900DF9B74 /* Rules.swift */; };
 		518229A025BF092A00974B3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5182299F25BF092A00974B3F /* AppDelegate.swift */; };
 		518229A225BF092A00974B3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518229A125BF092A00974B3F /* SceneDelegate.swift */; };
 		518229A425BF092A00974B3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518229A325BF092A00974B3F /* ContentView.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5180DFE625C4216200DF9B74 /* Bord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bord.swift; sourceTree = "<group>"; };
+		5180DFEB25C42C8900DF9B74 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		5182299C25BF092A00974B3F /* ChessReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5182299F25BF092A00974B3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		518229A125BF092A00974B3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				518229AD25BF092E00974B3F /* Info.plist */,
 				518229A725BF092E00974B3F /* Preview Content */,
 				51822A2825C15D3D00974B3F /* ChessBordView.swift */,
+				5180DFE625C4216200DF9B74 /* Bord.swift */,
+				5180DFEB25C42C8900DF9B74 /* Rules.swift */,
 			);
 			path = ChessReader;
 			sourceTree = "<group>";
@@ -276,11 +282,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				518229A025BF092A00974B3F /* AppDelegate.swift in Sources */,
+				5180DFEC25C42C8900DF9B74 /* Rules.swift in Sources */,
 				518229A225BF092A00974B3F /* SceneDelegate.swift in Sources */,
 				51822A2425C15A0B00974B3F /* GameList.swift in Sources */,
 				51822A1F25C159F500974B3F /* GameListEntry.swift in Sources */,
 				51822A2925C15D3D00974B3F /* ChessBordView.swift in Sources */,
 				518229A425BF092A00974B3F /* ContentView.swift in Sources */,
+				5180DFE725C4216200DF9B74 /* Bord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

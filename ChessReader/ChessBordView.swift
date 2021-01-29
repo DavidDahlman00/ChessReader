@@ -135,6 +135,9 @@ struct SquareView: View {
 //                .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             Button(action: {
                 print("test \(row), \(col)")
+                var rules = Rules()
+//                let moveList = rules.WhitePawn(bord: bord, row: row, col: col)
+                
             }) {
                 Image(pice)
                     .resizable()
