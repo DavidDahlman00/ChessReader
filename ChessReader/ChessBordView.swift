@@ -50,6 +50,7 @@ struct ChessBordView : View {
                         
                         .foregroundColor(.gray)
                     }
+                    
                     Text(playedGame?.coment ?? "Nobody coment this game, yet")
                         .foregroundColor(.gray)
                         .bold()
@@ -106,14 +107,14 @@ struct RowView: View {
     
     var body: some View {
         HStack(spacing: 0){
-            SquareView(size: imageSize, color: color1, pice: image[0])
-            SquareView(size: imageSize, color: color2, pice: image[1])
-            SquareView(size: imageSize, color: color1, pice: image[2])
-            SquareView(size: imageSize, color: color2, pice: image[3])
-            SquareView(size: imageSize, color: color1, pice: image[4])
-            SquareView(size: imageSize, color: color2, pice: image[5])
-            SquareView(size: imageSize, color: color1, pice: image[6])
-            SquareView(size: imageSize, color: color2, pice: image[7])
+            SquareView(size: imageSize, color: color1, pice: image[0], row: row, col: 0)
+            SquareView(size: imageSize, color: color2, pice: image[1], row: row, col: 1)
+            SquareView(size: imageSize, color: color1, pice: image[2], row: row, col: 2)
+            SquareView(size: imageSize, color: color2, pice: image[3], row: row, col: 3)
+            SquareView(size: imageSize, color: color1, pice: image[4], row: row, col: 4)
+            SquareView(size: imageSize, color: color2, pice: image[5], row: row, col: 5)
+            SquareView(size: imageSize, color: color1, pice: image[6], row: row, col: 6)
+            SquareView(size: imageSize, color: color2, pice: image[7], row: row, col: 7)
 
         }
     }
@@ -123,13 +124,22 @@ struct SquareView: View {
     var size: CGFloat
     let color: Color
     var pice: String
+    let row: Int
+    let col: Int
     var body: some View {
         ZStack{
             color
                 .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            Image(pice)
-                .resizable()
-                .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//            Image(pice)
+//                .resizable()
+//                .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            Button(action: {
+                print("test \(row), \(col)")
+            }) {
+                Image(pice)
+                    .resizable()
+                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            }
             
         }
     }
