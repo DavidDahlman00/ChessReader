@@ -141,8 +141,10 @@ struct SquareView: View {
             Button(action: {
                 print("test \(row), \(col)")
                 var rules = Rules()
-//                let moveList = rules.WhitePawn(bord: bord, row: row, col: col)
-                
+                let moveList = rules.LightPawn(bord: bord.bord, row: row, col: col)
+                for entry in moveList{
+                    print("\(entry[0]), \(entry[1])")
+                }
             }) {
                 Image(bord.bord[row][col])
                     .resizable()
