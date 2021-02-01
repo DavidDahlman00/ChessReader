@@ -50,7 +50,5 @@ class Bord: ObservableObject {
             }
         }
     }
-
     
-
 }

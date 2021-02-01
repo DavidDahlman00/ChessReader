@@ -93,32 +93,17 @@ struct RowView: View {
     let imageSize: CGFloat
     let row: Int
     let image: [String]
-    var color1: Color{
-        if row.isMultiple(of: 2) {
-            return Color(red: 171.0/255.0, green: 171.0/255.0, blue: 171.0/255.0)
-        }else{
-            return Color(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0)
-        }
-    }
-    var color2: Color{
-        if row.isMultiple(of: 2) {
-            return Color(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0)
-        }else{
-            return Color(red: 171.0/255.0, green: 171.0/255.0, blue: 171.0/255.0)
-        }
-    }
-        
     
     var body: some View {
         HStack(spacing: 0){
-            SquareView(bord: bord, size: imageSize, color: color1, pice: image[0], row: row, col: 0)
-            SquareView(bord: bord, size: imageSize, color: color2, pice: image[1], row: row, col: 1)
-            SquareView(bord: bord, size: imageSize, color: color1, pice: image[2], row: row, col: 2)
-            SquareView(bord: bord, size: imageSize, color: color2, pice: image[3], row: row, col: 3)
-            SquareView(bord: bord, size: imageSize, color: color1, pice: image[4], row: row, col: 4)
-            SquareView(bord: bord, size: imageSize, color: color2, pice: image[5], row: row, col: 5)
-            SquareView(bord: bord, size: imageSize, color: color1, pice: image[6], row: row, col: 6)
-            SquareView(bord: bord, size: imageSize, color: color2, pice: image[7], row: row, col: 7)
+            SquareView(bord: bord, size: imageSize, pice: image[0], row: row, col: 0)
+            SquareView(bord: bord, size: imageSize, pice: image[1], row: row, col: 1)
+            SquareView(bord: bord, size: imageSize, pice: image[2], row: row, col: 2)
+            SquareView(bord: bord, size: imageSize, pice: image[3], row: row, col: 3)
+            SquareView(bord: bord, size: imageSize, pice: image[4], row: row, col: 4)
+            SquareView(bord: bord, size: imageSize, pice: image[5], row: row, col: 5)
+            SquareView(bord: bord, size: imageSize, pice: image[6], row: row, col: 6)
+            SquareView(bord: bord, size: imageSize, pice: image[7], row: row, col: 7)
 
         }
     }
@@ -127,7 +112,30 @@ struct RowView: View {
 struct SquareView: View {
     @ObservedObject var bord: Bord
     var size: CGFloat
-    @State var color: Color
+    var color: Color{
+        switch bord.activityBord[row][col] {
+        case "none":
+            if (row + col).isMultiple(of: 2) {
+                return Color(red: 171.0/255.0, green: 171.0/255.0, blue: 171.0/255.0)
+            }else{
+                return Color(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0)
+            }
+        case "active":
+            if (row + col).isMultiple(of: 2) {
+                return Color(red: 19.0/255.0, green: 196.0/255.0, blue: 202.0/255.0)
+            }else{
+                return Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
+            }
+        case "inMoveList":
+            if (row + col).isMultiple(of: 2) {
+                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+            }else{
+                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+            }
+        default:
+            return Color(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0)
+        }
+    }
     var pice: String
     let row: Int
     let col: Int
@@ -140,7 +148,12 @@ struct SquareView: View {
                 print("test \(row), \(col)")
                 bord.squareTuched(row: row, col: col)
                 print(bord.activityBord[row][col])
-                color = Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
+//                if bord.activityBord[row][col] == "active" {
+//                    color = Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
+//                } else{
+//                    color = Color(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0)
+//                }
+               
                 
 //                var rules = Rules()
 //                let moveList = rules.LightPawn(bord: bord.bord, row: row, col: col)
