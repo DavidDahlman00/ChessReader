@@ -10,7 +10,7 @@ import SwiftUI
 struct ChessBordView : View {
     var playedGame : GameListEntry? = nil
     var testText: String = "Test"
-//    @State var bord: [[String]] = [["DR", "DN", "DB", "DK", "DQ", "DB", "DN", "DR"], ["DP","DP","DP","DP","DP","DP","DP","DP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR"]]
+
     
    @ObservedObject var bord = Bord()
     var body: some View {
@@ -127,7 +127,7 @@ struct RowView: View {
 struct SquareView: View {
     @ObservedObject var bord: Bord
     var size: CGFloat
-    let color: Color
+    @State var color: Color
     var pice: String
     let row: Int
     let col: Int
@@ -135,16 +135,19 @@ struct SquareView: View {
         ZStack{
             color
                 .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//            Image(pice)
-//                .resizable()
-//                .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        
             Button(action: {
                 print("test \(row), \(col)")
-                var rules = Rules()
-                let moveList = rules.LightPawn(bord: bord.bord, row: row, col: col)
-                for entry in moveList{
-                    print("\(entry[0]), \(entry[1])")
-                }
+                bord.changeTuchedSquare(row: row, col: col)
+                print("\(bord.tuchedSquare![0]), \(bord.tuchedSquare![1])")
+                color = Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
+                
+//                var rules = Rules()
+//                let moveList = rules.LightPawn(bord: bord.bord, row: row, col: col)
+//                for entry in moveList{
+//                    print("\(entry[0]), \(entry[1])")
+//                }
+                
             }) {
                 Image(bord.bord[row][col])
                     .resizable()
