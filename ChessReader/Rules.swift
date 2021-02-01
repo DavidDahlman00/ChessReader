@@ -176,5 +176,57 @@ func inBord(row : Int, col : Int) -> Bool{
         return moveList
     }
     
+    func DarkBishop(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+        var moveList = [[Int]]()
+        var x = 1
+        var y = 1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x + 1
+            y = y + 1
+        }
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "LQ", "LP"].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        x = 1
+        y = -1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x + 1
+            y = y - 1
+        }
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "LQ", "LP"].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        x = -1
+        y =  1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x - 1
+            y = y + 1
+        }
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "LQ", "LP"].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        x = -1
+        y = -1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x - 1
+            y = y - 1
+        }
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "LQ", "LP"].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        return moveList
+    }
     
 }
