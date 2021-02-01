@@ -10,7 +10,7 @@ import Foundation
 class Bord: ObservableObject {
 
     @Published var bord : [[String]]
-    var tuchedSquare : [Int]? = nil
+    @Published var activityBord : [[String]]
     var playerToGo : String = "light"
     @Published var schack : [Bool] = [false, false]
     
@@ -18,6 +18,7 @@ class Bord: ObservableObject {
 
         bord = [["BR", "BN", "BB", "BK", "BQ", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR"]]
         
+        activityBord = [["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",]]
         
     }
     
@@ -33,9 +34,20 @@ class Bord: ObservableObject {
         }
     }
     
-    func changeTuchedSquare(row: Int, col: Int)  {
-        if true {
-            tuchedSquare = [row, col]
+    func recetActivityBord() {
+        for row in 0...7 {
+            for col in 0...7 {
+                activityBord[row][col] = "none"
+            }
+        }
+    }
+    
+    func squareTuched(row: Int, col: Int)  {
+        if playerToGo == "light" {
+            if ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR", "LP"].contains(bord[row][col]){
+                recetActivityBord()
+                activityBord[row][col] = "active"
+            }
         }
     }
 

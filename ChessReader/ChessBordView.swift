@@ -138,8 +138,8 @@ struct SquareView: View {
         
             Button(action: {
                 print("test \(row), \(col)")
-                bord.changeTuchedSquare(row: row, col: col)
-                print("\(bord.tuchedSquare![0]), \(bord.tuchedSquare![1])")
+                bord.squareTuched(row: row, col: col)
+                print(bord.activityBord[row][col])
                 color = Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
                 
 //                var rules = Rules()
