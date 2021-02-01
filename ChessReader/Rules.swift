@@ -18,37 +18,79 @@ func inBord(row : Int, col : Int) -> Bool{
         return false
     }
     
+//    func LightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+//        var moveList = [[Int]]()
+//        if bord[row - 1][col] == "" && row > 0  {
+//            moveList.append([row - 1, col,])
+//            if bord[row - 2][col] == "" && row == 6 {
+//                moveList.append([row - 2, col,])
+//            }
+//        }
+//        if ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col - 1]) && col > 0 && row > 0 {
+//            moveList.append([row - 1, col - 1])
+//        }
+//        if ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col + 1]) && col < 7 && row > 0 {
+//            moveList.append([row - 1, col - 1])
+//        }
+//        return moveList
+//    }
+    
+//    func DarkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+//        var moveList = [[Int]]()
+//
+//
+//        if bord[row + 1][col] == "" && row < 0  {
+//            moveList.append([row + 1, col,])
+//            if bord[row + 2][col] == "" && row == 1 {
+//                moveList.append([row + 2, col,])
+//            }
+//        }
+//        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col + 1]) && col < 0 && row < 0 {
+//            moveList.append([row + 1, col + 1])
+//        }
+//        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col - 1]) && col > 7 && row < 0 {
+//            moveList.append([row + 1, col + 1])
+//        }
+//        return moveList
+//    }
+    
     func LightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
-        if bord[row - 1][col] == "" && row > 0  {
-            moveList.append([row - 1, col,])
-            if bord[row - 2][col] == "" && row == 6 {
-                moveList.append([row - 2, col,])
-            }
+        
+        
+        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col]) && inBord(row: row + 1, col: col){
+            moveList.append([row + 1, col])
         }
-        if ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col - 1]) && col > 0 && row > 0 {
-            moveList.append([row - 1, col - 1])
+        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 2][col]) && inBord(row: row + 2, col: col) && row == 1 /*bonden måste vara på rad 1 för att kunna gå 2 steg*/ {
+            moveList.append([row + 2, col])
         }
-        if ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col + 1]) && col < 7 && row > 0 {
-            moveList.append([row - 1, col - 1])
+        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col + 1]) && inBord(row: row + 1, col: col + 1){
+            moveList.append([row + 1, col + 1])
         }
+        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col - 1]) && inBord(row: row + 1, col: col - 1){
+            moveList.append([row + 1, col - 1])
+        }
+        
         return moveList
     }
     
     func DarkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
-        if bord[row + 1][col] == "" && row < 0  {
-            moveList.append([row + 1, col,])
-            if bord[row + 2][col] == "" && row == 1 {
-                moveList.append([row + 2, col,])
-            }
+        
+        
+        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col]) && inBord(row: row + 1, col: col){
+            moveList.append([row + 1, col])
         }
-        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col + 1]) && col < 0 && row < 0 {
+        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 2][col]) && inBord(row: row + 2, col: col) && row == 1 /*bonden måste vara på rad 1 för att kunna gå 2 steg*/ {
+            moveList.append([row + 2, col])
+        }
+        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col + 1]) && inBord(row: row + 1, col: col + 1){
             moveList.append([row + 1, col + 1])
         }
-        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col - 1]) && col > 7 && row < 0 {
-            moveList.append([row + 1, col + 1])
+        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col - 1]) && inBord(row: row + 1, col: col - 1){
+            moveList.append([row + 1, col - 1])
         }
+        
         return moveList
     }
     
@@ -230,6 +272,60 @@ func inBord(row : Int, col : Int) -> Bool{
     }
     
     
+    func LightBishop(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+        var moveList = [[Int]]()
+        var x = 1
+        var y = 1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x + 1
+            y = y + 1
+        }
+        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        x = 1
+        y = -1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x + 1
+            y = y - 1
+        }
+        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        x = -1
+        y =  1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x - 1
+            y = y + 1
+        }
+        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        x = -1
+        y = -1
+        while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
+            moveList.append([row + x, col + y])
+            x = x - 1
+            y = y - 1
+        }
+        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+                moveList.append([row + x, col + y])
+            
+        }
+        
+        return moveList
+        
+    }
+    
     func DarkRook (bord: [[String]], row: Int, col: Int) -> [[Int]] {
            var moveList = [[Int]]()
            var x = 1
@@ -280,4 +376,53 @@ func inBord(row : Int, col : Int) -> Bool{
            return moveList
        }
     
+    func LightRook (bord: [[String]], row: Int, col: Int) -> [[Int]] {
+           var moveList = [[Int]]()
+           var x = 1
+           var y = 1
+           
+           while inBord(row: row + x, col:col) && bord[row + x][col] == ""{
+               moveList.append([row + x, col])
+               x = x + 1
+           }
+       
+           if inBord(row: row + x, col: col) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col]){
+               moveList.append([row + x, col])
+           }
+           x = 1
+           
+           
+           while inBord(row: row - x, col:col) && bord[row - x][col] == ""{
+               moveList.append([row + x, col])
+               x = x - 1
+           }
+       
+           if inBord(row: row - x, col: col) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - x][col]){
+               moveList.append([row - x, col])
+           }
+           x = 1
+           
+           while inBord(row: row , col:col + y) && bord[row][col + y] == ""{
+               moveList.append([row, col + y])
+               y = y + 1
+           }
+       
+           if inBord(row: row , col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row][col + y]){
+               moveList.append([row, col + y])
+           }
+           y = 1
+           
+           while inBord(row: row , col:col - y) && bord[row][col - y] == ""{
+               moveList.append([row, col - y])
+               y = y - 1
+           }
+       
+           if inBord(row: row , col: col - y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row][col - y]){
+               moveList.append([row, col - y])
+           }
+           y = 1
+           
+           
+           return moveList
+       }
 }
