@@ -11,7 +11,6 @@ class Bord: ObservableObject {
 
      @Published var bord : [[String]]
 
-    
 
     init() {
 
