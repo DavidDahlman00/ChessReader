@@ -229,4 +229,55 @@ func inBord(row : Int, col : Int) -> Bool{
         return moveList
     }
     
+    
+    func DarkRook (bord: [[String]], row: Int, col: Int) -> [[Int]] {
+           var moveList = [[Int]]()
+           var x = 1
+           var y = 1
+           
+           while inBord(row: row + x, col:col) && bord[row + x][col] == ""{
+               moveList.append([row + x, col])
+               x = x + 1
+           }
+       
+           if inBord(row: row + x, col: col) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + x][col]){
+               moveList.append([row + x, col])
+           }
+           x = 1
+           
+           
+           while inBord(row: row - x, col:col) && bord[row - x][col] == ""{
+               moveList.append([row + x, col])
+               x = x - 1
+           }
+       
+           if inBord(row: row - x, col: col) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row - x][col]){
+               moveList.append([row - x, col])
+           }
+           x = 1
+           
+           while inBord(row: row , col:col + y) && bord[row][col + y] == ""{
+               moveList.append([row, col + y])
+               y = y + 1
+           }
+       
+           if inBord(row: row , col: col + y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row][col + y]){
+               moveList.append([row, col + y])
+           }
+           y = 1
+           
+           while inBord(row: row , col:col - y) && bord[row][col - y] == ""{
+               moveList.append([row, col - y])
+               y = y - 1
+           }
+       
+           if inBord(row: row , col: col - y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row][col - y]){
+               moveList.append([row, col - y])
+           }
+           y = 1
+           
+           
+           return moveList
+       }
+    
 }
