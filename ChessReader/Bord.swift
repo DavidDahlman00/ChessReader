@@ -47,8 +47,20 @@ class Bord: ObservableObject {
             if ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR", "LP"].contains(bord[row][col]){
                 recetActivityBord()
                 activityBord[row][col] = "active"
+                let rules = Rules()
+                var moveList = [[Int]]()
+                
+                switch bord[row][col] {
+                    case "LP":
+                        moveList = rules.LightPawn(bord: bord, row: row, col: col)
+                    default:
+                        moveList = [[Int]]()
+                    }
+                
+                    for move in moveList {
+                        activityBord[move[0]][move[1]] = "inMoveList"
+                    }
             }
         }
     }
-    
 }
