@@ -13,6 +13,9 @@ class Bord: ObservableObject {
     @Published var activityBord : [[String]]
     var playerToGo : String = "light"
     @Published var schack : [Bool] = [false, false]
+    var activeSquare: [Int]? = nil
+    var activePice: String? = nil
+    
     
     init() {
 
@@ -40,27 +43,56 @@ class Bord: ObservableObject {
                 activityBord[row][col] = "none"
             }
         }
+        activeSquare = nil
+        activePice = nil
     }
     
     func squareTuched(row: Int, col: Int)  {
         if playerToGo == "light" {
-            if ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR", "LP"].contains(bord[row][col]){
+            switch activityBord[row][col] {
+            case "active":
                 recetActivityBord()
-                activityBord[row][col] = "active"
-                let rules = Rules()
-                var moveList = [[Int]]()
-                
-                switch bord[row][col] {
-                    case "LP":
-                        moveList = rules.LightPawn(bord: bord, row: row, col: col)
-                    default:
-                        moveList = [[Int]]()
-                    }
-                
-                    for move in moveList {
-                        activityBord[move[0]][move[1]] = "inMoveList"
-                    }
+            case "inMoveList":
+                if activeSquare != nil{
+                    bord[activeSquare![0]][activeSquare![1]] = ""
+                }
+                if activePice != nil {
+                    bord[row][col] = activePice!
+                }
+                recetActivityBord()
+                changePlayerToGo()
+            case "none":
+                if ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR", "LP"].contains(bord[row][col]){
+                    recetActivityBord()
+                    activityBord[row][col] = "active"
+                    activeSquare = [row, col]
+                    activePice = bord[row][col]
+                    let rules = Rules()
+                    var moveList = [[Int]]()
+                    
+                    switch bord[row][col] {
+                        case "LB":
+                            moveList = rules.lightBishop(bord: bord, row: row, col: col)
+                        case "LK":
+                            moveList = rules.lightKing(bord: bord, row: row, col: col)
+                        case "LN":
+                            moveList = rules.lightKnight(bord: bord, row: row, col: col)
+                        case "LP":
+                            moveList = rules.lightPawn(bord: bord, row: row, col: col)
+                        case "LR":
+                            moveList = rules.lightRook(bord: bord, row: row, col: col)
+                        default:
+                            moveList = [[Int]]()
+                        }
+                    
+                        for move in moveList {
+                            activityBord[move[0]][move[1]] = "inMoveList"
+                        }
+                }
+            default:
+                recetActivityBord()
             }
+
         }
     }
 }

@@ -18,24 +18,24 @@ func inBord(row : Int, col : Int) -> Bool{
         return false
     }
     
-//    func LightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
-//        var moveList = [[Int]]()
-//        if bord[row - 1][col] == "" && row > 0  {
-//            moveList.append([row - 1, col,])
-//            if bord[row - 2][col] == "" && row == 6 {
-//                moveList.append([row - 2, col,])
-//            }
-//        }
-//        if ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col - 1]) && col > 0 && row > 0 {
-//            moveList.append([row - 1, col - 1])
-//        }
-//        if ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col + 1]) && col < 7 && row > 0 {
-//            moveList.append([row - 1, col - 1])
-//        }
-//        return moveList
-//    }
+    func lightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+        var moveList = [[Int]]()
+        if bord[row - 1][col] == "" && row > 0  {
+            moveList.append([row - 1, col,])
+            if bord[row - 2][col] == "" && row == 6 {
+                moveList.append([row - 2, col,])
+            }
+        }
+        if col > 0 && row > 0 && ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col - 1]) {
+            moveList.append([row - 1, col - 1])
+        }
+        if col < 7 && row > 0 && ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row - 1][col + 1]) {
+            moveList.append([row - 1, col - 1])
+        }
+        return moveList
+    }
     
-//    func DarkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+//    func darkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
 //        var moveList = [[Int]]()
 //
 //
@@ -54,28 +54,27 @@ func inBord(row : Int, col : Int) -> Bool{
 //        return moveList
 //    }
     
-    func LightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
-        var moveList = [[Int]]()
-        if inBord(row: row, col: col){
-        
-        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 1][col]) && inBord(row: row - 1, col: col){
-            moveList.append([row - 1, col])
-        }
-        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 2][col]) && inBord(row: row - 2, col: col) && row == 6 {
-            moveList.append([row - 2, col])
-        }
-        if col != 0 && col != 7 && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 1][col + 1]) && inBord(row: row - 1, col: col + 1){
-            moveList.append([row - 1, col + 1])
-        }
-        if col != 0 && col != 7 && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 1][col - 1]) && inBord(row: row - 1, col: col - 1){
-            moveList.append([row - 1, col - 1])
-            }
-        }
-
-        return moveList
-    }
+//    func lightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+//        var moveList = [[Int]]()
+//
+//
+//        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col]) && inBord(row: row + 1, col: col){
+//            moveList.append([row + 1, col])
+//        }
+//        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 2][col]) && inBord(row: row + 2, col: col) && row == 1 /*bonden måste vara på rad 1 för att kunna gå 2 steg*/ {
+//            moveList.append([row + 2, col])
+//        }
+//        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col + 1]) && inBord(row: row + 1, col: col + 1){
+//            moveList.append([row + 1, col + 1])
+//        }
+//        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col - 1]) && inBord(row: row + 1, col: col - 1){
+//            moveList.append([row + 1, col - 1])
+//        }
+//
+//        return moveList
+//    }
     
-    func DarkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func darkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         
         
@@ -95,7 +94,7 @@ func inBord(row : Int, col : Int) -> Bool{
         return moveList
     }
     
-    func LightKing(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func lightKing(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         
         if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row][col + 1]) && inBord(row: row, col: col + 1){
@@ -127,7 +126,7 @@ func inBord(row : Int, col : Int) -> Bool{
         return moveList
     }
     
-    func DarkKing(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func darkKing(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row][col + 1]) && inBord(row: row, col: col + 1){
             moveList.append([row, col + 1])
@@ -158,7 +157,7 @@ func inBord(row : Int, col : Int) -> Bool{
         return moveList
     }
     
-    func DarkKnight(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func darkKnight(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + 1][col + 2]) && inBord(row: row + 1, col: col + 2){
             moveList.append([row + 1 , col + 2])
@@ -189,7 +188,7 @@ func inBord(row : Int, col : Int) -> Bool{
         return moveList
     }
     
-    func LightKnight(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func lightKnight(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col + 2]) && inBord(row: row + 1, col: col + 2){
             moveList.append([row + 1 , col + 2])
@@ -219,7 +218,7 @@ func inBord(row : Int, col : Int) -> Bool{
         return moveList
     }
     
-    func DarkBishop(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func darkBishop(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         var x = 1
         var y = 1
@@ -273,7 +272,7 @@ func inBord(row : Int, col : Int) -> Bool{
     }
     
     
-    func LightBishop(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func lightBishop(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         var x = 1
         var y = 1
@@ -327,7 +326,7 @@ func inBord(row : Int, col : Int) -> Bool{
         
     }
     
-    func DarkRook (bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func darkRook (bord: [[String]], row: Int, col: Int) -> [[Int]] {
            var moveList = [[Int]]()
            var x = 1
            var y = 1
@@ -377,7 +376,7 @@ func inBord(row : Int, col : Int) -> Bool{
            return moveList
        }
     
-    func LightRook (bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func lightRook (bord: [[String]], row: Int, col: Int) -> [[Int]] {
            var moveList = [[Int]]()
            var x = 1
            var y = 1
