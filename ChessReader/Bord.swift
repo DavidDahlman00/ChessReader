@@ -48,51 +48,83 @@ class Bord: ObservableObject {
     }
     
     func squareTuched(row: Int, col: Int)  {
+        let pices = [["LB", "LK", "LN", "LP", "LR", "LQ"], ["BB", "BK", "BN", "BP", "BR", "BQ"]]
+        let player: Int
         if playerToGo == "light" {
-            switch activityBord[row][col] {
-            case "active":
+            player = 0
+        }else{
+            player = 1
+        }
+            
+    switch activityBord[row][col] {
+        case "active":
+            recetActivityBord()
+        case "inMoveList":
+            if activeSquare != nil{
+                bord[activeSquare![0]][activeSquare![1]] = ""
+            }
+            if activePice != nil {
+                bord[row][col] = activePice!
+            }
+            recetActivityBord()
+            changePlayerToGo()
+        case "none":
+            if pices[player].contains(bord[row][col]){
                 recetActivityBord()
-            case "inMoveList":
-                if activeSquare != nil{
-                    bord[activeSquare![0]][activeSquare![1]] = ""
-                }
-                if activePice != nil {
-                    bord[row][col] = activePice!
-                }
-                recetActivityBord()
-                changePlayerToGo()
-            case "none":
-                if ["LR", "LN", "LB", "LK", "LQ", "LB", "LN", "LR", "LP"].contains(bord[row][col]){
-                    recetActivityBord()
-                    activityBord[row][col] = "active"
-                    activeSquare = [row, col]
-                    activePice = bord[row][col]
-                    let rules = Rules()
-                    var moveList = [[Int]]()
+                activityBord[row][col] = "active"
+                activeSquare = [row, col]
+                activePice = bord[row][col]
+                let rules = Rules()
+                var moveList = [[Int]]()
                     
-                    switch bord[row][col] {
-                        case "LB":
+                switch bord[row][col] {
+                    case pices[player][0]:
+                        if player == 0 {
                             moveList = rules.lightBishop(bord: bord, row: row, col: col)
-                        case "LK":
+                        }else{
+                            moveList = rules.darkBishop(bord: bord, row: row, col: col)
+                        }
+                        
+                    case pices[player][1]:
+                        if player == 0 {
                             moveList = rules.lightKing(bord: bord, row: row, col: col)
-                        case "LN":
+                        }else{
+                            moveList = rules.darkKing(bord: bord, row: row, col: col)
+                        }
+                    case pices[player][2]:
+                        if player == 0 {
                             moveList = rules.lightKnight(bord: bord, row: row, col: col)
-                        case "LP":
+                        }else{
+                            moveList = rules.darkKnight(bord: bord, row: row, col: col)
+                        }
+                    case pices[player][3]:
+                        if player == 0 {
                             moveList = rules.lightPawn(bord: bord, row: row, col: col)
-                        case "LR":
+                        }else{
+                            moveList = rules.darkPawn(bord: bord, row: row, col: col)
+                        }
+                    case pices[player][4]:
+                        if player == 0 {
                             moveList = rules.lightRook(bord: bord, row: row, col: col)
-                        default:
+                        }else{
+                            moveList = rules.darkRook(bord: bord, row: row, col: col)
+                        }
+                    case pices[player][5]:
+                        if player == 0 {
+                            moveList = [[Int]]()    // Queen move toDo
+                        }else{
                             moveList = [[Int]]()
                         }
+                    default:
+                        moveList = [[Int]]()
+                    }
                     
-                        for move in moveList {
-                            activityBord[move[0]][move[1]] = "inMoveList"
-                        }
-                }
-            default:
-                recetActivityBord()
+                    for move in moveList {
+                        activityBord[move[0]][move[1]] = "inMoveList"
+                    }
             }
-
+        default:
+            recetActivityBord()
         }
     }
 }
