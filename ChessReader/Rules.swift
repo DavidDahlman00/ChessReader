@@ -389,24 +389,10 @@ struct Rules{
        }
     
     func darkQueen(bord: [[String]], row: Int, col: Int) -> [[Int]]{
-        var moveList = [[Int]]()
-        for move in darkBishop(bord: bord, row: row, col: col){
-            moveList.append(move)
-        }
-        for move in darkRook(bord: bord, row: row, col: col) {
-            moveList.append(move)
-        }
-        return moveList
+        return darkBishop(bord: bord, row: row, col: col) +  darkRook(bord: bord, row: row, col: col)
     }
     
     func lightQueen(bord: [[String]], row: Int, col: Int) -> [[Int]]{
-        var moveList = [[Int]]()
-        for move in lightBishop(bord: bord, row: row, col: col){
-            moveList.append(move)
-        }
-        for move in lightRook(bord: bord, row: row, col: col) {
-            moveList.append(move)
-        }
-        return moveList
+        return lightBishop(bord: bord, row: row, col: col) +  lightRook(bord: bord, row: row, col: col)
     }
 }
