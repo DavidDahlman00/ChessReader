@@ -1,0 +1,6 @@
+framework module Pods_ChessReader_ChessReaderUITests {
+  umbrella header "Pods-ChessReader-ChessReaderUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
