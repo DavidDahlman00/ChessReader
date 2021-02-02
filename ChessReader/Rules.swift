@@ -492,7 +492,7 @@ func inBord(row : Int, col : Int) -> Bool{
             x = x + 1
             y = y + 1
         }
-        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + x][col + y]) {
                 moveList.append([row + x, col + y])
             
         }
@@ -504,7 +504,7 @@ func inBord(row : Int, col : Int) -> Bool{
             x = x + 1
             y = y - 1
         }
-        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + x][col + y]) {
                 moveList.append([row + x, col + y])
             
         }
@@ -516,7 +516,7 @@ func inBord(row : Int, col : Int) -> Bool{
             x = x - 1
             y = y + 1
         }
-        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + x][col + y]) {
                 moveList.append([row + x, col + y])
             
         }
@@ -528,7 +528,7 @@ func inBord(row : Int, col : Int) -> Bool{
             x = x - 1
             y = y - 1
         }
-        if inBord(row: row + x, col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col + y]) {
+        if inBord(row: row + x, col: col + y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + x][col + y]) {
                 moveList.append([row + x, col + y])
             
         }
@@ -539,7 +539,7 @@ func inBord(row : Int, col : Int) -> Bool{
             x = x + 1
         }
     
-        if inBord(row: row + x, col: col) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + x][col]){
+        if inBord(row: row + x, col: col) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + x][col]){
             moveList.append([row + x, col])
         }
         x = 1
@@ -550,7 +550,7 @@ func inBord(row : Int, col : Int) -> Bool{
             x = x - 1
         }
     
-        if inBord(row: row - x, col: col) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - x][col]){
+        if inBord(row: row - x, col: col) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row - x][col]){
             moveList.append([row - x, col])
         }
         x = 1
@@ -560,7 +560,7 @@ func inBord(row : Int, col : Int) -> Bool{
             y = y + 1
         }
     
-        if inBord(row: row , col: col + y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row][col + y]){
+        if inBord(row: row , col: col + y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row][col + y]){
             moveList.append([row, col + y])
         }
         y = 1
@@ -570,7 +570,7 @@ func inBord(row : Int, col : Int) -> Bool{
             y = y - 1
         }
     
-        if inBord(row: row , col: col - y) && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row][col - y]){
+        if inBord(row: row , col: col - y) && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row][col - y]){
             moveList.append([row, col - y])
         }
         y = 1
