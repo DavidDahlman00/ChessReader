@@ -111,9 +111,9 @@ class Bord: ObservableObject {
                         }
                     case pices[player][5]:
                         if player == 0 {
-                            moveList = [[Int]]()    // Queen move toDo
+                            moveList = rules.lightQueen(bord: bord, row: row, col: col)
                         }else{
-                            moveList = [[Int]]()
+                            moveList = rules.darkQueen(bord: bord, row: row, col: col)
                         }
                     default:
                         moveList = [[Int]]()

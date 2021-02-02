@@ -305,8 +305,8 @@ struct Rules{
            
            
            while inBord(row: row - x, col:col) && bord[row - x][col] == ""{
-               moveList.append([row + x, col])
-               x = x - 1
+               moveList.append([row - x, col])
+               x = x + 1
            }
        
            if inBord(row: row - x, col: col) && lightPices.contains(bord[row - x][col]){
@@ -326,7 +326,7 @@ struct Rules{
            
            while inBord(row: row , col:col - y) && bord[row][col - y] == ""{
                moveList.append([row, col - y])
-               y = y - 1
+               y = y + 1
            }
        
            if inBord(row: row , col: col - y) && lightPices.contains(bord[row][col - y]){
@@ -355,8 +355,8 @@ struct Rules{
            
            
            while inBord(row: row - x, col:col) && bord[row - x][col] == ""{
-               moveList.append([row + x, col])
-               x = x - 1
+               moveList.append([row - x, col])
+               x = x + 1
            }
        
            if inBord(row: row - x, col: col) && darkPices.contains(bord[row - x][col]){
@@ -376,7 +376,7 @@ struct Rules{
            
            while inBord(row: row , col:col - y) && bord[row][col - y] == ""{
                moveList.append([row, col - y])
-               y = y - 1
+               y = y + 1
            }
        
            if inBord(row: row , col: col - y) && darkPices.contains(bord[row][col - y]){
@@ -388,4 +388,25 @@ struct Rules{
            return moveList
        }
     
+    func darkQueen(bord: [[String]], row: Int, col: Int) -> [[Int]]{
+        var moveList = [[Int]]()
+        for move in darkBishop(bord: bord, row: row, col: col){
+            moveList.append(move)
+        }
+        for move in darkRook(bord: bord, row: row, col: col) {
+            moveList.append(move)
+        }
+        return moveList
+    }
+    
+    func lightQueen(bord: [[String]], row: Int, col: Int) -> [[Int]]{
+        var moveList = [[Int]]()
+        for move in lightBishop(bord: bord, row: row, col: col){
+            moveList.append(move)
+        }
+        for move in lightRook(bord: bord, row: row, col: col) {
+            moveList.append(move)
+        }
+        return moveList
+    }
 }
