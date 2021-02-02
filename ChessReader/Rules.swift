@@ -44,10 +44,10 @@ func inBord(row : Int, col : Int) -> Bool{
                 moveList.append([row + 2, col,])
             }
         }
-        if col > 0 && row > 0 && ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row + 1][col - 1]) {
+        if col > 0 && row > 0 && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + 1][col - 1]) {
             moveList.append([row + 1, col - 1])
         }
-        if col < 7 && row > 0 && ["DR", "DN", "DB", "DK", "DQ", "DP"].contains(bord[row + 1][col + 1]) {
+        if col < 7 && row > 0 && ["LR", "LN", "LB", "LK", "BQ", "LP", ""].contains(bord[row + 1][col + 1]) {
             moveList.append([row + 1, col - 1])
         }
         return moveList
