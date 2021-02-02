@@ -71,12 +71,16 @@ class Bord: ObservableObject {
                     var moveList = [[Int]]()
                     
                     switch bord[row][col] {
+                        case "LB":
+                            moveList = rules.lightBishop(bord: bord, row: row, col: col)
                         case "LK":
-                            moveList = rules.LightKing(bord: bord, row: row, col: col)
+                            moveList = rules.lightKing(bord: bord, row: row, col: col)
                         case "LN":
-                            moveList = rules.LightKnight(bord: bord, row: row, col: col)
+                            moveList = rules.lightKnight(bord: bord, row: row, col: col)
                         case "LP":
-                            moveList = rules.LightPawn(bord: bord, row: row, col: col)
+                            moveList = rules.lightPawn(bord: bord, row: row, col: col)
+                        case "LR":
+                            moveList = rules.lightRook(bord: bord, row: row, col: col)
                         default:
                             moveList = [[Int]]()
                         }
