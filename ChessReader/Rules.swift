@@ -56,21 +56,22 @@ func inBord(row : Int, col : Int) -> Bool{
     
     func LightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
+        if inBord(row: row, col: col){
         
-        
-        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col]) && inBord(row: row + 1, col: col){
-            moveList.append([row + 1, col])
+        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 1][col]) && inBord(row: row - 1, col: col){
+            moveList.append([row - 1, col])
         }
-        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 2][col]) && inBord(row: row + 2, col: col) && row == 1 /*bonden måste vara på rad 1 för att kunna gå 2 steg*/ {
-            moveList.append([row + 2, col])
+        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 2][col]) && inBord(row: row - 2, col: col) && row == 6 {
+            moveList.append([row - 2, col])
         }
-        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col + 1]) && inBord(row: row + 1, col: col + 1){
-            moveList.append([row + 1, col + 1])
+        if col != 0 && col != 7 && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 1][col + 1]) && inBord(row: row - 1, col: col + 1){
+            moveList.append([row - 1, col + 1])
         }
-        if ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row + 1][col - 1]) && inBord(row: row + 1, col: col - 1){
-            moveList.append([row + 1, col - 1])
+        if col != 0 && col != 7 && ["DR", "DN", "DB", "DK", "DQ", "DP", ""].contains(bord[row - 1][col - 1]) && inBord(row: row - 1, col: col - 1){
+            moveList.append([row - 1, col - 1])
+            }
         }
-        
+
         return moveList
     }
     
@@ -81,13 +82,13 @@ func inBord(row : Int, col : Int) -> Bool{
         if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col]) && inBord(row: row + 1, col: col){
             moveList.append([row + 1, col])
         }
-        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 2][col]) && inBord(row: row + 2, col: col) && row == 1 /*bonden måste vara på rad 1 för att kunna gå 2 steg*/ {
+        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 2][col]) && inBord(row: row + 2, col: col) && row == 1 {
             moveList.append([row + 2, col])
         }
-        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col + 1]) && inBord(row: row + 1, col: col + 1){
+        if col != 0 && col != 7 && ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col + 1]) && inBord(row: row + 1, col: col + 1){
             moveList.append([row + 1, col + 1])
         }
-        if ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col - 1]) && inBord(row: row + 1, col: col - 1){
+        if col != 0 && col != 7 && ["LR", "LN", "LB", "LK", "BQ", "LP"].contains(bord[row + 1][col - 1]) && inBord(row: row + 1, col: col - 1){
             moveList.append([row + 1, col - 1])
         }
         
