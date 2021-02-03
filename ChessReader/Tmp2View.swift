@@ -23,7 +23,7 @@ struct Tmp2View: View {
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord)
                     Button(action: {
                         
-                            db.collection("items").addDocument(data: ["state" : bord.bord])
+                            db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])
                         
                             
                             print("check")}, label: {
