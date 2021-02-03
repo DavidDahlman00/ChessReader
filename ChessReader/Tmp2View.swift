@@ -8,7 +8,7 @@ import SwiftUI
 
 struct Tmp2View: View {
     var body: some View {
-        Text("Tmp2")
+        Text("Singleplayer game")
     }
 }
 

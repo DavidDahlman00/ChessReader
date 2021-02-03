@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Tmp3View: View {
     var body: some View {
-        Text("Tmp3")
+        Text("Multiplayer game")
     }
 }
 
