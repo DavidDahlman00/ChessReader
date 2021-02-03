@@ -33,7 +33,7 @@ struct Rules{
             moveList.append([row - 1, col - 1])
         }
         if col < 7 && row > 0 && darkPices.contains(bord[row - 1][col + 1]) {
-            moveList.append([row - 1, col - 1])
+            moveList.append([row - 1, col + 1])
         }
         return moveList
     }
@@ -51,7 +51,7 @@ struct Rules{
             moveList.append([row + 1, col - 1])
         }
         if col < 7 && row > 0 && lightPices.contains(bord[row + 1][col + 1]) {
-            moveList.append([row + 1, col - 1])
+            moveList.append([row + 1, col + 1])
         }
         return moveList
     }

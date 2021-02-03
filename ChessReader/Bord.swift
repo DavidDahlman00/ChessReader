@@ -11,7 +11,7 @@ class Bord: ObservableObject {
 
     @Published var bord : [[String]]
     @Published var activityBord : [[String]]
-    var playerToGo : String = "light"
+    var playerToGo : String = "Light"
     @Published var schack : [Bool] = [false, false]
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
@@ -30,10 +30,10 @@ class Bord: ObservableObject {
     }
     
     func changePlayerToGo()  {
-        if playerToGo == "light" {
-            playerToGo = "dark"
+        if playerToGo == "Light" {
+            playerToGo = "Dark"
         } else {
-            playerToGo = "light"
+            playerToGo = "Light"
         }
     }
     
@@ -50,7 +50,7 @@ class Bord: ObservableObject {
     func squareTuched(row: Int, col: Int)  {
         let pices = [["LB", "LK", "LN", "LP", "LR", "LQ"], ["BB", "BK", "BN", "BP", "BR", "BQ"]]
         let player: Int
-        if playerToGo == "light" {
+        if playerToGo == "Light" {
             player = 0
         }else{
             player = 1
