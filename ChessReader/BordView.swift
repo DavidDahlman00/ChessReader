@@ -71,6 +71,12 @@ struct SquareView: View {
             }else{
                 return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
             }
+        case "inEnPassantList":
+            if (row + col).isMultiple(of: 2) {
+                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+            }else{
+                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+            }
         default:
             return Color(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0)
         }

@@ -102,11 +102,7 @@ class Bord: ObservableObject {
                 activityBord[row][col] = "none"
             }
         }
-//        if playerToGo == "Light" {
-//            enPassant[0] = 10
-//        }else{
-//            enPassant[1] = 10
-//        }
+
         activeSquare = nil
         activePice = nil
     }
@@ -139,13 +135,20 @@ class Bord: ObservableObject {
             print(bord[row][col])
             print(activityBord[row][col])
             print("enPassants \(enPassant[0]), \(enPassant[1])")
+            if playerToGo == "Light" {
+                enPassant[1] = 10
+            }else{
+                enPassant[0] = 10
+            }
             recetActivityBord()
             changePlayerToGo()
         case "inEnPassantList":
             if playerToGo == "Light" {
                 bord[3][col] = ""
+                enPassant[1] = 10
             }else{
                 bord[4][col] = ""
+                enPassant[1] = 10
             }
             if activeSquare != nil{
                 bord[activeSquare![0]][activeSquare![1]] = ""
