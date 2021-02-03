@@ -102,11 +102,11 @@ class Bord: ObservableObject {
                 activityBord[row][col] = "none"
             }
         }
-        if playerToGo == "Light" {
-            enPassant[1] = 10
-        }else{
-            enPassant[0] = 10
-        }
+//        if playerToGo == "Light" {
+//            enPassant[0] = 10
+//        }else{
+//            enPassant[1] = 10
+//        }
         activeSquare = nil
         activePice = nil
     }
@@ -153,8 +153,8 @@ class Bord: ObservableObject {
             if activePice != nil {
                 bord[row][col] = activePice!
             }
-            recetActivityBord()
             changePlayerToGo()
+            recetActivityBord()
         case "none":
             if pices[player].contains(bord[row][col]){
                 recetActivityBord()
@@ -190,7 +190,7 @@ class Bord: ObservableObject {
                             enPassantList = rules.lightPawnEnPassant(bord: bord,enPassant: enPassant, row: row, col: col)
                         }else{
                             moveList = rules.darkPawn(bord: bord, row: row, col: col)
-                            enPassantList = rules.lightPawnEnPassant(bord: bord, enPassant: enPassant, row: row, col: col)
+                            enPassantList = rules.darkPawnEnPassant(bord: bord, enPassant: enPassant, row: row, col: col)
                         }
                     case pices[player][4]:
                         if player == 0 {
@@ -214,7 +214,7 @@ class Bord: ObservableObject {
                 
                     for move in enPassantList {
                         activityBord[move[0]][move[1]] = "inEnPassantList"
-                        //print("enPassant \(move[0]), \(move[1])")
+                        print("enPassant \(move[0]), \(move[1])")
                     }
             }
         default:

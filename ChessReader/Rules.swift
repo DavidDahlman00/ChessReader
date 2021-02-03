@@ -24,10 +24,10 @@ struct Rules{
     func lightPawnEnPassant(bord: [[String]], enPassant: [Int], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if row == 3 {
-            if  col - 1 >= 0 && col - 1 == enPassant[1]{
+            if  col - 1 >= 0 && col - 1 == enPassant[1] {
                 moveList.append([2, col - 1])
             }
-            if  col + 1 <= 7 && col + 1 == enPassant[1]{
+            if  col + 1 <= 7 && col + 1 == enPassant[1] {
                 moveList.append([2, col + 1])
             }
         }
