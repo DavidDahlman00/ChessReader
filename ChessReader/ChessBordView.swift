@@ -148,18 +148,7 @@ struct SquareView: View {
                 print("test \(row), \(col)")
                 bord.squareTuched(row: row, col: col)
                 print(bord.activityBord[row][col])
-//                if bord.activityBord[row][col] == "active" {
-//                    color = Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
-//                } else{
-//                    color = Color(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0)
-//                }
-               
-                
-//                var rules = Rules()
-//                let moveList = rules.LightPawn(bord: bord.bord, row: row, col: col)
-//                for entry in moveList{
-//                    print("\(entry[0]), \(entry[1])")
-//                }
+
                 
             }) {
                 Image(bord.bord[row][col])
