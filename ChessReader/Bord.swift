@@ -42,6 +42,7 @@ class Bord: ObservableObject {
     @Published var schack : [Bool] = [false, false]
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
+    var enPassant = [10, 10]        // 10 = no en passant move
     
     
     init() {
@@ -101,6 +102,11 @@ class Bord: ObservableObject {
                 activityBord[row][col] = "none"
             }
         }
+        if playerToGo == "Light" {
+            enPassant[1] = 10
+        }else{
+            enPassant[0] = 10
+        }
         activeSquare = nil
         activePice = nil
     }
@@ -124,6 +130,29 @@ class Bord: ObservableObject {
             if activePice != nil {
                 bord[row][col] = activePice!
             }
+            if activePice == "LP" && activeSquare![0] - row == 2 {
+                enPassant[0] = col
+            }
+            if activePice == "BP" && row - activeSquare![0] == 2 {
+                enPassant[1] = col
+            }
+            print(bord[row][col])
+            print(activityBord[row][col])
+            print("enPassants \(enPassant[0]), \(enPassant[1])")
+            recetActivityBord()
+            changePlayerToGo()
+        case "inEnPassantList":
+            if playerToGo == "Light" {
+                bord[3][col] = ""
+            }else{
+                bord[4][col] = ""
+            }
+            if activeSquare != nil{
+                bord[activeSquare![0]][activeSquare![1]] = ""
+            }
+            if activePice != nil {
+                bord[row][col] = activePice!
+            }
             recetActivityBord()
             changePlayerToGo()
         case "none":
@@ -134,7 +163,7 @@ class Bord: ObservableObject {
                 activePice = bord[row][col]
                 let rules = Rules()
                 var moveList = [[Int]]()
-                    
+                var enPassantList = [[Int]]()
                 switch bord[row][col] {
                     case pices[player][0]:
                         if player == 0 {
@@ -158,8 +187,10 @@ class Bord: ObservableObject {
                     case pices[player][3]:
                         if player == 0 {
                             moveList = rules.lightPawn(bord: bord, row: row, col: col)
+                            enPassantList = rules.lightPawnEnPassant(bord: bord,enPassant: enPassant, row: row, col: col)
                         }else{
                             moveList = rules.darkPawn(bord: bord, row: row, col: col)
+                            enPassantList = rules.lightPawnEnPassant(bord: bord, enPassant: enPassant, row: row, col: col)
                         }
                     case pices[player][4]:
                         if player == 0 {
@@ -179,6 +210,11 @@ class Bord: ObservableObject {
                     
                     for move in moveList {
                         activityBord[move[0]][move[1]] = "inMoveList"
+                    }
+                
+                    for move in enPassantList {
+                        activityBord[move[0]][move[1]] = "inEnPassantList"
+                        //print("enPassant \(move[0]), \(move[1])")
                     }
             }
         default:

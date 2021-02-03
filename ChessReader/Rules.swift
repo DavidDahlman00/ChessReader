@@ -21,6 +21,32 @@ struct Rules{
         return false
     }
     
+    func lightPawnEnPassant(bord: [[String]], enPassant: [Int], row: Int, col: Int) -> [[Int]] {
+        var moveList = [[Int]]()
+        if row == 3 {
+            if  col - 1 >= 0 && col - 1 == enPassant[1]{
+                moveList.append([2, col - 1])
+            }
+            if  col + 1 <= 7 && col + 1 == enPassant[1]{
+                moveList.append([2, col + 1])
+            }
+        }
+        return moveList
+    }
+    
+    func darkPawnEnPassant(bord: [[String]], enPassant: [Int], row: Int, col: Int) -> [[Int]] {
+        var moveList = [[Int]]()
+        if row == 4 {
+            if  col - 1 >= 0 && col - 1 == enPassant[0]{
+                moveList.append([5, col - 1])
+            }
+            if  col + 1 <= 7 && col + 1 == enPassant[0]{
+                moveList.append([5, col + 1])
+            }
+        }
+        return moveList
+    }
+    
     func lightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if bord[row - 1][col] == "" && row > 0  {
