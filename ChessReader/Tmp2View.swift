@@ -58,7 +58,18 @@ struct Tmp2View: View {
                         .foregroundColor(.gray)
                     }
                     // knappar och annat
+                    
+                    Button(action: {
+                     
+                        bord.bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
+                         
+                    }) {
+                        Text("Reset").font(.system(size: 20))
+                    }
+                    .foregroundColor(.red)
                 }
+                
+                
                 
             }.edgesIgnoringSafeArea(.all)
             
