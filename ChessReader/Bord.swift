@@ -41,7 +41,7 @@ class Bord: ObservableObject {
     @Published var promotedPawn: [Int] = [-1, -1]   // -1 = no pawn to promote
     @Published var promotePawn: Bool = false
     var playerToGo : String = "Light"
-    @Published var schack : [Bool] = [false, false]
+    @Published var schach : [Bool] = [false, false]
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
     var enPassant = [10, 10]        // 10 = no en passant move
@@ -153,6 +153,7 @@ class Bord: ObservableObject {
             }
             recetActivityBord()
             changePlayerToGo()
+            checkSchach()
         case "inEnPassantList":
             if playerToGo == "Light" {
                 bord[3][col] = ""
@@ -169,6 +170,7 @@ class Bord: ObservableObject {
             }
             changePlayerToGo()
             recetActivityBord()
+            checkSchach()
         case "none":
             if pices[player].contains(bord[row][col]){
                 recetActivityBord()
@@ -233,6 +235,23 @@ class Bord: ObservableObject {
             }
         default:
             recetActivityBord()
+        }
+    }
+    
+    func checkSchach()  {
+        let rule = Rules()
+        if rule.checkForSchach(bord: bord, player: playerToGo){
+            if playerToGo == "Light" {
+                schach[0] = true
+            }else{
+                schach[1] = true
+            }
+        }else{
+            if playerToGo == "Light" {
+                schach[0] = false
+            }else{
+                schach[1] = false
+            }
         }
     }
 }

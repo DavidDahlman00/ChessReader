@@ -434,4 +434,65 @@ struct Rules{
         return positions
     }
     
+    func checkForSchach(bord: [[String]], player: String) -> Bool  {
+        let kingPosition: [Int]
+       
+        if player == "Light" {
+             kingPosition = getPiecesPositions(bord: bord, piece: "LK")[0]
+        }else{
+             kingPosition = getPiecesPositions(bord: bord, piece: "BK")[0]
+        }
+        var moveList = [[Int]]()
+        
+        if player == "Light" {
+            for value in darkPices{
+                let pieces = getPiecesPositions(bord: bord, piece: value)
+                for piece in pieces{
+                    switch value {
+                    case "BB":
+                        moveList = moveList + darkBishop(bord: bord, row: piece[0], col: piece[1])
+                    case "BK":
+                        moveList = moveList + darkKing(bord: bord, row: piece[0], col: piece[1])
+                    case "BN":
+                        moveList = moveList + darkKnight(bord: bord, row: piece[0], col: piece[1])
+                    case "BP":
+                        moveList = moveList + darkPawn(bord: bord, row: piece[0], col: piece[1])
+                    case "BR":
+                        moveList = moveList + darkRook(bord: bord, row: piece[0], col: piece[1])
+                    case "BQ":
+                        moveList = moveList + darkQueen(bord: bord, row: piece[0], col: piece[1])
+                    default: break
+                    }
+                }
+            }
+        }else {
+            for value in lightPices{
+                let pieces = getPiecesPositions(bord: bord, piece: value)
+                for piece in pieces{
+                    switch value {
+                    case "LB":
+                        moveList = moveList + lightBishop(bord: bord, row: piece[0], col: piece[1])
+                    case "LK":
+                        moveList = moveList + lightKing(bord: bord, row: piece[0], col: piece[1])
+                    case "LN":
+                        moveList = moveList + lightKnight(bord: bord, row: piece[0], col: piece[1])
+                    case "LP":
+                        moveList = moveList + lightPawn(bord: bord, row: piece[0], col: piece[1])
+                    case "LR":
+                        moveList = moveList + lightRook(bord: bord, row: piece[0], col: piece[1])
+                    case "LQ":
+                        moveList = moveList + lightQueen(bord: bord, row: piece[0], col: piece[1])
+                    default: break
+                    }
+                }
+            }
+        }
+        if moveList.contains(kingPosition) {
+            return true
+            print("schach")
+        }else{
+            print("not schach")
+        }
+        return false
+    }
 }

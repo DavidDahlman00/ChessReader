@@ -12,9 +12,17 @@ struct BordView: View {
    @ObservedObject var bord: Bord
     let imageSize: CGFloat
     var image: [[String]]
-    @State var alertReply = ""
+    var schach: String{
+        if (bord.playerToGo == "Light" && bord.schach[0]) || (bord.playerToGo == "Dark" && bord.schach[1]){
+            return "Schach"
+        }else {
+            return ""
+        }
+    }
     var body: some View {
         VStack(spacing: 0){
+            Text(schach)
+                .foregroundColor(.gray)
             RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0])
             RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1])
             RowView(bord: bord, imageSize: imageSize, row: 2, image: image[2])
