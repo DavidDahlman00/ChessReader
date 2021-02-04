@@ -489,10 +489,14 @@ struct Rules{
         }
         if moveList.contains(kingPosition) {
             return true
-            print("schach")
-        }else{
-            print("not schach")
         }
         return false
+    }
+    
+    func moveIsNotInSchach(bord: [[String]],player: String, rowFrom: Int, colFrom: Int, rowTo: Int, colTo: Int) -> Bool {
+        var tmpBord = bord
+        tmpBord[rowFrom][colFrom] = ""
+        tmpBord[rowTo][colTo] = "?"
+        return checkForSchach(bord: tmpBord, player: player)
     }
 }
