@@ -421,4 +421,17 @@ struct Rules{
     func lightQueen(bord: [[String]], row: Int, col: Int) -> [[Int]]{
         return lightBishop(bord: bord, row: row, col: col) +  lightRook(bord: bord, row: row, col: col)
     }
+    
+    func getPiecesPositions(bord: [[String]], piece: String ) -> [[Int]] {
+        var positions = [[Int]]()
+        for row in 0...7 {
+            for col in 0...7 {
+                if bord[row][col] == piece {
+                    positions.append([row, col])
+                }
+            }
+        }
+        return positions
+    }
+    
 }
