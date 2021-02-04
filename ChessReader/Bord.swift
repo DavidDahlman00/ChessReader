@@ -38,6 +38,8 @@ class Bord: ObservableObject {
 
     @Published var bord : [[String]]
     @Published var activityBord : [[String]]
+    @Published var promotedPawn: [Int] = [-1, -1]   // -1 = no pawn to promote
+    @Published var promotePawn: Bool = false
     var playerToGo : String = "Light"
     @Published var schack : [Bool] = [false, false]
     var activeSquare: [Int]? = nil
@@ -120,6 +122,15 @@ class Bord: ObservableObject {
         case "active":
             recetActivityBord()
         case "inMoveList":
+            if activePice == "LP" && row == 0 {
+                promotePawn = true
+                promotedPawn = [col, -1]
+            }
+            if activePice == "BP" && row == 7 {
+                promotePawn = true
+                promotedPawn = [-1, col]
+            }
+            
             if activeSquare != nil{
                 bord[activeSquare![0]][activeSquare![1]] = ""
             }

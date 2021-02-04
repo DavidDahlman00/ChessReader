@@ -62,7 +62,7 @@ struct Tmp2View: View {
                     Button(action: {
                      
                         bord.bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
-                         
+                        bord.playerToGo = "Light"
                     }) {
                         Text("Reset").font(.system(size: 20))
                     }

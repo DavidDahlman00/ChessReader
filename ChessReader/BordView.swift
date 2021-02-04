@@ -12,6 +12,7 @@ struct BordView: View {
    @ObservedObject var bord: Bord
     let imageSize: CGFloat
     var image: [[String]]
+    @State var alertReply = ""
     var body: some View {
         VStack(spacing: 0){
             RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0])
@@ -24,6 +25,46 @@ struct BordView: View {
             RowView(bord: bord, imageSize: imageSize, row: 7, image: image[7])
         }
         .padding()
+        .actionSheet(isPresented: $bord.promotePawn){
+            ActionSheet(title: Text("Promote pawn to"), buttons: [
+                            .default(Text("Queen")) { if bord.promotedPawn[0] != -1{
+                                bord.bord[0][bord.promotedPawn[0]] = "LQ"
+                            }else{
+                                bord.bord[7][bord.promotedPawn[1]] = "BQ"
+                            }
+                            bord.promotePawn = false
+                            bord.promotedPawn = [-1, -1]
+                            },
+
+                             
+                            .default(Text("Rook")) { if bord.promotedPawn[0] != -1{
+                                bord.bord[0][bord.promotedPawn[0]] = "LR"
+                            }else{
+                                bord.bord[7][bord.promotedPawn[1]] = "BR"
+                            }
+                            bord.promotePawn = false
+                            bord.promotedPawn = [-1, -1]
+                            },
+
+                             
+                            .default(Text("Knight")) { if bord.promotedPawn[0] != -1{
+                                bord.bord[0][bord.promotedPawn[0]] = "LN"
+                            }else{
+                                bord.bord[7][bord.promotedPawn[1]] = "BN"
+                            }
+                            bord.promotePawn = false
+                            bord.promotedPawn = [-1, -1]
+                            },
+                            .default(Text("Bishop")) { if bord.promotedPawn[0] != -1{
+                                bord.bord[0][bord.promotedPawn[0]] = "LB"
+                            }else{
+                                bord.bord[7][bord.promotedPawn[1]] = "BB"
+                            }
+                            bord.promotePawn = false
+                            bord.promotedPawn = [-1, -1]
+                            },])
+                    
+        }
     }
 }
 
