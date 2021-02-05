@@ -159,28 +159,52 @@ struct Rules{
     func darkKnight(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if inBord(row: row + 1, col: col + 2) && lightPicesAndNoPice.contains(bord[row + 1][col + 2]){
-            moveList.append([row + 1 , col + 2])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col + 2) {
+                moveList.append([row + 1, col + 2])
+            }
+            //moveList.append([row + 1 , col + 2])
         }
         if inBord(row: row + 1, col: col - 2) && lightPicesAndNoPice.contains(bord[row + 1][col - 2]){
-            moveList.append([row + 1, col - 2])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col - 2) {
+                moveList.append([row + 1, col - 2])
+            }
+            //moveList.append([row + 1, col - 2])
         }
         if inBord(row: row - 1, col: col + 2) && lightPicesAndNoPice.contains(bord[row - 1][col + 2]){
-            moveList.append([row - 1, col + 2])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col + 2) {
+                moveList.append([row - 1, col + 2])
+            }
+            //moveList.append([row - 1, col + 2])
         }
         if inBord(row: row - 1, col: col - 2) && lightPicesAndNoPice.contains(bord[row - 1][col - 2]){
-            moveList.append([row - 1, col - 2])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col - 2) {
+                moveList.append([row - 1, col - 2])
+            }
+            //moveList.append([row - 1, col - 2])
         }
         if inBord(row: row + 2, col: col + 1) && lightPicesAndNoPice.contains(bord[row + 2][col + 1]){
-            moveList.append([row + 2, col + 1])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 2, colTo: col + 1) {
+                moveList.append([row + 2, col + 1])
+            }
+            //moveList.append([row + 2, col + 1])
         }
         if inBord(row: row + 2, col: col - 1) && lightPicesAndNoPice.contains(bord[row + 2][col - 1]) {
-            moveList.append([row + 2, col - 1])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 2, colTo: col - 1) {
+                moveList.append([row + 2, col - 1])
+            }
+            //moveList.append([row + 2, col - 1])
         }
         if inBord(row: row - 2, col: col + 1) && lightPicesAndNoPice.contains(bord[row - 2][col + 1]) {
-            moveList.append([row - 2, col + 1])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - 2, colTo: col + 1) {
+                moveList.append([row - 2, col + 1])
+            }
+            //moveList.append([row - 2, col + 1])
         }
         if inBord(row: row - 2, col: col - 1) && lightPicesAndNoPice.contains(bord[row - 2][col - 1]) {
-            moveList.append([row - 2, col - 1])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - 2, colTo: col - 1) {
+                moveList.append([row - 2, col - 1])
+            }
+            //moveList.append([row - 2, col - 1])
         }
         
         
