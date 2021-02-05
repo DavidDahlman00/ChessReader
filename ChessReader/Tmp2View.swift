@@ -9,6 +9,7 @@ import Firebase
 
 struct Tmp2View: View {
     var db = Firestore.firestore()
+    @State private var showingSheet = false
     @ObservedObject var bord = Bord()
     var body: some View {
         GeometryReader{geo in
@@ -61,12 +62,18 @@ struct Tmp2View: View {
                     
                     Button(action: {
                      
-                        bord.bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
-                        bord.playerToGo = "Light"
+                        self.showingSheet = true
                     }) {
                         Text("Reset").font(.system(size: 20))
                     }
                     .foregroundColor(.red)
+                    .actionSheet(isPresented: $showingSheet){
+                        ActionSheet(title: Text("Would you like to restart?"), buttons: [.default(Text("Yes")){
+                            
+                            bord.bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
+                            bord.playerToGo = "Light"
+                        }, .cancel()])
+                    }
                 }
                 
                 
