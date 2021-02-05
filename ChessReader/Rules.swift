@@ -68,9 +68,13 @@ struct Rules{
     func darkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if bord[row + 1][col] == "" && row > 0  {
-            moveList.append([row + 1, col,])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col) {
+                moveList.append([row + 1, col])
+            }
             if bord[row + 2][col] == "" && row == 1 {
-                moveList.append([row + 2, col])
+                if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 2, colTo: col) {
+                    moveList.append([row + 2, col])
+                }
             }
         }
         if col > 0 && row > 0 && lightPices.contains(bord[row + 1][col - 1]) {
@@ -493,7 +497,7 @@ struct Rules{
         return false
     }
     
-    func moveIsNotInSchach(bord: [[String]],player: String, rowFrom: Int, colFrom: Int, rowTo: Int, colTo: Int) -> Bool {
+    func moveIsInSchach(bord: [[String]],player: String, rowFrom: Int, colFrom: Int, rowTo: Int, colTo: Int) -> Bool {
         var tmpBord = bord
         tmpBord[rowFrom][colFrom] = ""
         tmpBord[rowTo][colTo] = "?"
