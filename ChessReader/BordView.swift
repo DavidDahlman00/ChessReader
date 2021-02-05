@@ -42,6 +42,7 @@ struct BordView: View {
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
+                            bord.checkSchach()
                             },
 
                              
@@ -52,6 +53,7 @@ struct BordView: View {
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
+                            bord.checkSchach()
                             },
 
                              
@@ -62,6 +64,7 @@ struct BordView: View {
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
+                            bord.checkSchach()
                             },
                             .default(Text("Bishop")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LB"
@@ -70,8 +73,8 @@ struct BordView: View {
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
+                            bord.checkSchach()
                             },])
-                    
         }
     }
 }
