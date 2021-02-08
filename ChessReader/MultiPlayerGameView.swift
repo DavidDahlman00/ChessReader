@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct  MultiPlayerGameView: View {
+    //@State private var items = [Item]()
+   @State var move = 1
+    var db = Firestore.firestore()
     @ObservedObject var bord = Bord()
     var body: some View {
         GeometryReader{geo in
@@ -17,7 +21,10 @@ struct  MultiPlayerGameView: View {
                     Text("Multiplayer")
                     
                         
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc())
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc()).onAppear(){
+                        listenToFireStore()
+                    }
+
                     HStack{
                         Button(action: {
                             if bord.bord[3][3] == "" {
@@ -47,15 +54,48 @@ struct  MultiPlayerGameView: View {
                         .foregroundColor(.gray)
                     }
                     // knappar och annat
+                    Button(action: {
+                        
+                            db.collection("testItems2").addDocument(data: ["move": move, "state" : bord.bordToString()])
+                        
+                            
+                            print("check")}, label: {
+                        Image(systemName: "checkmark.square" )
+                    })
+//                    Button(action: {
+//                            var tmp
+//                            bord.bord = db.collection("testItems2")
+//
+//                            print("check")}, label: {
+//                        Image(systemName: "checkmark.square" )
+//                    })
                 }
                 
             }.edgesIgnoringSafeArea(.all)
             
         }
     }
+    
     func testFunc(){
         print("func test 3")
     }
+    
+ func listenToFireStore() {
+        
+        db.collection("testItems2").addSnapshotListener{ (snapshot, err) in
+            var tmpState = ""
+            var tmpMove = 0
+            for document in snapshot!.documents {
+                if document["move"] as! Int > tmpMove {
+                    tmpState = document["state"] as! String
+                    tmpMove = document["move"] as! Int
+                }
+                    
+               }
+            move = tmpMove + 1
+            print(tmpState)
+            }
+        }
 }
 
 struct  MultiPlayerGameView_Previews: PreviewProvider {
