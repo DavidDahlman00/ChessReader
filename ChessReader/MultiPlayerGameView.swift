@@ -93,7 +93,10 @@ struct  MultiPlayerGameView: View {
                     
                }
             move = tmpMove + 1
-            bord.stringToBord(fenText: tmpState)
+            if tmpState != "" {
+                bord.stringToBord(fenText: tmpState)
+            }
+            
             print(tmpState)
             }
         }
