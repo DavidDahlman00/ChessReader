@@ -50,10 +50,10 @@ struct Rules{
     func lightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if inBord(row: row - 1, col: col) && bord[row - 1][col] == "" {
-            moveList.append([row - 1, col])
+           moveList.append([row - 1, col])
 //            if !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col) {
-//                moveList.append([row - 1, col])
-//            }
+  //              moveList.append([row - 1, col])
+    //        }
             if inBord(row: row - 2, col: col) && bord[row - 2][col] == "" && row == 6 {
                 moveList.append([row - 2, col])
             }
@@ -232,6 +232,10 @@ struct Rules{
             moveList.append([row + 2, col - 1])
         }
         if inBord(row: row - 2, col: col + 1) && darkPicesAndNoPice.contains(bord[row - 2][col + 1]){
+//            if !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 2, colTo: col + 1) {
+//                print("??????")
+//                moveList.append([row - 2, col + 1])
+//            }
             moveList.append([row - 2, col + 1])
         }
         if inBord(row: row - 2, col: col - 1) && darkPicesAndNoPice.contains(bord[row - 2][col - 1]){
@@ -524,6 +528,7 @@ struct Rules{
                     default: break
                     }
                 }
+                print("in light move")
             }
         }else {
             for value in lightPices{
@@ -546,6 +551,7 @@ struct Rules{
                     }
                 }
             }
+            print("in dark move")
         }
         if moveList.contains(kingPosition) {
             return true

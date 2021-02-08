@@ -173,8 +173,10 @@ class Bord: ObservableObject {
             checkSchach()
         case "none":
             if pices[player].contains(bord[row][col]){
+                print("1")
                 recetActivityBord()
                 activityBord[row][col] = "active"
+                print("2")
                 activeSquare = [row, col]
                 activePice = bord[row][col]
                 let rules = Rules()
