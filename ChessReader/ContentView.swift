@@ -20,8 +20,10 @@ struct ContentView: View {
                 .tabItem{
                     Image(systemName: "person.fill")
                     Text("Singleplayer game")
+                    
+                    
                 }
-            MultiPlayerGameView()
+            WaitingForMultiPlayerView()
                 .tabItem{
                     Image(systemName: "person.2.fill")
                     Text("multiplayer game")
