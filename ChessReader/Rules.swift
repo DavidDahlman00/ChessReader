@@ -554,6 +554,7 @@ struct Rules{
     }
     
     func moveIsInSchach(bord: [[String]],player: String, rowFrom: Int, colFrom: Int, rowTo: Int, colTo: Int) -> Bool {
+        
         var tmpBord = bord
         tmpBord[rowFrom][colFrom] = ""
         tmpBord[rowTo][colTo] = "?"

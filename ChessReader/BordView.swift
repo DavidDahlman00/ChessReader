@@ -12,9 +12,10 @@ struct BordView: View {
    @ObservedObject var bord: Bord
     let imageSize: CGFloat
     var image: [[String]]
+    let action: ()
     var schach: String{
         if (bord.playerToGo == "Light" && bord.schach[0]) || (bord.playerToGo == "Dark" && bord.schach[1]){
-            return "Schach"
+            return "Schack"
         }else {
             return ""
         }
@@ -23,14 +24,14 @@ struct BordView: View {
         VStack(spacing: 0){
             Text(schach)
                 .foregroundColor(.gray)
-            RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0])
-            RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1])
-            RowView(bord: bord, imageSize: imageSize, row: 2, image: image[2])
-            RowView(bord: bord, imageSize: imageSize, row: 3, image: image[3])
-            RowView(bord: bord, imageSize: imageSize, row: 4, image: image[4])
-            RowView(bord: bord, imageSize: imageSize, row: 5, image: image[5])
-            RowView(bord: bord, imageSize: imageSize, row: 6, image: image[6])
-            RowView(bord: bord, imageSize: imageSize, row: 7, image: image[7])
+            RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0], action: action)
+            RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1], action: action)
+            RowView(bord: bord, imageSize: imageSize, row: 2, image: image[2], action: action)
+            RowView(bord: bord, imageSize: imageSize, row: 3, image: image[3], action: action)
+            RowView(bord: bord, imageSize: imageSize, row: 4, image: image[4], action: action)
+            RowView(bord: bord, imageSize: imageSize, row: 5, image: image[5], action: action)
+            RowView(bord: bord, imageSize: imageSize, row: 6, image: image[6], action: action)
+            RowView(bord: bord, imageSize: imageSize, row: 7, image: image[7], action: action)
         }
         .padding()
         .actionSheet(isPresented: $bord.promotePawn){
@@ -84,17 +85,18 @@ struct RowView: View {
     let imageSize: CGFloat
     let row: Int
     let image: [String]
+    let action: ()
     
     var body: some View {
         HStack(spacing: 0){
-            SquareView(bord: bord, size: imageSize, pice: image[0], row: row, col: 0)
-            SquareView(bord: bord, size: imageSize, pice: image[1], row: row, col: 1)
-            SquareView(bord: bord, size: imageSize, pice: image[2], row: row, col: 2)
-            SquareView(bord: bord, size: imageSize, pice: image[3], row: row, col: 3)
-            SquareView(bord: bord, size: imageSize, pice: image[4], row: row, col: 4)
-            SquareView(bord: bord, size: imageSize, pice: image[5], row: row, col: 5)
-            SquareView(bord: bord, size: imageSize, pice: image[6], row: row, col: 6)
-            SquareView(bord: bord, size: imageSize, pice: image[7], row: row, col: 7)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[0], row: row, col: 0)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[1], row: row, col: 1)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[2], row: row, col: 2)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[3], row: row, col: 3)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[4], row: row, col: 4)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[5], row: row, col: 5)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[6], row: row, col: 6)
+            SquareView(bord: bord, size: imageSize, action: action, pice: image[7], row: row, col: 7)
 
         }
     }
@@ -103,6 +105,8 @@ struct RowView: View {
 struct SquareView: View {
     @ObservedObject var bord: Bord
     var size: CGFloat
+    let action: ()
+    
     var color: Color{
         switch bord.activityBord[row][col] {
         case "none":
@@ -145,7 +149,7 @@ struct SquareView: View {
                 print("test \(row), \(col)")
                 bord.squareTuched(row: row, col: col)
                 print(bord.activityBord[row][col])
-
+                action
                 
             }) {
                 Image(bord.bord[row][col])

@@ -7,7 +7,7 @@
 import SwiftUI
 import Firebase
 
-struct Tmp2View: View {
+struct SinglePlayerGameView: View {
     var db = Firestore.firestore()
     @State private var showingSheet = false
     @ObservedObject var bord = Bord()
@@ -21,7 +21,7 @@ struct Tmp2View: View {
                         .font(.largeTitle)
                         .foregroundColor(.gray)
                     
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord)
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc())
                     Button(action: {
                         
                             db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])
@@ -82,10 +82,13 @@ struct Tmp2View: View {
             
         }
     }
+    func testFunc(){
+        print("func test 2")
+    }
 }
 
-struct Tmp2View_Previews: PreviewProvider {
+struct SinglePlayerGameView_Previews: PreviewProvider {
     static var previews: some View {
-        Tmp2View()
+        SinglePlayerGameView()
     }
 }

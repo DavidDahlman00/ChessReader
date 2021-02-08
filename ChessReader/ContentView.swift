@@ -11,17 +11,17 @@ struct ContentView: View {
     var body: some View {
         //Image("chessImage")
         TabView{
-            Tmp1View()
+            ReadGameView()
                 .tabItem{
                     Image(systemName: "text.book.closed.fill")
                     Text("Read games")
                 }
-            Tmp2View()
+            SinglePlayerGameView()
                 .tabItem{
                     Image(systemName: "person.fill")
-                    Text("Single game")
+                    Text("Singleplayer game")
                 }
-            Tmp3View()
+            MultiPlayerGameView()
                 .tabItem{
                     Image(systemName: "person.2.fill")
                     Text("multiplayer game")

@@ -22,9 +22,9 @@
 		51822A1F25C159F500974B3F /* GameListEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51822A1E25C159F400974B3F /* GameListEntry.swift */; };
 		51822A2425C15A0B00974B3F /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51822A2325C15A0B00974B3F /* GameList.swift */; };
 		51822A2925C15D3D00974B3F /* ChessBordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51822A2825C15D3D00974B3F /* ChessBordView.swift */; };
-		51B80A5B25CAA0130036656F /* Tmp1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A5A25CAA0130036656F /* Tmp1View.swift */; };
-		51B80A6025CAA0340036656F /* Tmp2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A5F25CAA0340036656F /* Tmp2View.swift */; };
-		51B80A6225CAA04A0036656F /* Tmp3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A6125CAA04A0036656F /* Tmp3View.swift */; };
+		51B80A5B25CAA0130036656F /* ReadGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A5A25CAA0130036656F /* ReadGameView.swift */; };
+		51B80A6025CAA0340036656F /* SinglePlayerGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A5F25CAA0340036656F /* SinglePlayerGameView.swift */; };
+		51B80A6225CAA04A0036656F /* MultiPlayerGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A6125CAA04A0036656F /* MultiPlayerGameView.swift */; };
 		6838950FE8D367A0ACEC52CF /* Pods_ChessReaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A90AC6103B87D0952376FD8 /* Pods_ChessReaderTests.framework */; };
 		773B995E25C98A2F003E9CEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 773B995D25C98A2F003E9CEA /* GoogleService-Info.plist */; };
 		BC0EF598F61D13F4A9B9D417 /* Pods_ChessReader_ChessReaderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B126FBC3FAB6120527E6CDC /* Pods_ChessReader_ChessReaderUITests.framework */; };
@@ -71,9 +71,9 @@
 		51822A1E25C159F400974B3F /* GameListEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListEntry.swift; sourceTree = "<group>"; };
 		51822A2325C15A0B00974B3F /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
 		51822A2825C15D3D00974B3F /* ChessBordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBordView.swift; sourceTree = "<group>"; };
-		51B80A5A25CAA0130036656F /* Tmp1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tmp1View.swift; sourceTree = "<group>"; };
-		51B80A5F25CAA0340036656F /* Tmp2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tmp2View.swift; sourceTree = "<group>"; };
-		51B80A6125CAA04A0036656F /* Tmp3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tmp3View.swift; sourceTree = "<group>"; };
+		51B80A5A25CAA0130036656F /* ReadGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadGameView.swift; sourceTree = "<group>"; };
+		51B80A5F25CAA0340036656F /* SinglePlayerGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGameView.swift; sourceTree = "<group>"; };
+		51B80A6125CAA04A0036656F /* MultiPlayerGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayerGameView.swift; sourceTree = "<group>"; };
 		773B995D25C98A2F003E9CEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C88D70CB69FC000206A2C5C /* Pods-ChessReader-ChessReaderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessReader-ChessReaderUITests.release.xcconfig"; path = "Target Support Files/Pods-ChessReader-ChessReaderUITests/Pods-ChessReader-ChessReaderUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8E95DC09C61AB6DA3E403F23 /* Pods-ChessReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChessReader.release.xcconfig"; path = "Target Support Files/Pods-ChessReader/Pods-ChessReader.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,9 +172,9 @@
 				51822A2825C15D3D00974B3F /* ChessBordView.swift */,
 				5180DFE625C4216200DF9B74 /* Bord.swift */,
 				5180DFEB25C42C8900DF9B74 /* Rules.swift */,
-				51B80A5A25CAA0130036656F /* Tmp1View.swift */,
-				51B80A5F25CAA0340036656F /* Tmp2View.swift */,
-				51B80A6125CAA04A0036656F /* Tmp3View.swift */,
+				51B80A5A25CAA0130036656F /* ReadGameView.swift */,
+				51B80A5F25CAA0340036656F /* SinglePlayerGameView.swift */,
+				51B80A6125CAA04A0036656F /* MultiPlayerGameView.swift */,
 				512750A025CAAD3200E1FF8D /* BordView.swift */,
 			);
 			path = ChessReader;
@@ -451,12 +451,12 @@
 				512750A125CAAD3200E1FF8D /* BordView.swift in Sources */,
 				51822A2425C15A0B00974B3F /* GameList.swift in Sources */,
 				51822A1F25C159F500974B3F /* GameListEntry.swift in Sources */,
-				51B80A6225CAA04A0036656F /* Tmp3View.swift in Sources */,
-				51B80A5B25CAA0130036656F /* Tmp1View.swift in Sources */,
+				51B80A6225CAA04A0036656F /* MultiPlayerGameView.swift in Sources */,
+				51B80A5B25CAA0130036656F /* ReadGameView.swift in Sources */,
 				51822A2925C15D3D00974B3F /* ChessBordView.swift in Sources */,
 				518229A425BF092A00974B3F /* ContentView.swift in Sources */,
 				5180DFE725C4216200DF9B74 /* Bord.swift in Sources */,
-				51B80A6025CAA0340036656F /* Tmp2View.swift in Sources */,
+				51B80A6025CAA0340036656F /* SinglePlayerGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

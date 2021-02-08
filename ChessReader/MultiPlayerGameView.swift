@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Tmp3View: View {
+struct  MultiPlayerGameView: View {
     @ObservedObject var bord = Bord()
     var body: some View {
         GeometryReader{geo in
@@ -17,7 +17,7 @@ struct Tmp3View: View {
                     Text("Multiplayer")
                     
                         
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord)
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc())
                     HStack{
                         Button(action: {
                             if bord.bord[3][3] == "" {
@@ -53,11 +53,14 @@ struct Tmp3View: View {
             
         }
     }
+    func testFunc(){
+        print("func test 3")
+    }
 }
 
-struct Tmp3View_Previews: PreviewProvider {
+struct  MultiPlayerGameView_Previews: PreviewProvider {
     static var previews: some View {
-        Tmp3View()
+        MultiPlayerGameView()
     }
 }
 

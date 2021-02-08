@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Tmp1View: View {
+struct ReadGameView: View {
     @ObservedObject var gameList = GameList()
     init(){
         UITableView.appearance().backgroundColor = .clear
@@ -46,9 +46,9 @@ struct Tmp1View: View {
      }
 }
 
-struct Tmp1_Previews: PreviewProvider {
+struct ReadGame_Previews: PreviewProvider {
     static var previews: some View {
-        Tmp1View()
+        ReadGameView()
     }
 }
 
