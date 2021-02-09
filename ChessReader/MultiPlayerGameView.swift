@@ -19,7 +19,7 @@ struct  MultiPlayerGameView: View {
                 Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
                 VStack{
                     Text("Multiplayer")
-                    
+                        .foregroundColor(.gray)
                         
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc()).onAppear(){
                         listenToFireStore()
@@ -60,8 +60,9 @@ struct  MultiPlayerGameView: View {
             move = tmpMove + 1
             if tmpState != "" {
                 bord.stringToBord(fenText: tmpState)
+                bord.changePlayerToGo()
             }
-            bord.changePlayerToGo()
+            
             print(tmpState)
             }
         }
