@@ -8,32 +8,58 @@
 import Firebase
 import SwiftUI
 
-
-
 struct WaitingForMultiPlayerView: View {
+    
     @State var email: String = ""
     @State var password: String = ""
     var body: some View {
+        NavigationView{
         ZStack{
             Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
             Image("chessTest").resizable().scaledToFit()
             VStack{
+                HStack{
+                Text("Enter your email:")
+                    .foregroundColor(.white)
+                TextField("Email", text: $email)
+                    .textContentType(.emailAddress)
+                    .cornerRadius(20)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.white)
+                    .foregroundColor(.black)
+                    .padding(8)
+                    
+                }
+                HStack{
+                Text("Enter your password:")
+                    .foregroundColor(.white)
+                TextField("Password", text: $password)
+                    .textContentType(.password)
+                    .cornerRadius(20)
+                    
+                    .background(Color.white)
+                    .foregroundColor(.black)
+                    .padding(8)
+                }
+                NavigationLink(
+                    destination: MultiPlayerGameView()){
+                    Text("Sign In")
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .background(Color.white)
+                        .cornerRadius(40)
+                        .padding(30)
+                }
+            }
                
+            }.edgesIgnoringSafeArea(.all)
             
-                TextField("Enter your email", text: $email).foregroundColor(.red).foregroundColor(.red)
-                
-                TextField("Enter your password", text: $password).foregroundColor(.red).foregroundColor(.red)
-                
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Press me").foregroundColor(.red)
-                })
+        }
+    }
+      
+   }
 
-                
-            }
-        }.edgesIgnoringSafeArea(.all)
-       
-            }
-}
 
 
 

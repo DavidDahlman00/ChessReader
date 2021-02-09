@@ -30,34 +30,34 @@ struct SinglePlayerGameView: View {
                             print("check")}, label: {
                         Image(systemName: "checkmark.square" )
                     })
-                    HStack{
-                        Button(action: {
-                            if bord.bord[3][3] == "" {
-                                bord.bord[3][3] = bord.bord[1][3]
-                                bord.bord[1][3] = ""
-                            }else{
-                                bord.bord[1][3] = bord.bord[3][3]
-                                bord.bord[3][3] = ""
-                             }
-                        }) {
-                            Image(systemName: "backward.fill")
-                        }
-                        .foregroundColor(.gray)
-                        
-                        Button(action: {
-                            if bord.bord[4][3] == "" {
-                                bord.bord[4][3] = bord.bord[6][3]
-                                bord.bord[6][3] = ""
-                            }else{
-                                bord.bord[6][3] = bord.bord[4][3]
-                                bord.bord[4][3] = ""
-                             }
-                        }) {
-                            Image(systemName: "forward.fill")
-                        }
-                        
-                        .foregroundColor(.gray)
-                    }
+//                    HStack{
+//                        Button(action: {
+//                            if bord.bord[3][3] == "" {
+//                                bord.bord[3][3] = bord.bord[1][3]
+//                                bord.bord[1][3] = ""
+//                            }else{
+//                                bord.bord[1][3] = bord.bord[3][3]
+//                                bord.bord[3][3] = ""
+//                             }
+//                        }) {
+//                            Image(systemName: "backward.fill")
+//                        }
+//                        .foregroundColor(.gray)
+//
+//                        Button(action: {
+//                            if bord.bord[4][3] == "" {
+//                                bord.bord[4][3] = bord.bord[6][3]
+//                                bord.bord[6][3] = ""
+//                            }else{
+//                                bord.bord[6][3] = bord.bord[4][3]
+//                                bord.bord[4][3] = ""
+//                             }
+//                        }) {
+//                            Image(systemName: "forward.fill")
+//                        }
+//
+//                        .foregroundColor(.gray)
+//                    }
                     // knappar och annat
                     
                     Button(action: {
@@ -66,7 +66,7 @@ struct SinglePlayerGameView: View {
                     }) {
                         Text("Reset").font(.system(size: 20))
                     }
-                    .foregroundColor(.red)
+                    .foregroundColor(.gray)
                     .actionSheet(isPresented: $showingSheet){
                         ActionSheet(title: Text("Would you like to restart?"), buttons: [.default(Text("Yes")){
                             
