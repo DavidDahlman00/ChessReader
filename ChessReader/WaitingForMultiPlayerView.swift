@@ -47,6 +47,7 @@ struct WaitingForMultiPlayerView: View {
                         .font(.title)
                         .foregroundColor(.black)
                         .fontWeight(.bold)
+                        .overlay(RoundedRectangle)
                         .background(Color.white)
                         .cornerRadius(40)
                         .padding(30)
