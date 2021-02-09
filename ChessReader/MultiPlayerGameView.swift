@@ -25,34 +25,6 @@ struct  MultiPlayerGameView: View {
                         listenToFireStore()
                     }
 
-                    HStack{
-                        Button(action: {
-                            if bord.bord[3][3] == "" {
-                                bord.bord[3][3] = bord.bord[1][3]
-                                bord.bord[1][3] = ""
-                            }else{
-                                bord.bord[1][3] = bord.bord[3][3]
-                                bord.bord[3][3] = ""
-                             }
-                        }) {
-                            Image(systemName: "backward.fill")
-                        }
-                        .foregroundColor(.gray)
-                        
-                        Button(action: {
-                            if bord.bord[4][3] == "" {
-                                bord.bord[4][3] = bord.bord[6][3]
-                                bord.bord[6][3] = ""
-                            }else{
-                                bord.bord[6][3] = bord.bord[4][3]
-                                bord.bord[4][3] = ""
-                             }
-                        }) {
-                            Image(systemName: "forward.fill")
-                        }
-                        
-                        .foregroundColor(.gray)
-                    }
                     // knappar och annat
                     Button(action: {
                         
@@ -62,13 +34,6 @@ struct  MultiPlayerGameView: View {
                             print("check")}, label: {
                         Image(systemName: "checkmark.square" )
                     })
-//                    Button(action: {
-//                            var tmp
-//                            bord.bord = db.collection("testItems2")
-//
-//                            print("check")}, label: {
-//                        Image(systemName: "checkmark.square" )
-//                    })
                 }
                 
             }.edgesIgnoringSafeArea(.all)
@@ -96,7 +61,7 @@ struct  MultiPlayerGameView: View {
             if tmpState != "" {
                 bord.stringToBord(fenText: tmpState)
             }
-            
+            bord.changePlayerToGo()
             print(tmpState)
             }
         }

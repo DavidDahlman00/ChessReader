@@ -36,7 +36,6 @@ struct WaitingForMultiPlayerView: View {
                 TextField("Password", text: $password)
                     .textContentType(.password)
                     .cornerRadius(20)
-                    
                     .background(Color.white)
                     .foregroundColor(.black)
                     .padding(8)
@@ -47,7 +46,7 @@ struct WaitingForMultiPlayerView: View {
                         .font(.title)
                         .foregroundColor(.black)
                         .fontWeight(.bold)
-                        .overlay(RoundedRectangle)
+                        //.overlay(RoundedRectangle)
                         .background(Color.white)
                         .cornerRadius(40)
                         .padding(30)
