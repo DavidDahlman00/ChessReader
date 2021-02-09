@@ -29,7 +29,7 @@ struct  MultiPlayerGameView: View {
                     Button(action: {
                         
                             db.collection("testItems2").addDocument(data: ["move": move, "state" : bord.bordToString()])
-                        
+                            bord.changePlayerToGo()
                             
                             print("check")}, label: {
                         Image(systemName: "checkmark.square" )
