@@ -42,6 +42,7 @@ class Bord: ObservableObject {
     @Published var promotePawn: Bool = false
     var playerToGo : String = "Light"
     @Published var schach : [Bool] = [false, false]
+    @Published var kingHasMoved : [Bool] = [false, false]
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
     var enPassant = [10, 10]        // 10 = no en passant move
@@ -122,6 +123,12 @@ class Bord: ObservableObject {
         case "active":
             recetActivityBord()
         case "inMoveList":
+            if activePice == "LK"{
+                kingHasMoved[0] = true
+            }
+            if activePice == "BK" {
+                kingHasMoved[1] = true
+            }
             if activePice == "LP" && row == 0 {
                 promotePawn = true
                 promotedPawn = [col, -1]
@@ -154,6 +161,9 @@ class Bord: ObservableObject {
             recetActivityBord()
             changePlayerToGo()
             checkSchach()
+            print("King move test")
+            print(kingHasMoved[0])
+            print(kingHasMoved[1])
         case "inEnPassantList":
             if playerToGo == "Light" {
                 bord[3][col] = ""
