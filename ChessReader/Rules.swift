@@ -47,46 +47,68 @@ struct Rules{
         return moveList
     }
     
-    func lightPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func lightPawn(bord: [[String]], checkSchack: Bool, row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if inBord(row: row - 1, col: col) && bord[row - 1][col] == "" {
            moveList.append([row - 1, col])
-//            if !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col) {
-  //              moveList.append([row - 1, col])
-    //        }
+            if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col) {
+                moveList.append([row - 1, col])
+            }else if !checkSchack{
+                moveList.append([row - 1, col])
+            }
             if inBord(row: row - 2, col: col) && bord[row - 2][col] == "" && row == 6 {
-                moveList.append([row - 2, col])
+                if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 2, colTo: col) {
+                    moveList.append([row - 2, col])
+                }else if !checkSchack{
+                    moveList.append([row - 2, col])
+                }
             }
         }
         if col > 0 && row > 0 && inBord(row: row - 1, col: col - 1) && darkPices.contains(bord[row - 1][col - 1]) {
-            moveList.append([row - 1, col - 1])
+            if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col - 1) {
+                moveList.append([row - 1, col - 1])
+            }else if !checkSchack{
+                moveList.append([row - 1, col - 1])
+            }
         }
         if col < 7 && row > 0 && inBord(row: row - 1, col: col + 1) && darkPices.contains(bord[row - 1][col + 1]) {
-            moveList.append([row - 1, col + 1])
+            if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col + 1) {
+                moveList.append([row - 1, col + 1])
+            }else if !checkSchack{
+                moveList.append([row - 1, col + 1])
+            }
         }
         return moveList
     }
 
     
-    func darkPawn(bord: [[String]], row: Int, col: Int) -> [[Int]] {
+    func darkPawn(bord: [[String]], checkSchack: Bool, row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if inBord(row: row + 1, col: col) && bord[row + 1][col] == ""  {
-            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col) {
+            if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col) {
+                moveList.append([row + 1, col])
+            }else if !checkSchack{
                 moveList.append([row + 1, col])
             }
             if inBord(row: row + 2, col: col) && bord[row + 2][col] == "" && row == 1 {
-                if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 2, colTo: col) {
+                if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 2, colTo: col) {
+                    moveList.append([row + 2, col])
+                }else if !checkSchack{
                     moveList.append([row + 2, col])
                 }
             }
         }
         if inBord(row: row + 1, col: col - 1) && col > 0 && row > 0 && lightPices.contains(bord[row + 1][col - 1]) {
-            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col - 1) {
+            if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col - 1) {
+                moveList.append([row + 1, col - 1])
+            }else if !checkSchack{
                 moveList.append([row + 1, col - 1])
             }
         }
         if inBord(row: row + 1, col: col + 1) && col < 7 && row > 0 && lightPices.contains(bord[row + 1][col + 1]) {
-            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col + 1) {
+            if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + 1, colTo: col + 1) {
+                moveList.append([row + 1, col + 1])
+            } else if !checkSchack{
                 moveList.append([row + 1, col + 1])
             }
         }
@@ -545,7 +567,7 @@ struct Rules{
                     case "BN":
                         moveList = moveList + darkKnight(bord: bord, row: piece[0], col: piece[1])
                     case "BP":
-                        moveList = moveList + darkPawn(bord: bord, row: piece[0], col: piece[1])
+                        moveList = moveList + darkPawn(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
                     case "BR":
                         moveList = moveList + darkRook(bord: bord, row: piece[0], col: piece[1])
                     case "BQ":
@@ -567,7 +589,7 @@ struct Rules{
                     case "LN":
                         moveList = moveList + lightKnight(bord: bord, row: piece[0], col: piece[1])
                     case "LP":
-                        moveList = moveList + lightPawn(bord: bord, row: piece[0], col: piece[1])
+                        moveList = moveList + lightPawn(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
                     case "LR":
                         moveList = moveList + lightRook(bord: bord, row: piece[0], col: piece[1])
                     case "LQ":

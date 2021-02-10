@@ -204,10 +204,10 @@ class Bord: ObservableObject {
                         }
                     case pices[player][3]:
                         if player == 0 {
-                            moveList = rules.lightPawn(bord: bord, row: row, col: col)
+                            moveList = rules.lightPawn(bord: bord, checkSchack: true, row: row, col: col)
                             enPassantList = rules.lightPawnEnPassant(bord: bord,enPassant: enPassant, row: row, col: col)
                         }else{
-                            moveList = rules.darkPawn(bord: bord, row: row, col: col)
+                            moveList = rules.darkPawn(bord: bord, checkSchack: true, row: row, col: col)
                             enPassantList = rules.darkPawnEnPassant(bord: bord, enPassant: enPassant, row: row, col: col)
                         }
                     case pices[player][4]:
