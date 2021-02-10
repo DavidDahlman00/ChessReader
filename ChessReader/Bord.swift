@@ -192,9 +192,9 @@ class Bord: ObservableObject {
                         
                     case pices[player][1]:
                         if player == 0 {
-                            moveList = rules.lightKing(bord: bord, row: row, col: col)
+                            moveList = rules.lightKing(bord: bord, checkSchack: true, row: row, col: col)
                         }else{
-                            moveList = rules.darkKing(bord: bord, row: row, col: col)
+                            moveList = rules.darkKing(bord: bord, checkSchack: true, row: row, col: col)
                         }
                     case pices[player][2]:
                         if player == 0 {
