@@ -383,43 +383,68 @@ struct Rules{
            var y = 1
            
            while inBord(row: row + x, col:col) && bord[row + x][col] == ""{
-               moveList.append([row + x, col])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + x, colTo: col) {
+                moveList.append([row + x, col])
+            }
+            //moveList.append([row + x, col])
+            
                x = x + 1
            }
        
            if inBord(row: row + x, col: col) && lightPices.contains(bord[row + x][col]){
-               moveList.append([row + x, col])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + x, colTo: col) {
+                moveList.append([row + x, col])
+            }
+            //moveList.append([row + x, col])
            }
            x = 1
            
            
            while inBord(row: row - x, col:col) && bord[row - x][col] == ""{
-               moveList.append([row - x, col])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - x, colTo: col) {
+                moveList.append([row - x, col])
+            }
+            //moveList.append([row - x, col])
                x = x + 1
            }
        
            if inBord(row: row - x, col: col) && lightPices.contains(bord[row - x][col]){
-               moveList.append([row - x, col])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - x, colTo: col) {
+                moveList.append([row - x, col])
+            }
+            //moveList.append([row - x, col])
            }
            x = 1
            
            while inBord(row: row , col:col + y) && bord[row][col + y] == ""{
-               moveList.append([row, col + y])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row, colTo: col + y) {
+                moveList.append([row, col + y])
+            }
+            //moveList.append([row, col + y])
                y = y + 1
            }
        
            if inBord(row: row , col: col + y) && lightPices.contains(bord[row][col + y]){
-               moveList.append([row, col + y])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row, colTo: col + y) {
+                moveList.append([row, col + y])
+            }
+            //moveList.append([row, col + y])
            }
            y = 1
            
            while inBord(row: row , col:col - y) && bord[row][col - y] == ""{
-               moveList.append([row, col - y])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row, colTo: col - y) {
+                moveList.append([row, col - y])
+            }
+            //moveList.append([row, col - y])
                y = y + 1
            }
        
            if inBord(row: row , col: col - y) && lightPices.contains(bord[row][col - y]){
-               moveList.append([row, col - y])
+            if !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row, colTo: col - y) {
+                moveList.append([row, col - y])
+            }
+            //moveList.append([row, col - y])
            }
            y = 1
            
