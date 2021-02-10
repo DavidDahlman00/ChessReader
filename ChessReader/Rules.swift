@@ -21,27 +21,47 @@ struct Rules{
         return false
     }
     
-    func lightPawnEnPassant(bord: [[String]], enPassant: [Int], row: Int, col: Int) -> [[Int]] {
+    func lightPawnEnPassant(bord: [[String]], checkSchack: Bool, enPassant: [Int], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if row == 3 {
             if  col - 1 >= 0 && col - 1 == enPassant[1] {
-                moveList.append([2, col - 1])
+                //moveList.append([2, col - 1])
+                if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: 2, colTo: col - 1) {
+                    moveList.append([2, col - 1])
+                }else if !checkSchack{
+                    moveList.append([2, col - 1])
+                }
             }
             if  col + 1 <= 7 && col + 1 == enPassant[1] {
-                moveList.append([2, col + 1])
+                //moveList.append([2, col + 1])
+                if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: 2, colTo: col + 1) {
+                    moveList.append([2, col + 1])
+                }else if !checkSchack{
+                    moveList.append([2, col + 1])
+                }
             }
         }
         return moveList
     }
     
-    func darkPawnEnPassant(bord: [[String]], enPassant: [Int], row: Int, col: Int) -> [[Int]] {
+    func darkPawnEnPassant(bord: [[String]], checkSchack: Bool, enPassant: [Int], row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if row == 4 {
             if  col - 1 >= 0 && col - 1 == enPassant[0]{
-                moveList.append([5, col - 1])
+                //moveList.append([5, col - 1])
+                if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: 5, colTo: col - 1) {
+                    moveList.append([5, col - 1])
+                }else if !checkSchack{
+                    moveList.append([5, col - 1])
+                }
             }
             if  col + 1 <= 7 && col + 1 == enPassant[0]{
-                moveList.append([5, col + 1])
+                //moveList.append([5, col + 1])
+                if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: 5, colTo: col + 1) {
+                    moveList.append([5, col + 1])
+                }else if !checkSchack{
+                    moveList.append([5, col + 1])
+                }
             }
         }
         return moveList
