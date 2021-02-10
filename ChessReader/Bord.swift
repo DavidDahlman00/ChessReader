@@ -212,9 +212,9 @@ class Bord: ObservableObject {
                         }
                     case pices[player][4]:
                         if player == 0 {
-                            moveList = rules.lightRook(bord: bord, row: row, col: col)
+                            moveList = rules.lightRook(bord: bord, checkSchack: true, row: row, col: col)
                         }else{
-                            moveList = rules.darkRook(bord: bord, row: row, col: col)
+                            moveList = rules.darkRook(bord: bord, checkSchack: true, row: row, col: col)
                         }
                     case pices[player][5]:
                         if player == 0 {
