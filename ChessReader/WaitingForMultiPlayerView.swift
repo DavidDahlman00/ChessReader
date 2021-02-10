@@ -9,7 +9,7 @@ import Firebase
 import SwiftUI
 
 struct WaitingForMultiPlayerView: View {
-    
+    @State var showMultiplayerGame: Bool = false
     @ObservedObject var auth: GlobalAuth
     @State var email: String = ""
     @State var password: String = ""
@@ -51,7 +51,11 @@ struct WaitingForMultiPlayerView: View {
                     .padding(8)
                 }
                 NavigationLink(
-                    destination: MultiPlayerGameView()){
+                    destination: MultiPlayerGameView(), isActive: $showMultiplayerGame){
+                    Button(action: {
+                        
+                        showMultiplayerGame = true
+                    }){
                     Text("Sign In")
                         .font(.title)
                         .foregroundColor(.black)
@@ -68,7 +72,7 @@ struct WaitingForMultiPlayerView: View {
     }
       
    }
-
+}
 
 
 
