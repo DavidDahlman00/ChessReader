@@ -29,26 +29,26 @@ struct WaitingForMultiPlayerView: View {
                 }, label:{
                     Text("test")})
                 HStack{
-                Text("Enter your email:")
-                    .foregroundColor(.white)
-                TextField("Email", text: $email)
-                    .textContentType(.emailAddress)
-                    .cornerRadius(20)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.white)
-                    .foregroundColor(.black)
-                    .padding(8)
-                    
-                }
-                HStack{
-                Text("Enter your password:")
-                    .foregroundColor(.white)
-                TextField("Password", text: $password)
-                    .textContentType(.password)
-                    .cornerRadius(20)
-                    .background(Color.white)
-                    .foregroundColor(.black)
-                    .padding(8)
+//                Text("Enter your email:")
+//                    .foregroundColor(.white)
+//                TextField("Email", text: $email)
+//                    .textContentType(.emailAddress)
+//                    .cornerRadius(20)
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .background(Color.white)
+//                    .foregroundColor(.black)
+//                    .padding(8)
+//                    
+//                }
+//                HStack{
+//                Text("Enter your password:")
+//                    .foregroundColor(.white)
+//                TextField("Password", text: $password)
+//                    .textContentType(.password)
+//                    .cornerRadius(20)
+//                    .background(Color.white)
+//                    .foregroundColor(.black)
+//                    .padding(8)
                 }
                 NavigationLink(
                     destination: MultiPlayerGameView(), isActive: $showMultiplayerGame){
