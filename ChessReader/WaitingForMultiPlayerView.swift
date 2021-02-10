@@ -10,14 +10,23 @@ import SwiftUI
 
 struct WaitingForMultiPlayerView: View {
     
+    @ObservedObject var auth: GlobalAuth
     @State var email: String = ""
     @State var password: String = ""
+    
+    
     var body: some View {
         NavigationView{
         ZStack{
             Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
             Image("chessTest").resizable().scaledToFit()
             VStack{
+                Button(action: {
+                    print("$$$$$$$$$$$$")
+                    print(auth.auth.currentUser)
+                    print("$$$$$$$$$$$$")
+                }, label:{
+                    Text("test")})
                 HStack{
                 Text("Enter your email:")
                     .foregroundColor(.white)
@@ -64,8 +73,4 @@ struct WaitingForMultiPlayerView: View {
 
 
 
-struct  WaitingForMultiPlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        WaitingForMultiPlayerView(email: "", password: "")
-    }
-}
+

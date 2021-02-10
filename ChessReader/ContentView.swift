@@ -8,12 +8,16 @@
 import SwiftUI
 import FirebaseAuth
 
+class GlobalAuth: ObservableObject {
+    @Published var auth = Auth.auth()
+}
+
 struct ContentView: View {
-    let auth = Auth.auth()
+    @ObservedObject var auth = GlobalAuth()
 
     init() {
         print("###########")
-        auth.signInAnonymously{ (result, err) in
+        auth.auth.signInAnonymously{ (result, err) in
             print("!!!!!!!!")
             if let err = err {
 
@@ -22,6 +26,7 @@ struct ContentView: View {
                 return
             }
             print("Success Auth")
+        
         }
     }
     var body: some View {
@@ -39,7 +44,7 @@ struct ContentView: View {
                     
                     
                 }
-            WaitingForMultiPlayerView()
+            WaitingForMultiPlayerView(auth: auth)
                 .tabItem{
                     Image(systemName: "person.2.fill")
                     Text("multiplayer game")
