@@ -185,9 +185,9 @@ class Bord: ObservableObject {
                 switch bord[row][col] {
                     case pices[player][0]:
                         if player == 0 {
-                            moveList = rules.lightBishop(bord: bord, row: row, col: col)
+                            moveList = rules.lightBishop(bord: bord, checkSchack: true, row: row, col: col)
                         }else{
-                            moveList = rules.darkBishop(bord: bord, row: row, col: col)
+                            moveList = rules.darkBishop(bord: bord, checkSchack: true, row: row, col: col)
                         }
                         
                     case pices[player][1]:
@@ -218,9 +218,9 @@ class Bord: ObservableObject {
                         }
                     case pices[player][5]:
                         if player == 0 {
-                            moveList = rules.lightQueen(bord: bord, row: row, col: col)
+                            moveList = rules.lightQueen(bord: bord, checkSchack: true, row: row, col: col)
                         }else{
-                            moveList = rules.darkQueen(bord: bord, row: row, col: col)
+                            moveList = rules.darkQueen(bord: bord, checkSchack: true, row: row, col: col)
                         }
                     default:
                         moveList = [[Int]]()
