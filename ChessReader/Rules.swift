@@ -50,7 +50,6 @@ struct Rules{
     func lightPawn(bord: [[String]], checkSchack: Bool, row: Int, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         if inBord(row: row - 1, col: col) && bord[row - 1][col] == "" {
-           moveList.append([row - 1, col])
             if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col) {
                 moveList.append([row - 1, col])
             }else if !checkSchack{
