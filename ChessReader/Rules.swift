@@ -746,6 +746,33 @@ struct Rules{
         return positions
     }
     
+    func shortCastling(bord: Bord) -> Bool {
+        if bord.playerToGo == "Light" && !bord.kingHasMoved[0] && bord.bord[7][7] == "LR" &&
+            bord.bord[7][5] == "" && bord.bord[7][6] == "" && !bord.schach[0]{
+            var tmpBord1 = bord.bord
+            tmpBord1[7][4] = ""
+            tmpBord1[7][5] = "LK"
+            var tmpBord2 = bord.bord
+            tmpBord2[7][4] = ""
+            tmpBord2[7][6] = "LK"
+            if !checkForSchach(bord: tmpBord1, player: "Light") && !checkForSchach(bord: tmpBord2, player: "Light") {
+                return true
+            }
+        } else if !bord.kingHasMoved[1] && bord.bord[0][7] == "BR" &&
+                    bord.bord[0][5] == "" && bord.bord[0][6] == "" && !bord.schach[1]{
+            var tmpBord1 = bord.bord
+            tmpBord1[0][4] = ""
+            tmpBord1[0][5] = "BK"
+            var tmpBord2 = bord.bord
+            tmpBord2[0][4] = ""
+            tmpBord2[0][6] = "BK"
+            if !checkForSchach(bord: tmpBord1, player: "Dark") && !checkForSchach(bord: tmpBord2, player: "Dark") {
+                return true
+            }
+        }
+        return false
+    }
+    
     func checkForSchach(bord: [[String]], player: String) -> Bool  {
         let kingPosition: [Int]
        

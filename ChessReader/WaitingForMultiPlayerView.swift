@@ -23,7 +23,8 @@ struct WaitingForMultiPlayerView: View {
             VStack{
                 Button(action: {
                     print("$$$$$$$$$$$$")
-                    print(auth.auth.currentUser)
+                    print(auth.auth.currentUser!)
+                    print(auth.auth.currentUser!)
                     print("$$$$$$$$$$$$")
                 }, label:{
                     Text("test")})
@@ -55,7 +56,6 @@ struct WaitingForMultiPlayerView: View {
                         .font(.title)
                         .foregroundColor(.black)
                         .fontWeight(.bold)
-                        //.overlay(RoundedRectangle)
                         .background(Color.white)
                         .cornerRadius(40)
                         .padding(30)

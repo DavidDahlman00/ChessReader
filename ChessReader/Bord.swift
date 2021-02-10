@@ -202,9 +202,17 @@ class Bord: ObservableObject {
                         
                     case pices[player][1]:
                         if player == 0 {
-                            moveList = rules.lightKing(bord: bord, checkSchack: true, row: row, col: col)
+                            moveList = rules.lightKing(bord: bord,  checkSchack: true, row: row, col: col)
+                            print("///////////////")
+                            if rules.shortCastling(bord: self){
+                                print("Can short castle")
+                            }
                         }else{
                             moveList = rules.darkKing(bord: bord, checkSchack: true, row: row, col: col)
+                            print("///////////////")
+                            if rules.shortCastling(bord: self){
+                                print("Can short castle")
+                            }
                         }
                     case pices[player][2]:
                         if player == 0 {
