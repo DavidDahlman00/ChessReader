@@ -6,24 +6,24 @@
 //
 
 import SwiftUI
-//import FirebaseAuth
+import FirebaseAuth
 
 struct ContentView: View {
-//    let auth = Auth.auth()
-//
-//    init() {
-//        print("###########")
-//        auth.signInAnonymously{ (result, err) in
-//            print("!!!!!!!!")
-//            if let err = err {
-//
-//                print(err.localizedDescription)
-//                print("!!!!!!!!!!")
-//                return
-//            }
-//            print("Success Auth")
-//        }
-//    }
+    let auth = Auth.auth()
+
+    init() {
+        print("###########")
+        auth.signInAnonymously{ (result, err) in
+            print("!!!!!!!!")
+            if let err = err {
+
+                print(err.localizedDescription)
+                print("!!!!!!!!!!")
+                return
+            }
+            print("Success Auth")
+        }
+    }
     var body: some View {
         //Image("chessImage")
         TabView{
