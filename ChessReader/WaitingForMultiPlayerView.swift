@@ -1,9 +1,3 @@
-//
-//  WaitingForMultiPlayerView.swift
-//  ChessReader
-//
-//  Created by Axel Söderberg on 2021-02-08.
-//
 
 import Firebase
 import SwiftUI
