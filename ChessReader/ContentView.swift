@@ -20,13 +20,14 @@ struct ContentView: View {
         auth.auth.signInAnonymously{ (result, err) in
             print("!!!!!!!!")
             if let err = err {
-
+                
+                
                 print(err.localizedDescription)
                 print("!!!!!!!!!!")
                 return
             }
+            
             print("Success Auth")
-        
         }
     }
     var body: some View {
@@ -48,6 +49,7 @@ struct ContentView: View {
                 .tabItem{
                     Image(systemName: "person.2.fill")
                     Text("multiplayer game")
+                    
                 }
         }
     }
