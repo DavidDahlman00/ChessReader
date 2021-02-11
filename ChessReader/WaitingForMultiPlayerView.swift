@@ -63,7 +63,7 @@ struct WaitingForMultiPlayerView: View {
                                         color = "Light"
                                         db.collection("waitList").document(document.documentID).delete()
                                         db.collection("waitList").addDocument(data: ["waiting": false, "toGameCounter": gameNumber + 1])
-                                        showMultiplayerGame = true
+                                       showMultiplayerGame = true
                                     }
                                 }
                             }
@@ -90,9 +90,13 @@ struct WaitingForMultiPlayerView: View {
            
            db.collection("waitList").addSnapshotListener{ (snapshot, err) in
             for document in snapshot!.documents {
-                if document["waiting"] as! Bool == false {
+                if document["toGameCounter"] as! Int > gameNumber && color != "err" {
+                    print("Yessss")
                     showMultiplayerGame = true
                 }
+                print(gameNumber)
+                print(color)
+                print(document.data()["toGameCounter"] )
                }
            }
     }
