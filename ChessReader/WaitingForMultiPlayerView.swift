@@ -13,7 +13,9 @@ struct WaitingForMultiPlayerView: View {
     @ObservedObject var auth: GlobalAuth
     @State var email: String = ""
     @State var password: String = ""
-    
+    @State var gameNumber: Int = 0
+    @State var color: String = "err"
+    var db = Firestore.firestore()
     
     var body: some View {
         NavigationView{
@@ -51,10 +53,28 @@ struct WaitingForMultiPlayerView: View {
 //                    .padding(8)
                 }
                 NavigationLink(
-                    destination: MultiPlayerGameView(), isActive: $showMultiplayerGame){
+                    destination: MultiPlayerGameView(gameNumber: gameNumber, color: color ), isActive: $showMultiplayerGame){
                     Button(action: {
-                        
-                        showMultiplayerGame = true
+                        db.collection("waitList").getDocuments() { (querySnapshot, err) in
+                            if let err = err {
+                                print("Error getting documents: \(err)")
+                            } else {
+                                for document in querySnapshot!.documents {
+                                    gameNumber = document.data()["toGameCounter"] as! Int
+                                    if document.data()["waiting"] as! Bool == false {
+                                        color = "Dark"
+                                        db.collection("waitList").document(document.documentID).delete()
+                                        db.collection("waitList").addDocument(data: ["waiting": true, "toGameCounter": gameNumber])
+                                    }else{
+                                        color = "Light"
+                                        db.collection("waitList").document(document.documentID).delete()
+                                        db.collection("waitList").addDocument(data: ["waiting": false, "toGameCounter": gameNumber + 1])
+                                        showMultiplayerGame = true
+                                    }
+                                }
+                            }
+                        }
+                        listenToFireStore()
                     }){
                     Text("Sign In")
                         .font(.title)
@@ -72,6 +92,12 @@ struct WaitingForMultiPlayerView: View {
     }
       
    }
+    func listenToFireStore() {
+           
+           db.collection("waitList").addSnapshotListener{ (snapshot, err) in
+                showMultiplayerGame = true
+               }
+           }
 }
 
 

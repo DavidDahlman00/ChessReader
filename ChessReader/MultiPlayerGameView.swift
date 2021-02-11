@@ -10,14 +10,21 @@ import Firebase
 
 struct  MultiPlayerGameView: View {
     //@State private var items = [Item]()
+    let gameNumber: Int
+    let color: String
+    
    @State var move = 1
     var db = Firestore.firestore()
     @ObservedObject var bord = Bord()
+    
+   
     var body: some View {
         GeometryReader{geo in
             ZStack{
                 Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
                 VStack{
+                    Text(color)
+                    Text("\(gameNumber)")
                     Text("Multiplayer")
                         .foregroundColor(.gray)
                         
@@ -68,10 +75,5 @@ struct  MultiPlayerGameView: View {
         }
 }
 
-struct  MultiPlayerGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        MultiPlayerGameView()
-    }
-}
 
 
