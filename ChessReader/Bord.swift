@@ -204,14 +204,14 @@ class Bord: ObservableObject {
                         if player == 0 {
                             moveList = rules.lightKing(bord: bord,  checkSchack: true, row: row, col: col)
                             print("///////////////")
-                            if rules.shortCastling(bord: self){
-                                print("Can short castle")
+                            if rules.longCastling(bord: self){
+                                print("Can long castle")
                             }
                         }else{
                             moveList = rules.darkKing(bord: bord, checkSchack: true, row: row, col: col)
                             print("///////////////")
-                            if rules.shortCastling(bord: self){
-                                print("Can short castle")
+                            if rules.longCastling(bord: self){
+                                print("Can long castle")
                             }
                         }
                     case pices[player][2]:
@@ -243,16 +243,16 @@ class Bord: ObservableObject {
                     default:
                         moveList = [[Int]]()
                     }
-                    
                     for move in moveList {
                         activityBord[move[0]][move[1]] = "inMoveList"
                     }
-                
                     for move in enPassantList {
                         activityBord[move[0]][move[1]] = "inEnPassantList"
                         print("enPassant \(move[0]), \(move[1])")
                     }
+                
             }
+            
         default:
             recetActivityBord()
         }
