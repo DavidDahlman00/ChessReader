@@ -181,6 +181,32 @@ class Bord: ObservableObject {
             changePlayerToGo()
             recetActivityBord()
             checkSchach()
+        case "casteling":
+            if row == 7 && col == 6 {
+                bord[7][4] = ""
+                bord[7][5] = "LR"
+                bord[7][6] = "LK"
+                bord[7][7] = ""
+            } else if row == 7 && col == 2{
+                bord[7][0] = ""
+                bord[7][3] = "LR"
+                bord[7][2] = "LK"
+                bord[7][4] = ""
+            } else if row == 0 && col == 6{
+                bord[0][4] = ""
+                bord[0][5] = "BR"
+                bord[0][6] = "BK"
+                bord[0][7] = ""
+            } else if row == 0 && col == 2{
+                bord[0][0] = ""
+                bord[0][3] = "BR"
+                bord[0][2] = "BK"
+                bord[0][4] = ""
+            }
+            changePlayerToGo()
+            recetActivityBord()
+            checkSchach()
+            
         case "none":
             if pices[player].contains(bord[row][col]){
                 print("1")
@@ -204,13 +230,23 @@ class Bord: ObservableObject {
                         if player == 0 {
                             moveList = rules.lightKing(bord: bord,  checkSchack: true, row: row, col: col)
                             print("///////////////")
+                            if rules.shortCastling(bord: self){
+                                activityBord[7][6] = "casteling"
+                                print("Can short castle")
+                            }
                             if rules.longCastling(bord: self){
+                                activityBord[7][2] = "casteling"
                                 print("Can long castle")
                             }
                         }else{
                             moveList = rules.darkKing(bord: bord, checkSchack: true, row: row, col: col)
                             print("///////////////")
+                            if rules.shortCastling(bord: self){
+                                activityBord[0][6] = "casteling"
+                                print("Can short castle")
+                            }
                             if rules.longCastling(bord: self){
+                                activityBord[0][2] = "casteling"
                                 print("Can long castle")
                             }
                         }
