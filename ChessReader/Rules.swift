@@ -238,9 +238,9 @@ struct Rules{
         }
         if inBord(row: row - 1, col: col - 1) && lightPicesAndNoPice.contains(bord[row - 1][col - 1]){
             if checkSchack && !moveIsInSchachBK(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col + 1){
-                moveList.append([row - 1, col + 1])
+                moveList.append([row - 1, col - 1])
             }else if !checkSchack{
-                moveList.append([row - 1, col + 1])
+                moveList.append([row - 1, col - 1])
             }
         }
         if inBord(row: row + 1, col: col - 1) && lightPicesAndNoPice.contains(bord[row + 1][col - 1]){
