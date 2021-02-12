@@ -9,6 +9,8 @@ struct WaitingForMultiPlayerView: View {
     @State var password: String = ""
     @State var gameNumber: Int = 0
     @State var color: String = "err"
+    @State var waitingString = ""
+    @State var waitingButton = "Start"
     var db = Firestore.firestore()
     
     var body: some View {
@@ -17,68 +19,49 @@ struct WaitingForMultiPlayerView: View {
             Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0).edgesIgnoringSafeArea(.all)
             //Image("chessTest").resizable().scaledToFit()
             VStack{
+                Text(waitingString).foregroundColor(.gray)
                 Image("chessTest").resizable().scaledToFit()
-                Button(action: {
-                    print("$$$$$$$$$$$$")
-                    print(auth.auth.currentUser!)
-                    print(auth.auth.currentUser!)
-                    print("$$$$$$$$$$$$")
-                }, label:{
-                    Text("test")})
-                HStack{
-//                Text("Enter your email:")
-//                    .foregroundColor(.white)
-//                TextField("Email", text: $email)
-//                    .textContentType(.emailAddress)
-//                    .cornerRadius(20)
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .background(Color.white)
-//                    .foregroundColor(.black)
-//                    .padding(8)
-//                    
-//                }
-//                HStack{
-//                Text("Enter your password:")
-//                    .foregroundColor(.white)
-//                TextField("Password", text: $password)
-//                    .textContentType(.password)
-//                    .cornerRadius(20)
-//                    .background(Color.white)
-//                    .foregroundColor(.black)
-//                    .padding(8)
-                }
+
                 NavigationLink(
                     destination: MultiPlayerGameView(gameNumber: gameNumber, color: color ), isActive: $showMultiplayerGame){
                     Button(action: {
-                        db.collection("waitList").getDocuments() { (querySnapshot, err) in
-                            if let err = err {
-                                print("Error getting documents: \(err)")
-                            } else {
-                                for document in querySnapshot!.documents {
-                                    gameNumber = document.data()["toGameCounter"] as! Int
-                                    if document.data()["waiting"] as! Bool == false {
-                                        color = "Dark"
-                                        db.collection("waitList").document(document.documentID).delete()
-                                        db.collection("waitList").addDocument(data: ["waiting": true, "toGameCounter": gameNumber])
-                                    }else{
-                                        color = "Light"
-                                        db.collection("waitList").document(document.documentID).delete()
-                                        db.collection("waitList").addDocument(data: ["waiting": false, "toGameCounter": gameNumber + 1])
-                                       showMultiplayerGame = true
+                        if color == "err"{
+                            waitingString = "Waiting for oponent..."
+                            waitingButton = "Wait."
+                            db.collection("waitList").getDocuments() { (querySnapshot, err) in
+                                if let err = err {
+                                    print("Error getting documents: \(err)")
+                                } else {
+                                    for document in querySnapshot!.documents {
+                                        gameNumber = document.data()["toGameCounter"] as! Int
+                                        if document.data()["waiting"] as! Bool == false {
+                                            color = "Dark"
+                                            db.collection("waitList").document(document.documentID).delete()
+                                            db.collection("waitList").addDocument(data: ["waiting": true, "toGameCounter": gameNumber])
+                                        }else{
+                                            color = "Light"
+                                            db.collection("waitList").document(document.documentID).delete()
+                                            db.collection("waitList").addDocument(data: ["waiting": false, "toGameCounter": gameNumber + 1])
+                                            showMultiplayerGame = true
+                                        }
                                     }
                                 }
                             }
                         }
                         listenToFireStore()
                     }){
-                    Text("Sign In")
+                    Text(waitingButton)
                         .font(.title)
-                        .foregroundColor(.black)
+                        .foregroundColor(.gray)
                         .fontWeight(.bold)
-                        .background(Color.white)
-                        .cornerRadius(40)
-                        .padding(30)
-                }
+                        .background(Color(red: 20.0/255.0, green: 20.0/255.0, blue: 48.0/255.0))
+                        .cornerRadius(25)
+                        .padding(20)
+                        
+                        
+                }.background(Color(red: 20.0/255.0, green: 20.0/255.0, blue: 48.0/255.0))
+                    .cornerRadius(25)
+                    .padding(25)
             }
                
             }.edgesIgnoringSafeArea(.all)
@@ -112,31 +95,17 @@ struct WaitingForMultiPlayerView: View {
                         }
 
                         } else{
-
                             print("Error inCounter nil")
-
                         }
-
                         print(gameNumber)
-
                         print(color)
-
                       //  print(document.data()["toGameCounter"] )
-
                     }
-
                 } else {
-
                     print("snapshot did not work \(err)")
-
                 }
-
-               }
-
-            
-
+            }
         }
-
     }
 
 
