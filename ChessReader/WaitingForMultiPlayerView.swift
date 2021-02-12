@@ -14,9 +14,12 @@ struct WaitingForMultiPlayerView: View {
     var body: some View {
         NavigationView{
         ZStack{
-            Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
-            Image("chessTest").resizable().scaledToFit()
+            Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0).edgesIgnoringSafeArea(.all)
+//            Image("chessTest").resizable().scaledToFit()
             VStack{
+                
+                Image("chessTest").resizable().scaledToFit()
+                
                 Button(action: {
                     print("$$$$$$$$$$$$")
                     print(auth.auth.currentUser!)
@@ -87,7 +90,7 @@ struct WaitingForMultiPlayerView: View {
       
    }
     func listenToFireStore() {
-           
+
            db.collection("waitList").addSnapshotListener{ (snapshot, err) in
             for document in snapshot!.documents {
                 if document["toGameCounter"] as! Int > gameNumber && color != "err" {
@@ -101,8 +104,3 @@ struct WaitingForMultiPlayerView: View {
            }
     }
 }
-
-
-
-
-
