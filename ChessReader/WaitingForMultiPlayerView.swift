@@ -92,15 +92,19 @@ struct WaitingForMultiPlayerView: View {
     func listenToFireStore() {
 
            db.collection("waitList").addSnapshotListener{ (snapshot, err) in
-            for document in snapshot!.documents {
-                if document["toGameCounter"] as! Int > gameNumber && color != "err" {
-                    print("Yessss")
-                    showMultiplayerGame = true
+            if !(snapshot?.isEmpty ?? true){
+                for document in snapshot!.documents {
+                
+                    if document["toGameCounter"] as! Int > gameNumber && color != "err" {
+                        print("Yessss")
+                        showMultiplayerGame = true
+                    }
+                    print(gameNumber)
+                    print(color)
+                    print(document.data()["toGameCounter"] )
                 }
-                print(gameNumber)
-                print(color)
-                print(document.data()["toGameCounter"] )
-               }
+            }
            }
+        
     }
 }
