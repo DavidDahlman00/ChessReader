@@ -23,7 +23,7 @@ struct ChessBordView : View {
                         .foregroundColor(.gray)
                         .bold()
                         
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc())
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
                     HStack{
                         Button(action: {
                             if bord.bord[3][3] == "" {

@@ -21,7 +21,7 @@ struct SinglePlayerGameView: View {
                         .font(.largeTitle)
                         .foregroundColor(.gray)
                     
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc())
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
                     Button(action: {
                         
                             db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])

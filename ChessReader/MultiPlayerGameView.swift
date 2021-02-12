@@ -28,7 +28,7 @@ struct  MultiPlayerGameView: View {
                     Text("Multiplayer")
                         .foregroundColor(.gray)
                         
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc()).onAppear(){
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: color).onAppear(){
                         listenToFireStore()
                     }
 

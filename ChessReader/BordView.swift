@@ -12,7 +12,7 @@ struct BordView: View {
    @ObservedObject var bord: Bord
     let imageSize: CGFloat
     var image: [[String]]
-    let action: ()
+    let action: String
     var schach: String{
         if (bord.playerToGo == "Light" && bord.schach[0]) || (bord.playerToGo == "Dark" && bord.schach[1]){
             return "Schack"
@@ -85,7 +85,7 @@ struct RowView: View {
     let imageSize: CGFloat
     let row: Int
     let image: [String]
-    let action: ()
+    let action: String
     
     var body: some View {
         HStack(spacing: 0){
@@ -105,7 +105,7 @@ struct RowView: View {
 struct SquareView: View {
     @ObservedObject var bord: Bord
     var size: CGFloat
-    let action: ()
+    let action: String
     
     var color: Color{
         switch bord.activityBord[row][col] {
@@ -152,10 +152,28 @@ struct SquareView: View {
                 .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         
             Button(action: {
-                print("test \(row), \(col)")
-                bord.squareTuched(row: row, col: col)
-                print(bord.activityBord[row][col])
-                action
+                switch action{
+                //case "ChessBordView"      to be done
+                case "SinglePlayerGameView":
+                    print("test \(row), \(col)")
+                    bord.squareTuched(row: row, col: col)
+                    print(bord.activityBord[row][col])
+                    //action
+                case "Dark":
+                    if bord.playerToGo == "Dark" {
+                        bord.squareTuched(row: row, col: col)
+                    }
+                case "Light":
+                    if bord.playerToGo == "Light" {
+                        bord.squareTuched(row: row, col: col)
+                    }
+
+                default:
+                    print("test \(row), \(col)")
+                    bord.squareTuched(row: row, col: col)
+                    print(bord.activityBord[row][col])
+                }
+                
                 
             }) {
                 Image(bord.bord[row][col])
