@@ -14,6 +14,7 @@ struct BordView: View {
     var image: [[String]]
     let action: String
     var schach: String{
+        
         if (bord.playerToGo == "Light" && bord.schach[0]) || (bord.playerToGo == "Dark" && bord.schach[1]){
             return "Schack"
         }else {
