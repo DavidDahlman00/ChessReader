@@ -42,6 +42,7 @@ class Bord: ObservableObject {
     @Published var promotePawn: Bool = false
     var playerToGo : String = "Light"
     @Published var schach : [Bool] = [false, false]
+    @Published var schachMate : [Bool] = [false, false]
     @Published var kingHasMoved : [Bool] = [false, false]
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
@@ -161,6 +162,7 @@ class Bord: ObservableObject {
             recetActivityBord()
             changePlayerToGo()
             checkSchach()
+            checkSchackMate()
             print("King move test")
             print(kingHasMoved[0])
             print(kingHasMoved[1])
@@ -181,6 +183,7 @@ class Bord: ObservableObject {
             changePlayerToGo()
             recetActivityBord()
             checkSchach()
+            checkSchackMate()
         case "casteling":
             if row == 7 && col == 6 {
                 bord[7][4] = ""
@@ -206,6 +209,7 @@ class Bord: ObservableObject {
             changePlayerToGo()
             recetActivityBord()
             checkSchach()
+            checkSchackMate()
             
         case "none":
             if pices[player].contains(bord[row][col]){
@@ -291,6 +295,16 @@ class Bord: ObservableObject {
             
         default:
             recetActivityBord()
+        }
+    }
+    func checkSchackMate() {
+        let rule = Rules()
+        if rule.SchackMate(bord: bord, enPassant: enPassant, player: playerToGo){
+            if playerToGo == "Light" {
+                schachMate[0] = true
+            }else{
+                schachMate[1] = true
+            }
         }
     }
     
