@@ -43,6 +43,7 @@ class Bord: ObservableObject {
     var playerToGo : String = "Light"
     @Published var schach : [Bool] = [false, false]
     @Published var schachMate : [Bool] = [false, false]
+    @Published var staleMate : [Bool] = [false, false]
     @Published var kingHasMoved : [Bool] = [false, false]
     var drawByRepitation : Bool = false
     var activeSquare: [Int]? = nil
@@ -185,10 +186,6 @@ class Bord: ObservableObject {
             if activePice != nil {
                 bord[row][col] = activePice!
             }
-//            changePlayerToGo()
-//            recetActivityBord()
-//            checkSchach()
-//            checkSchackMate()
             goToNextPlayer()
         case "casteling":
             if row == 7 && col == 6 {
@@ -212,10 +209,6 @@ class Bord: ObservableObject {
                 bord[0][2] = "BK"
                 bord[0][4] = ""
             }
-//            changePlayerToGo()
-//            recetActivityBord()
-//            checkSchach()
-//            checkSchackMate()
             goToNextPlayer()
         case "none":
             if pices[player].contains(bord[row][col]){
@@ -314,6 +307,17 @@ class Bord: ObservableObject {
         }
     }
     
+    func checkStaleMate() {
+        let rule = Rules()
+        if rule.StaleMate(bord: bord, enPassant: enPassant, player: playerToGo){
+            if playerToGo == "Light" {
+                staleMate[0] = true
+            }else{
+                staleMate[1] = true
+            }
+        }
+    }
+    
     func checkSchach()  {
         let rule = Rules()
         if rule.checkForSchach(bord: bord, player: playerToGo){
@@ -335,6 +339,7 @@ class Bord: ObservableObject {
         changePlayerToGo()
         recetActivityBord()
         checkSchach()
+        checkStaleMate()
         checkSchackMate()
         histBord[4] = histBord[3]
         histBord[3] = histBord[2]
