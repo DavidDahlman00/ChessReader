@@ -873,9 +873,9 @@ struct Rules{
             var pieces: [String]
             var error = false
             if player == "Light"{
-                pieces = darkPices
-            }else{
                 pieces = lightPices
+            }else{
+                pieces = darkPices
             }
             for piece in pieces{
                 if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
