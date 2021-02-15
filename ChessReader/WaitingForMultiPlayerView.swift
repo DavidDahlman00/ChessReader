@@ -18,7 +18,7 @@ struct WaitingForMultiPlayerView: View {
             Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0).edgesIgnoringSafeArea(.all)
 
             VStack{
-                
+                Text(waitingString).foregroundColor(.gray)
                 Image("chessTest").resizable().scaledToFit()
                 
                 Button(action: {
