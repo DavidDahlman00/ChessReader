@@ -41,6 +41,7 @@ struct BordView: View {
             RowView(bord: bord, imageSize: imageSize, row: 7, image: image[7], action: action)
         }
         .padding()
+
         .actionSheet(isPresented: $bord.promotePawn){
             ActionSheet(title: Text("Promote pawn to"), buttons: [
                             .default(Text("Queen")) { if bord.promotedPawn[0] != -1{
@@ -53,7 +54,7 @@ struct BordView: View {
                             bord.checkSchach()
                             },
 
-                             
+
                             .default(Text("Rook")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LR"
                             }else{
@@ -64,7 +65,7 @@ struct BordView: View {
                             bord.checkSchach()
                             },
 
-                             
+
                             .default(Text("Knight")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LN"
                             }else{

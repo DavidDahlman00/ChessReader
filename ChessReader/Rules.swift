@@ -862,6 +862,7 @@ struct Rules{
             if moveList.isEmpty{
                 return true
             }
+            
         }
         return false
     }

@@ -56,11 +56,14 @@ struct SinglePlayerGameView: View {
                            
                         }, .cancel()])
                     }
+                }.alert(isPresented: $bord.schachMate[1]){
+                    Alert(title: Text("Fungerar"))
                 }
                 
                 
                 
             }.edgesIgnoringSafeArea(.all)
+            
             
         }
     }
