@@ -164,10 +164,7 @@ class Bord: ObservableObject {
             }else{
                 enPassant[0] = 10
             }
-//            recetActivityBord()
-//            changePlayerToGo()
-//            checkSchach()
-//            checkSchackMate()
+
             goToNextPlayer()
             print("King move test")
             print(kingHasMoved[0])

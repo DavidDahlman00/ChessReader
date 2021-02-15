@@ -881,29 +881,29 @@ struct Rules{
                 if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
                     for position in getPiecesPositions(bord: bord, piece: piece) {
                         switch piece {
-                        case "DB":
+                        case "BB":
                             moveList = moveList + darkBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LB":
                             moveList = moveList + lightBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "DK":
+                        case "BK":
                             moveList = moveList + darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LK":
                             moveList = moveList + lightKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "DN":
+                        case "BN":
                             moveList = moveList + darkKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LN":
                             moveList = moveList + lightKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "DP":
+                        case "BP":
                             moveList = moveList + darkPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
                             moveList = moveList + darkPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
                         case "LP":
                             moveList = moveList + lightPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
                             moveList = moveList + lightPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
-                        case "DQ":
+                        case "BQ":
                             moveList = moveList + darkQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LQ":
                             moveList = moveList + lightQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "DR":
+                        case "BR":
                             moveList = moveList + darkRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LR":
                             moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
