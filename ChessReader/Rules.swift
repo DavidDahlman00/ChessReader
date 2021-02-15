@@ -237,6 +237,7 @@ struct Rules{
             }
         }
         if inBord(row: row - 1, col: col - 1) && lightPicesAndNoPice.contains(bord[row - 1][col - 1]){
+
             if checkSchack && !moveIsInSchachBK(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - 1, colTo: col - 1){
                 moveList.append([row - 1, col - 1])
             }else if !checkSchack{
@@ -794,6 +795,118 @@ struct Rules{
             tmpBord2[0][4] = ""
             tmpBord2[0][2] = "BK"
             if !checkForSchach(bord: tmpBord1, player: "Dark") && !checkForSchach(bord: tmpBord2, player: "Dark") {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func SchackMate(bord: [[String]], enPassant: [Int], player: String) -> Bool {
+        print("test checkMate")
+        if checkForSchach(bord: bord, player: player){
+            var moveList = [[Int]]()
+            var pieces: [String]
+            var error = false
+            if player == "Light"{
+                pieces = lightPices
+            }else{
+                pieces = darkPices
+            }
+            for piece in pieces{
+                if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
+                    for position in getPiecesPositions(bord: bord, piece: piece) {
+                        switch piece {
+                        case "DB":
+                            moveList = moveList + darkBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LB":
+                            moveList = moveList + lightBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DK":
+                            moveList = moveList + darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LK":
+                            moveList = moveList + lightKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DN":
+                            moveList = moveList + darkKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LN":
+                            moveList = moveList + lightKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DP":
+                            moveList = moveList + darkPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                            moveList = moveList + darkPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
+                        case "LP":
+                            moveList = moveList + lightPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                            moveList = moveList + lightPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
+                        case "DQ":
+                            moveList = moveList + darkQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LQ":
+                            moveList = moveList + lightQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DR":
+                            moveList = moveList + darkRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LR":
+                            moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        default:
+                            error = true
+                            
+                        }
+                    }
+                }
+            }
+            print(moveList)
+            if moveList.isEmpty{
+                return true
+            }
+        }
+        return false
+    }
+    
+    func StaleMate(bord: [[String]], enPassant: [Int], player: String) -> Bool {
+        print("test checkMate")
+        if !checkForSchach(bord: bord, player: player){
+            var moveList = [[Int]]()
+            var pieces: [String]
+            var error = false
+            if player == "Light"{
+                pieces = lightPices
+            }else{
+                pieces = darkPices
+            }
+            for piece in pieces{
+                if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
+                    for position in getPiecesPositions(bord: bord, piece: piece) {
+                        switch piece {
+                        case "DB":
+                            moveList = moveList + darkBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LB":
+                            moveList = moveList + lightBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DK":
+                            moveList = moveList + darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LK":
+                            moveList = moveList + lightKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DN":
+                            moveList = moveList + darkKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LN":
+                            moveList = moveList + lightKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DP":
+                            moveList = moveList + darkPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                            moveList = moveList + darkPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
+                        case "LP":
+                            moveList = moveList + lightPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                            moveList = moveList + lightPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
+                        case "DQ":
+                            moveList = moveList + darkQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LQ":
+                            moveList = moveList + lightQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "DR":
+                            moveList = moveList + darkRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        case "LR":
+                            moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
+                        default:
+                            error = true
+                            
+                        }
+                    }
+                }
+            }
+            print(moveList)
+            if moveList.isEmpty{
                 return true
             }
         }

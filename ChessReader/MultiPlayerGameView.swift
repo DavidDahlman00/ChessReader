@@ -28,14 +28,14 @@ struct  MultiPlayerGameView: View {
                     Text("Multiplayer")
                         .foregroundColor(.gray)
                         
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc()).onAppear(){
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: color).onAppear(){
                         listenToFireStore()
                     }
 
                     // knappar och annat
                     Button(action: {
                         
-                            db.collection("testItems2").addDocument(data: ["move": move, "state" : bord.bordToString()])
+                            db.collection("game\(gameNumber)").addDocument(data: ["move": move, "state" : bord.bordToString()])
                             bord.changePlayerToGo()
                             
                             print("check")}, label: {
@@ -54,7 +54,7 @@ struct  MultiPlayerGameView: View {
     
  func listenToFireStore() {
         
-        db.collection("testItems2").addSnapshotListener{ (snapshot, err) in
+        db.collection("game\(gameNumber)").addSnapshotListener{ (snapshot, err) in
             var tmpState = ""
             var tmpMove = 0
             for document in snapshot!.documents {

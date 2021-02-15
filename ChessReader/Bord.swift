@@ -42,10 +42,14 @@ class Bord: ObservableObject {
     @Published var promotePawn: Bool = false
     var playerToGo : String = "Light"
     @Published var schach : [Bool] = [false, false]
+    @Published var schachMate : [Bool] = [false, false]
+    @Published var staleMate : [Bool] = [false, false]
     @Published var kingHasMoved : [Bool] = [false, false]
+    var drawByRepitation : Bool = false
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
     var enPassant = [10, 10]        // 10 = no en passant move
+    var histBord: [[[String]]] = [[["a"]], [["b"]], [["c"]], [["d"]], [[""]]]
     
     
     init() {
@@ -53,6 +57,8 @@ class Bord: ObservableObject {
         bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
         
         activityBord = [["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",]]
+        
+        histBord[0] = bord
         
     }
     
@@ -158,9 +164,11 @@ class Bord: ObservableObject {
             }else{
                 enPassant[0] = 10
             }
-            recetActivityBord()
-            changePlayerToGo()
-            checkSchach()
+//            recetActivityBord()
+//            changePlayerToGo()
+//            checkSchach()
+//            checkSchackMate()
+            goToNextPlayer()
             print("King move test")
             print(kingHasMoved[0])
             print(kingHasMoved[1])
@@ -178,9 +186,7 @@ class Bord: ObservableObject {
             if activePice != nil {
                 bord[row][col] = activePice!
             }
-            changePlayerToGo()
-            recetActivityBord()
-            checkSchach()
+            goToNextPlayer()
         case "casteling":
             if row == 7 && col == 6 {
                 bord[7][4] = ""
@@ -203,10 +209,7 @@ class Bord: ObservableObject {
                 bord[0][2] = "BK"
                 bord[0][4] = ""
             }
-            changePlayerToGo()
-            recetActivityBord()
-            checkSchach()
-            
+            goToNextPlayer()
         case "none":
             if pices[player].contains(bord[row][col]){
                 print("1")
@@ -293,6 +296,27 @@ class Bord: ObservableObject {
             recetActivityBord()
         }
     }
+    func checkSchackMate() {
+        let rule = Rules()
+        if rule.SchackMate(bord: bord, enPassant: enPassant, player: playerToGo){
+            if playerToGo == "Light" {
+                schachMate[0] = true
+            }else{
+                schachMate[1] = true
+            }
+        }
+    }
+    
+    func checkStaleMate() {
+        let rule = Rules()
+        if rule.StaleMate(bord: bord, enPassant: enPassant, player: playerToGo){
+            if playerToGo == "Light" {
+                staleMate[0] = true
+            }else{
+                staleMate[1] = true
+            }
+        }
+    }
     
     func checkSchach()  {
         let rule = Rules()
@@ -308,6 +332,22 @@ class Bord: ObservableObject {
             }else{
                 schach[1] = false
             }
+        }
+    }
+    
+    func goToNextPlayer() {
+        changePlayerToGo()
+        recetActivityBord()
+        checkSchach()
+        checkStaleMate()
+        checkSchackMate()
+        histBord[4] = histBord[3]
+        histBord[3] = histBord[2]
+        histBord[2] = histBord[1]
+        histBord[1] = histBord[0]
+        histBord[0] = bord
+        if histBord[0] == histBord[4]{
+            drawByRepitation = true
         }
     }
 }

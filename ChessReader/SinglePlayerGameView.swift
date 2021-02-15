@@ -21,45 +21,17 @@ struct SinglePlayerGameView: View {
                         .font(.largeTitle)
                         .foregroundColor(.gray)
                     
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: testFunc())
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
                     Button(action: {
                         
                             db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])
                         
                             
                             print("check")}, label: {
-                        Image(systemName: "checkmark.square" )
+                                Image(systemName: "checkmark.square" ).resizable()
+                                    .aspectRatio(contentMode:.fit).frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     })
-//                    HStack{
-//                        Button(action: {
-//                            if bord.bord[3][3] == "" {
-//                                bord.bord[3][3] = bord.bord[1][3]
-//                                bord.bord[1][3] = ""
-//                            }else{
-//                                bord.bord[1][3] = bord.bord[3][3]
-//                                bord.bord[3][3] = ""
-//                             }
-//                        }) {
-//                            Image(systemName: "backward.fill")
-//                        }
-//                        .foregroundColor(.gray)
-//
-//                        Button(action: {
-//                            if bord.bord[4][3] == "" {
-//                                bord.bord[4][3] = bord.bord[6][3]
-//                                bord.bord[6][3] = ""
-//                            }else{
-//                                bord.bord[6][3] = bord.bord[4][3]
-//                                bord.bord[4][3] = ""
-//                             }
-//                        }) {
-//                            Image(systemName: "forward.fill")
-//                        }
-//
-//                        .foregroundColor(.gray)
-//                    }
-                    // knappar och annat
-                    
+
                     Button(action: {
                      
                         self.showingSheet = true
@@ -81,9 +53,6 @@ struct SinglePlayerGameView: View {
             }.edgesIgnoringSafeArea(.all)
             
         }
-    }
-    func testFunc(){
-        print("func test 2")
     }
 }
 
