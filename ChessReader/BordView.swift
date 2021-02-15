@@ -14,9 +14,9 @@ struct BordView: View {
     var image: [[String]]
     let action: String
     var schach: String{
-//        if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
-//            return "StaleMate"
-//        }else
+        if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
+            return "StaleMate"
+        }else
         if bord.drawByRepitation{
             return "drawByRepitation"
         }else if  (bord.playerToGo == "Light" && bord.schachMate[0]) || (bord.playerToGo == "Dark" && bord.schachMate[1]){
