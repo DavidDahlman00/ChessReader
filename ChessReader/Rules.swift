@@ -849,6 +849,7 @@ struct Rules{
                     }
                 }
             }
+            print("TEST SCHACKMATE")
             print(moveList)
             if moveList.isEmpty{
                 return true
@@ -864,9 +865,9 @@ struct Rules{
             var pieces: [String]
             var error = false
             if player == "Light"{
-                pieces = lightPices
-            }else{
                 pieces = darkPices
+            }else{
+                pieces = lightPices
             }
             for piece in pieces{
                 if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
