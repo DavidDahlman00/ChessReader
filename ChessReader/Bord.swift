@@ -49,7 +49,7 @@ class Bord: ObservableObject {
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
     var enPassant = [10, 10]        // 10 = no en passant move
-    var histBord: [[[String]]] = [[["a"]], [["b"]], [["c"]], [["d"]], [[""]]]
+    var histBord: [[[String]]] = [[["a"]], [["b"]], [["c"]], [["d"]], [["e"]], [["f"]],[["g"]]]
     
     
     init() {
@@ -341,12 +341,14 @@ class Bord: ObservableObject {
         checkSchach()
         checkStaleMate()
         checkSchackMate()
+        histBord[6] = histBord[5]
+        histBord[5] = histBord[4]
         histBord[4] = histBord[3]
         histBord[3] = histBord[2]
         histBord[2] = histBord[1]
         histBord[1] = histBord[0]
         histBord[0] = bord
-        if histBord[0] == histBord[4]{
+        if histBord[0] == histBord[4] && histBord[1] == histBord[5] && histBord[2] == histBord[6]{
             drawByRepitation = true
         }
     }
