@@ -41,6 +41,9 @@ struct BordView: View {
             RowView(bord: bord, imageSize: imageSize, row: 7, image: image[7], action: action)
         }
         .padding()
+//        .actionSheet(isPresented: $bord.schach[1]){
+//            ActionSheet(title: Text("SchackMate white player won."), buttons: [.default(Text("Reset game")){},])
+//        }
         .actionSheet(isPresented: $bord.promotePawn){
             ActionSheet(title: Text("Promote pawn to"), buttons: [
                             .default(Text("Queen")) { if bord.promotedPawn[0] != -1{

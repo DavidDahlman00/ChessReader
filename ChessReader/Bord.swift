@@ -45,7 +45,7 @@ class Bord: ObservableObject {
     @Published var schachMate : [Bool] = [false, false]
     @Published var staleMate : [Bool] = [false, false]
     @Published var kingHasMoved : [Bool] = [false, false]
-    var drawByRepitation : Bool = false
+    @Published var drawByRepitation : Bool = false
     var activeSquare: [Int]? = nil
     var activePice: String? = nil
     var enPassant = [10, 10]        // 10 = no en passant move
@@ -57,6 +57,18 @@ class Bord: ObservableObject {
         bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
         
         activityBord = [["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",]]
+         promotedPawn = [-1, -1]   // -1 = no pawn to promote
+        promotePawn = false
+        playerToGo = "Light"
+        schach  = [false, false]
+         schachMate = [false, false]
+      staleMate = [false, false]
+       kingHasMoved = [false, false]
+         drawByRepitation  = false
+         activeSquare = nil
+         activePice = nil
+         enPassant = [10, 10]        // 10 = no en passant move
+         histBord = [[["a"]], [["b"]], [["c"]], [["d"]], [["e"]], [["f"]],[["g"]]]
         
         histBord[0] = bord
         
