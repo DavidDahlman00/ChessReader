@@ -43,6 +43,7 @@ class Bord: ObservableObject {
     var playerToGo : String = "Light"
     @Published var schach : [Bool] = [false, false]
     @Published var schachMate : [Bool] = [false, false]
+    @Published var gameEnd: Bool = false
     @Published var staleMate : [Bool] = [false, false]
     @Published var kingHasMoved : [Bool] = [false, false]
     var drawByRepitation : Bool = false
@@ -301,6 +302,7 @@ class Bord: ObservableObject {
             }else{
                 schachMate[1] = true
             }
+            gameEnd = true
         }
     }
     
@@ -312,6 +314,7 @@ class Bord: ObservableObject {
             }else{
                 staleMate[1] = true
             }
+            gameEnd = true
         }
     }
     
@@ -347,6 +350,7 @@ class Bord: ObservableObject {
         histBord[0] = bord
         if histBord[0] == histBord[4] && histBord[1] == histBord[5] && histBord[2] == histBord[6]{
             drawByRepitation = true
+            gameEnd = true
         }
     }
 }
