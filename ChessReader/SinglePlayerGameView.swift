@@ -47,14 +47,44 @@ struct SinglePlayerGameView: View {
                         }, .cancel()])
                     }
                 }.alert(isPresented: $bord.gameEnd){
-                    Alert(title: Text("White won"),
-                          message: Text("Would you like to reset?"),
-                          primaryButton: .destructive(Text("Reset")){
-                            bord.resetGame()
-                          },
-                          secondaryButton: .default(Text("View Game!")){
-                            
-                          })
+                    if bord.schachMate[1]{
+                        return Alert(title: Text("White won"),
+                                     message: Text("Would you like to reset?"),
+                                     primaryButton: .destructive(Text("Reset")){
+                                       bord.resetGame()
+                                     },
+                                     secondaryButton: .default(Text("View Game!")){
+                                       
+                                     })
+                    } else  if bord.schachMate[0]{
+                        return Alert(title: Text("Black won"),
+                                     message: Text("Would you like to reset?"),
+                                     primaryButton: .destructive(Text("Reset")){
+                                       bord.resetGame()
+                                     },
+                                     secondaryButton: .default(Text("View Game!")){
+                                       
+                                     })
+                    } else if bord.staleMateEnd{
+                        return Alert(title: Text("StaleMate"),
+                                     message: Text("Would you like to reset?"),
+                                     primaryButton: .destructive(Text("Reset")){
+                                       bord.resetGame()
+                                     },
+                                     secondaryButton: .default(Text("View Game!")){
+                                       
+                                     })
+                    }else{
+                        return Alert(title: Text("Draw by repetition"),
+                                     message: Text("Would you like to reset?"),
+                                     primaryButton: .destructive(Text("Reset")){
+                                       bord.resetGame()
+                                     },
+                                     secondaryButton: .default(Text("View Game!")){
+                                       
+                                     })
+                    }
+                    
                 }
                 
                 
