@@ -10,7 +10,7 @@ import SwiftUI
 struct ChessBordView : View {
     var playedGame : GameListEntry? = nil
     var testText: String = "Test"
-
+    var game = ReadPGN()
     
    @ObservedObject var bord = Bord()
     var body: some View {
@@ -26,26 +26,29 @@ struct ChessBordView : View {
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
                     HStack{
                         Button(action: {
-                            if bord.bord[3][3] == "" {
-                                bord.bord[3][3] = bord.bord[1][3]
-                                bord.bord[1][3] = ""
-                            }else{
-                                bord.bord[1][3] = bord.bord[3][3]
-                                bord.bord[3][3] = ""
-                             }
+                            game.moveBackward()
+                            print(game.testPGN[game.testPGNInt])
+                            
                         }) {
                             Image(systemName: "backward.fill")
                         }
                         .foregroundColor(.gray)
                         
                         Button(action: {
-                            if bord.bord[4][3] == "" {
-                                bord.bord[4][3] = bord.bord[6][3]
-                                bord.bord[6][3] = ""
-                            }else{
-                                bord.bord[6][3] = bord.bord[4][3]
-                                bord.bord[4][3] = ""
-                             }
+                            print(game.testPGNInt)
+                            print(game.testPGN[game.testPGNInt])
+                            game.readGame()
+                            print(game.information)
+                            print(game.lightMoveList.count)
+                            print(game.darkMoveList.count)
+                            for move in game.lightMoveList{
+                                print(move)
+                            }
+                            print("====================")
+                            for move in game.darkMoveList{
+                                print(move)
+                            }
+                            game.moveForward()
                         }) {
                             Image(systemName: "forward.fill")
                         }
