@@ -44,7 +44,9 @@ class Bord: ObservableObject {
     @Published var schach : [Bool] = [false, false]
     @Published var schachMate : [Bool] = [false, false]
     @Published var gameEnd: Bool = false
+    @Published var schachMateEnd: Bool = false
     @Published var staleMate : [Bool] = [false, false]
+    @Published var staleMateEnd : Bool = false
     @Published var kingHasMoved : [Bool] = [false, false]
     var drawByRepitation : Bool = false
     var activeSquare: [Int]? = nil
@@ -61,6 +63,19 @@ class Bord: ObservableObject {
         
         histBord[0] = bord
         
+    }
+    func resetGame(){
+                bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
+                playerToGo = "Light"
+                schach = [false, false]
+                schachMate = [false, false]
+                staleMate = [false, false]
+                kingHasMoved  = [false, false]
+                drawByRepitation  = false
+                activeSquare = nil
+                activePice = nil
+                enPassant = [10, 10]        // 10 = no en passant move
+                histBord = [[["a"]], [["b"]], [["c"]], [["d"]], [["e"]], [["f"]],[["g"]]]
     }
     
     func bordToString() -> String {

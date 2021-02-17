@@ -42,17 +42,7 @@ struct SinglePlayerGameView: View {
                     .actionSheet(isPresented: $showingSheet){
                         ActionSheet(title: Text("Would you like to restart?"), buttons: [.default(Text("Yes")){
                             
-                            bord.bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
-                            bord.playerToGo = "Light"
-                            bord.schach = [false, false]
-                            bord.schachMate = [false, false]
-                            bord.staleMate = [false, false]
-                            bord.kingHasMoved  = [false, false]
-                            bord.drawByRepitation  = false
-                            bord.activeSquare = nil
-                            bord.activePice = nil
-                            bord.enPassant = [10, 10]        // 10 = no en passant move
-                            bord.histBord = [[["a"]], [["b"]], [["c"]], [["d"]], [["e"]], [["f"]],[["g"]]]
+                            bord.resetGame()
                            
                         }, .cancel()])
                     }
@@ -60,17 +50,7 @@ struct SinglePlayerGameView: View {
                     Alert(title: Text("White won"),
                           message: Text("Would you like to reset?"),
                           primaryButton: .destructive(Text("Reset")){
-                            bord.bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
-                            bord.playerToGo = "Light"
-                            bord.schach = [false, false]
-                            bord.schachMate = [false, false]
-                            bord.staleMate = [false, false]
-                            bord.kingHasMoved  = [false, false]
-                            bord.drawByRepitation  = false
-                            bord.activeSquare = nil
-                            bord.activePice = nil
-                            bord.enPassant = [10, 10]        // 10 = no en passant move
-                            bord.histBord = [[["a"]], [["b"]], [["c"]], [["d"]], [["e"]], [["f"]],[["g"]]]
+                            bord.resetGame()
                           },
                           secondaryButton: .default(Text("View Game!")){
                             
