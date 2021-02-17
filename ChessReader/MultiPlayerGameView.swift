@@ -16,7 +16,13 @@ struct  MultiPlayerGameView: View {
    @State var move = 1
     var db = Firestore.firestore()
     @ObservedObject var bord = Bord()
-    
+    var playerToMove: String{
+        if bord.playerToGo == color {
+            return "Your turn to move"
+        }else{
+            return "Waiting for opponent"
+        }
+    }
    
     var body: some View {
         GeometryReader{geo in
@@ -27,7 +33,8 @@ struct  MultiPlayerGameView: View {
                     Text("\(gameNumber)")
                     Text("Multiplayer")
                         .foregroundColor(.gray)
-                        
+                    Text(playerToMove)
+                        .foregroundColor(.gray)
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: color).onAppear(){
                         listenToFireStore()
                     }
