@@ -388,4 +388,9 @@ class Bord: ObservableObject {
             gameEnd = true
         }
     }
+    
+    func pGNMoveToBord(pgn: String) {
+    
+    }
+    
 }
