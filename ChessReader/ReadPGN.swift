@@ -16,6 +16,7 @@ class ReadPGN {
     var player = "light"
     var result: String = ""
     var testPGN = """
+
 [Event "URS-ch40"]
 [Site "Baku"]
 [Date "1972.??.??"]
@@ -32,6 +33,7 @@ class ReadPGN {
 16.a4 Nb2 17.Qc2 Nxa4 18.Nxa4 bxa4 19.Qxa4 e6 20.e4 exd5 21.exd5 Ne4 22.Qa6 Bc8
 23.Qc4 f5 24.f3 Nf6 25.Bf2 Qf7 26.Rfe1 Re8 27.Rxe8+ Nxe8 28.Nd8 Qd7 29.Nxb7 Bxb7
 30.f4 Kf7 31.Qe2 Kf8 32.Qc4 Qa4 33.h3 Ba6  1/2-1/2
+
 """
     
     func moveForward() {
