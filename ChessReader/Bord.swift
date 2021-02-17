@@ -369,4 +369,9 @@ class Bord: ObservableObject {
             drawByRepitation = true
         }
     }
+    
+    func pGNMoveToBord(pgn: String) {
+    
+    }
+    
 }
