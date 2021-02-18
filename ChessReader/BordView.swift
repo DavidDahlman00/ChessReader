@@ -175,7 +175,8 @@ struct SquareView: View {
                     if bord.playerToGo == "Light" {
                         bord.squareTuched(row: row, col: col)
                     }
-
+                case "ChessBordView": break
+                    
                 default:
                     print("test \(row), \(col)")
                     bord.squareTuched(row: row, col: col)

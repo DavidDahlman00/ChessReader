@@ -11,8 +11,12 @@ struct ChessBordView : View {
     var playedGame : GameListEntry? = nil
     var testText: String = "Test"
     var game = ReadPGN()
+    @State private var showingAlert = false
+    @ObservedObject var bord = Bord()
     
-   @ObservedObject var bord = Bord()
+    init() {
+        game.readGame()
+    }
     var body: some View {
         GeometryReader{geo in
             ZStack{
@@ -22,7 +26,15 @@ struct ChessBordView : View {
                     Text(playedGame?.game ?? "Unknown Game")
                         .foregroundColor(.gray)
                         .bold()
-                        
+                  
+                    Button("Game Info") {
+                               showingAlert = true
+                           }
+                           .alert(isPresented: $showingAlert) {
+                            Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
+                           }
+                       
+                   
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
                     HStack{
                         Button(action: {
@@ -37,7 +49,7 @@ struct ChessBordView : View {
                         Button(action: {
                             print(game.testPGNInt)
                             print(game.testPGN[game.testPGNInt])
-                            game.readGame()
+                            bord.pGNMoveToBord(pgn: "0-0", player: "light")
                             print(game.information)
                             print(game.lightMoveList.count)
                             print(game.darkMoveList.count)

@@ -89,6 +89,8 @@ class ReadPGN {
         }
         print(tmpBuffert)
         print(i)
+        information = information.filter{ $0 != "\""}
+        testPGNInt = 0
     }
     
     

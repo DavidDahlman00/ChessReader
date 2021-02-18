@@ -389,8 +389,27 @@ class Bord: ObservableObject {
         }
     }
     
-    func pGNMoveToBord(pgn: String) {
-    
+    func pGNMoveToBord(pgn: String, player: String) {
+        
+        
+        if player == "light" {
+            switch pgn {
+            case "0-0":
+                bord[7][4] = ""
+                bord[7][5] = "LR"
+                bord[7][6] = "LK"
+                bord[7][7] = ""
+            case "0-0-0":
+                bord[7][0] = ""
+                bord[7][1] = ""
+                bord[7][2] = "LK"
+                bord[7][3] = "LR"
+                bord[7][4] = ""
+            default:
+                bord[7][4] = ""
+
+            }
+        }
     }
     
 }
