@@ -280,25 +280,83 @@ class Bord: ObservableObject {
                 bord[7][3] = "LR"
                 bord[7][4] = ""
             default:
-                _ = true
+                pGNMove(piece: piece, fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol, schacked: schacked)
             }
-            switch piece {
-            case "Bishop":
-                let getFrom = getPositionsOfPieces(piece: "LB")
-                if getFrom.count == 1 {
-                    let from = getFrom[0]
-                    bord[from[0]][from[1]] = ""
-                    bord[toRow][toCol] = "LB"
-                }else{
-                    let rules = Rules()
-                    for pos in getFrom {
-                        if rules.lightBishop(bord: bord, checkSchack: schacked, row: pos[0], col: pos[1]).contains([toRow, toCol]) {
-                            <#code#>
-                        }
+        }else{
+            switch pgn {
+            case "0-0":
+                bord[0][4] = ""
+                bord[0][5] = "BR"
+                bord[0][6] = "BK"
+                bord[0][7] = ""
+            case "0-0-0":
+                bord[0][0] = ""
+                bord[0][1] = ""
+                bord[0][2] = "BK"
+                bord[0][3] = "BR"
+                bord[0][4] = ""
+            default:
+                pGNMove(piece: piece, fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol, schacked: schacked)
+            }
+        }
+    }
+    
+    func pGNMove(piece: String, fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, schacked: Bool) {
+        let getFrom = getPositionsOfPieces(piece: piece)
+        if getFrom.count == 1 {
+            let from = getFrom[0]
+            bord[from[0]][from[1]] = ""
+            bord[toRow][toCol] = piece
+        }else{
+            let rules = Rules()
+            for pos in getFrom {
+                var row: Int{
+                    if fromRow != -1 {
+                        return fromRow
+                    }else{
+                        return pos[0]
                     }
                 }
-            default:
-                var _ = true
+                var col: Int{
+                    if fromCol != -1 {
+                        return fromCol
+                    }else{
+                        return pos[1]
+                    }
+                }
+                var posibleMove: Bool = false
+                switch piece {
+                case "LB":
+                    posibleMove = rules.lightBishop(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "BB":
+                    posibleMove = rules.darkBishop(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "LK":
+                    posibleMove = rules.lightKing(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "BK":
+                    posibleMove = rules.darkBishop(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "LN":
+                    posibleMove = rules.lightKnight(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "BN":
+                    posibleMove = rules.darkKnight(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "LP":
+                    posibleMove = rules.lightPawn(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "BP":
+                    posibleMove = rules.darkPawn(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "LQ":
+                    posibleMove = rules.lightQueen(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "BQ":
+                    posibleMove = rules.darkQueen(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "LR":
+                    posibleMove = rules.lightRook(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                case "BR":
+                    posibleMove = rules.darkRook(bord: bord, checkSchack: schacked, row: row, col: col).contains([toRow, toCol])
+                default:
+                    var _ = true
+                }
+                if pos[0] == row && pos[1] == col && posibleMove{
+                    bord[row][col] = ""
+                    bord[toRow][toCol] = piece
+                }
             }
         }
     }
