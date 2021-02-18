@@ -8,6 +8,9 @@
 import Foundation
 
 extension Bord{
+    
+    //  Major function for bord interaction. handels logic when user tuch the bordView.
+    
     func squareTuched(row: Int, col: Int)  {
         let pices = [["LB", "LK", "LN", "LP", "LR", "LQ"], ["BB", "BK", "BN", "BP", "BR", "BQ"]]
         let player: Int
@@ -48,9 +51,7 @@ extension Bord{
             if activePice == "BP" && row - activeSquare![0] == 2 {
                 enPassant[1] = col
             }
-            print(bord[row][col])
-            print(activityBord[row][col])
-            print("enPassants \(enPassant[0]), \(enPassant[1])")
+
             if playerToGo == "Light" {
                 enPassant[1] = 10
             }else{
@@ -58,9 +59,7 @@ extension Bord{
             }
 
             goToNextPlayer()
-            print("King move test")
-            print(kingHasMoved[0])
-            print(kingHasMoved[1])
+
         case "inEnPassantList":
             if playerToGo == "Light" {
                 bord[3][col] = ""
@@ -101,10 +100,8 @@ extension Bord{
             goToNextPlayer()
         case "none":
             if pices[player].contains(bord[row][col]){
-                print("1")
                 recetActivityBord()
                 activityBord[row][col] = "active"
-                print("2")
                 activeSquare = [row, col]
                 activePice = bord[row][col]
                 let rules = Rules()
@@ -121,25 +118,19 @@ extension Bord{
                     case pices[player][1]:
                         if player == 0 {
                             moveList = rules.lightKing(bord: bord,  checkSchack: true, row: row, col: col)
-                            print("///////////////")
                             if rules.shortCastling(bord: self){
                                 activityBord[7][6] = "casteling"
-                                print("Can short castle")
                             }
                             if rules.longCastling(bord: self){
                                 activityBord[7][2] = "casteling"
-                                print("Can long castle")
                             }
                         }else{
                             moveList = rules.darkKing(bord: bord, checkSchack: true, row: row, col: col)
-                            print("///////////////")
                             if rules.shortCastling(bord: self){
                                 activityBord[0][6] = "casteling"
-                                print("Can short castle")
                             }
                             if rules.longCastling(bord: self){
                                 activityBord[0][2] = "casteling"
-                                print("Can long castle")
                             }
                         }
                     case pices[player][2]:
@@ -176,9 +167,7 @@ extension Bord{
                     }
                     for move in enPassantList {
                         activityBord[move[0]][move[1]] = "inEnPassantList"
-                        print("enPassant \(move[0]), \(move[1])")
                     }
-                
             }
             
         default:

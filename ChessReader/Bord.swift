@@ -9,21 +9,21 @@ import Foundation
 
 class Bord: ObservableObject {
 
-    @Published var bord : [[String]]
-    @Published var activityBord : [[String]]
-    @Published var promotedPawn: [Int] = [-1, -1]   // -1 = no pawn to promote
-    @Published var promotePawn: Bool = false
-    var playerToGo : String = "Light"
-    @Published var schach : [Bool] = [false, false]
+    @Published var bord : [[String]]        // keep's track on current bord positions.
+    @Published var activityBord : [[String]] // keep's track on which square is clicked and which squares are posible to move to.
+    @Published var promotedPawn: [Int] = [-1, -1]   // -1 = no pawn to promote. else on which line the pawn sttands. first index for light, second for dark.
+    @Published var promotePawn: Bool = false // indicates that there is a pawn to promote
+    var playerToGo : String = "Light" // indicates which player to go. should be private
+    @Published var schach : [Bool] = [false, false] //
     @Published var schachMate : [Bool] = [false, false]
     @Published var gameEnd: Bool = false
     @Published var schachMateEnd: Bool = false
     @Published var staleMate : [Bool] = [false, false]
     @Published var staleMateEnd : Bool = false
-    @Published var kingHasMoved : [Bool] = [false, false]
-    var drawByRepitation : Bool = false
+    @Published var kingHasMoved : [Bool] = [false, false]   // indicates i the king's has moved.
+    var drawByRepitation : Bool = false   // returns true when the game has ended draw by repetation.
     var activeSquare: [Int]? = nil
-    var activePice: String? = nil
+    var activePice: String? = nil      // returns piece that is currently clicked
     var enPassant = [10, 10]        // 10 = no en passant move
     var histBord: [[[String]]] = [[["a"]], [["b"]], [["c"]], [["d"]], [["e"]], [["f"]],[["g"]]]
     
@@ -40,6 +40,8 @@ class Bord: ObservableObject {
         histBord[0] = bord
         
     }
+    
+    //  should containe all functions necessary resetGame
     func resetGame(){
                 bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
                 playerToGo = "Light"
@@ -54,6 +56,7 @@ class Bord: ObservableObject {
                 histBord = [[["a"]], [["b"]], [["c"]], [["d"]], [["e"]], [["f"]],[["g"]]]
     }
     
+    // transform a bord in form of [[String]] to a FEN "Forsyth-Edwards Notation"
     func bordToString() -> String {
         var fenText = ""
         for row in 0...7 {
@@ -69,6 +72,7 @@ class Bord: ObservableObject {
         return fenText
     }
     
+    // transform a FEN "Forsyth-Edwards Notation" to a bord in form of [[String]]
     func stringToBord(fenText: String) {
         var n = 0
         let str = fenText
@@ -84,11 +88,12 @@ class Bord: ObservableObject {
         }
     }
     
-    
+    // geter for active player.
     func getPlayerToGo() -> String {
         return playerToGo
     }
     
+    // change player.
     func changePlayerToGo()  {
         if playerToGo == "Light" {
             playerToGo = "Dark"
@@ -97,6 +102,7 @@ class Bord: ObservableObject {
         }
     }
     
+    // reset ActivityBord.
     func recetActivityBord() {
         for row in 0...7 {
             for col in 0...7 {
@@ -108,7 +114,7 @@ class Bord: ObservableObject {
         activePice = nil
     }
 
-    
+    // while go through current bord and check for schack mate. And set gameEnd to true.
     func checkSchackMate() {
         let rule = Rules()
         if rule.SchackMate(bord: bord, enPassant: enPassant, player: playerToGo){
@@ -121,6 +127,7 @@ class Bord: ObservableObject {
         }
     }
     
+    // while go through current bord and check for stale mate. And set gameEnd to true.
     func checkStaleMate() {
         let rule = Rules()
         if rule.StaleMate(bord: bord, enPassant: enPassant, player: playerToGo){
@@ -133,6 +140,7 @@ class Bord: ObservableObject {
         }
     }
     
+    // while go through current bord and check for schack. and set schach white respective index to true.
     func checkSchach()  {
         let rule = Rules()
         if rule.checkForSchach(bord: bord, player: playerToGo){
@@ -150,6 +158,7 @@ class Bord: ObservableObject {
         }
     }
     
+    // Should run all functions necessary to move over to next player after one player have made a move.
     func goToNextPlayer() {
         changePlayerToGo()
         recetActivityBord()
@@ -169,6 +178,7 @@ class Bord: ObservableObject {
         }
     }
     
+    // Takes a move from a PGN "Portable game notation" and updates bord.
     func pGNMoveToBord(pgn: String, player: String) {
         
         

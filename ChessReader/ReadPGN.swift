@@ -48,6 +48,7 @@ class ReadPGN {
         }
     }
     
+    
     func getCurrentChar() -> String {
         if testPGNInt < testPGN.count - 1 && testPGNInt > 0 {
             return testPGN[testPGNInt]
@@ -55,6 +56,7 @@ class ReadPGN {
         return ""
     }
     
+    // sets information, light and dark movelist from PGN string.
     func readGame() {
         var i = 0
         var tmpBuffert = ""

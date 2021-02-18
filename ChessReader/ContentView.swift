@@ -16,7 +16,7 @@ struct ContentView: View {
     @ObservedObject var auth = GlobalAuth()
 
     init() {
-        print("###########")
+     
         auth.auth.signInAnonymously{ (result, err) in
             print("!!!!!!!!")
             if let err = err {
