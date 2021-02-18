@@ -10,6 +10,8 @@
 		45E0D365DDF3CE7AFAFF726A /* Pods_ChessReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6EE6CC0D3694F1358264CA /* Pods_ChessReader.framework */; };
 		512750A125CAAD3200E1FF8D /* BordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512750A025CAAD3200E1FF8D /* BordView.swift */; };
 		517864A925DBF450009AAC95 /* ReadPGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517864A825DBF450009AAC95 /* ReadPGN.swift */; };
+		517864B625DE9DD7009AAC95 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517864B525DE9DD7009AAC95 /* StringExtension.swift */; };
+		517864BB25DEA5B2009AAC95 /* BordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517864BA25DEA5B2009AAC95 /* BordExtension.swift */; };
 		5180DFE725C4216200DF9B74 /* Bord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5180DFE625C4216200DF9B74 /* Bord.swift */; };
 		5180DFEC25C42C8900DF9B74 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5180DFEB25C42C8900DF9B74 /* Rules.swift */; };
 		518229A025BF092A00974B3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5182299F25BF092A00974B3F /* AppDelegate.swift */; };
@@ -55,6 +57,8 @@
 		0D6EE6CC0D3694F1358264CA /* Pods_ChessReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChessReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		512750A025CAAD3200E1FF8D /* BordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BordView.swift; sourceTree = "<group>"; };
 		517864A825DBF450009AAC95 /* ReadPGN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPGN.swift; sourceTree = "<group>"; };
+		517864B525DE9DD7009AAC95 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		517864BA25DEA5B2009AAC95 /* BordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BordExtension.swift; sourceTree = "<group>"; };
 		5180DFE625C4216200DF9B74 /* Bord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bord.swift; sourceTree = "<group>"; };
 		5180DFEB25C42C8900DF9B74 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		5182299C25BF092A00974B3F /* ChessReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,11 +179,13 @@
 				518229A725BF092E00974B3F /* Preview Content */,
 				51822A2825C15D3D00974B3F /* ChessBordView.swift */,
 				5180DFE625C4216200DF9B74 /* Bord.swift */,
+				517864B525DE9DD7009AAC95 /* StringExtension.swift */,
 				517864A825DBF450009AAC95 /* ReadPGN.swift */,
 				5180DFEB25C42C8900DF9B74 /* Rules.swift */,
 				51B80A5A25CAA0130036656F /* ReadGameView.swift */,
 				77BFBD7A25D1C96400D38B8C /* WaitingForMultiPlayerView.swift */,
 				51B80A5F25CAA0340036656F /* SinglePlayerGameView.swift */,
+				517864BA25DEA5B2009AAC95 /* BordExtension.swift */,
 				51B80A6125CAA04A0036656F /* MultiPlayerGameView.swift */,
 				512750A025CAAD3200E1FF8D /* BordView.swift */,
 			);
@@ -453,6 +459,8 @@
 			files = (
 				518229A025BF092A00974B3F /* AppDelegate.swift in Sources */,
 				5180DFEC25C42C8900DF9B74 /* Rules.swift in Sources */,
+				517864BB25DEA5B2009AAC95 /* BordExtension.swift in Sources */,
+				517864B625DE9DD7009AAC95 /* StringExtension.swift in Sources */,
 				518229A225BF092A00974B3F /* SceneDelegate.swift in Sources */,
 				512750A125CAAD3200E1FF8D /* BordView.swift in Sources */,
 				51822A2425C15A0B00974B3F /* GameList.swift in Sources */,

@@ -807,7 +807,7 @@ struct Rules{
             var moveList = [[Int]]()
             var pieces: [String]
             
-            var error = false
+            var _ = false
             if player == "Light"{
                 pieces = lightPices
             }else{
@@ -851,7 +851,7 @@ struct Rules{
                             moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         default:
                             print("Error")
-                            error = true
+                            _ = true
                             
                         }
                     }
@@ -872,7 +872,7 @@ struct Rules{
         if !checkForSchach(bord: bord, player: player){
             var moveList = [[Int]]()
             var pieces: [String]
-            var error = false
+            var _ = false
             if player == "Light"{
                 pieces = lightPices
             }else{
@@ -909,7 +909,7 @@ struct Rules{
                         case "LR":
                             moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         default:
-                            error = true
+                            _ = true
                             
                         }
                     }

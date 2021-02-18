@@ -21,6 +21,9 @@ struct SinglePlayerGameView: View {
                         .font(.largeTitle)
                         .foregroundColor(.gray)
                     
+                    Button("Temp for buggs in multiPlayer"){
+                        bord.stringToBord( fenText: "BRBNBBBQ/.BRBK/.BPBPBPBP/./.BPBP/././././././././././.LP/.BP/./.LQ/.LP/.LPLP/./.BB/./.LB/./././.LPLP/./././.LPLPLRLNLB/./.LRLK/.")
+                    }
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
                     Button(action: {
                         

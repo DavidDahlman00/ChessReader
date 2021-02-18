@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ChessBordView : View {
     var playedGame : GameListEntry? = nil
     var testText: String = "Test"
     var game = ReadPGN()
+    var db = Firestore.firestore()
     @State private var showingAlert = false
     @ObservedObject var bord = Bord()
     
@@ -26,7 +28,11 @@ struct ChessBordView : View {
                     Text(playedGame?.game ?? "Unknown Game")
                         .foregroundColor(.gray)
                         .bold()
-                  
+                    
+                    Button("Temp send to DB"){
+                        let content = game.testPGN 
+                        db.collection("contentTest").addDocument(data: ["game" : content])
+                    }
                     Button("Game Info") {
                                showingAlert = true
                            }

@@ -132,7 +132,7 @@ struct WaitingForMultiPlayerView: View {
                       //  print(document.data()["toGameCounter"] )
                     }
                 } else {
-                    print("snapshot did not work \(err)")
+                    print("snapshot did not work")
 
                 }
             }
