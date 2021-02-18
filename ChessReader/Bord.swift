@@ -180,7 +180,91 @@ class Bord: ObservableObject {
     
     // Takes a move from a PGN "Portable game notation" and updates bord.
     func pGNMoveToBord(pgn: String, player: String) {
+        var piece: String = ""
+        var toCol: Int = -1
+        var toRow: Int = -1
+        var fromRow: Int = -1
+        var fromCol: Int = -1
+        var schacked: Bool{
+           return ["+"].contains(pgn)
+        }
+        var _ = false
         
+        if !["0-0", "0-0-0"].contains(pgn){
+            if ["B"].contains(pgn) {
+                piece = "Bishop"
+            }else if ["K"].contains(pgn) {
+                piece = "King"
+            }else if ["N"].contains(pgn) {
+                piece = "Knight"
+            }else if ["Q"].contains(pgn) {
+                piece = "Queen"
+            }else if ["R"].contains(pgn) {
+                piece = "Rook"
+            }else{
+                piece = "Pawn"
+            }
+            let move = pgn.filter{
+                ["a", "b", "c", "d", "e", "f", "g", "h", "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
+                if move.count == 2{
+                    let col = move[0]
+                    let row = Int(move[1]) ?? -1
+                    toRow = row - 1
+                    switch col {
+                    case "a":
+                        toCol = 0
+                    case "b":
+                        toCol = 1
+                    case "c":
+                        toCol = 2
+                    case "d":
+                        toCol = 3
+                    case "e":
+                        toCol = 4
+                    case "f":
+                        toCol = 5
+                    case "g":
+                        toCol = 6
+                    case "h":
+                        toCol = 7
+                    default:
+                        _ = true
+                    }
+                }else{
+                    let colums = move.filter{
+                        ["a", "b", "c", "d", "e", "f", "g", "h"].contains($0)}
+                    let rows = move.filter{
+                        [ "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
+                    if rows.count == 2 {
+                        let row = Int(rows[1]) ?? -1
+                        fromRow = row - 1
+                    }
+                    if colums.count == 2 {
+                        let col = colums[0]
+                        switch col {
+                        case "a":
+                            fromCol = 0
+                        case "b":
+                            fromCol = 1
+                        case "c":
+                            fromCol = 2
+                        case "d":
+                            fromCol = 3
+                        case "e":
+                            fromCol = 4
+                        case "f":
+                            fromCol = 5
+                        case "g":
+                            fromCol = 6
+                        case "h":
+                            fromCol = 7
+                        default:
+                            _ = true
+                        }
+                    }
+                }
+            
+        }
         
         if player == "light" {
             switch pgn {
@@ -196,10 +280,59 @@ class Bord: ObservableObject {
                 bord[7][3] = "LR"
                 bord[7][4] = ""
             default:
-                bord[7][4] = ""
-
+                _ = true
+            }
+            switch piece {
+            case "Bishop":
+                let getFrom = getPositionsOfPieces(piece: "LB")
+                if getFrom.count == 1 {
+                    let from = getFrom[0]
+                    bord[from[0]][from[1]] = ""
+                    bord[toRow][toCol] = "LB"
+                }else{
+                    let rules = Rules()
+                    for pos in getFrom {
+                        if rules.lightBishop(bord: bord, checkSchack: schacked, row: pos[0], col: pos[1]).contains([toRow, toCol]) {
+                            <#code#>
+                        }
+                    }
+                }
+            default:
+                var _ = true
             }
         }
+    }
+    
+    func getPositionsOfPieces(piece: String) -> [[Int]] {
+        var moveList = [[Int]]()
+        for row in 0...7{
+            for col in 0...7{
+                if bord[row][col] == "BR" {
+                    moveList.append([row, col])
+                }
+            }
+        }
+        return moveList
+    }
+    
+    func getPositionsOfPiecesKnownRow(piece: String, row: Int) -> [[Int]] {
+        var moveList = [[Int]]()
+            for col in 0...7{
+                if bord[row][col] == "BR" {
+                    moveList.append([row, col])
+                }
+        }
+        return moveList
+    }
+    
+    func getPositionsOfPiecesKnownCol(piece: String, col: Int) -> [[Int]] {
+        var moveList = [[Int]]()
+        for row in 0...7{
+                if bord[row][col] == "BR" {
+                    moveList.append([row, col])
+            }
+        }
+        return moveList
     }
     
 }
