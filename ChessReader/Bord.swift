@@ -1,10 +1,3 @@
-//
-//  Bord.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-29.
-//
-
 import Foundation
 
 class Bord: ObservableObject {
@@ -31,7 +24,7 @@ class Bord: ObservableObject {
     
     init() {
 
-        bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
+        bord = [["DR", "DN", "DB", "DQ", "DK", "DB", "DN", "DR"], ["DP","DP","DP","DP","DP","DP","DP","DP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
        
        
         
@@ -41,7 +34,7 @@ class Bord: ObservableObject {
         
     }
     func resetGame(){
-                bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
+                bord = [["DR", "DN", "DB", "DQ", "DK", "DB", "DN", "DR"], ["DP","DP","DP","DP","DP","DP","DP","DP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
                 playerToGo = "Light"
                 schach = [false, false]
                 schachMate = [false, false]

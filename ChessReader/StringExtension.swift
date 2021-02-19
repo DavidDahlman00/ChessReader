@@ -1,10 +1,3 @@
-//
-//  StringExtension.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-18.
-//
-
 import Foundation
 
 extension String {

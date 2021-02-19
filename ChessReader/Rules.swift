@@ -1,17 +1,10 @@
-//
-//  Rules.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-29.
-//
-
 import Foundation
 
 struct Rules{
     let lightPices = ["LR", "LN", "LB", "LK", "LQ", "LP"]
     let lightPicesAndNoPice = ["LR", "LN", "LB", "LK", "LQ", "LP", ""]
-    let darkPices = ["BR", "BN", "BB", "BK", "BQ", "BP"]
-    let darkPicesAndNoPice = ["BR", "BN", "BB", "BK", "BQ", "BP", ""]
+    let darkPices = ["DR", "DN", "DB", "DK", "DQ", "DP"]
+    let darkPicesAndNoPice = ["DR", "DN", "DB", "DK", "DQ", "DP", ""]
 
     func inBord(row : Int, col : Int) -> Bool{
         if row >= 0 && row <= 7 && col >= 0 && col <= 7{
@@ -25,7 +18,6 @@ struct Rules{
         var moveList = [[Int]]()
         if row == 3 {
             if  col - 1 >= 0 && col - 1 == enPassant[1] {
-                //moveList.append([2, col - 1])
                 if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: 2, colTo: col - 1) {
                     moveList.append([2, col - 1])
                 }else if !checkSchack{
@@ -33,7 +25,6 @@ struct Rules{
                 }
             }
             if  col + 1 <= 7 && col + 1 == enPassant[1] {
-                //moveList.append([2, col + 1])
                 if checkSchack && !moveIsInSchach(bord: bord, player: "Light", rowFrom: row, colFrom: col, rowTo: 2, colTo: col + 1) {
                     moveList.append([2, col + 1])
                 }else if !checkSchack{
@@ -48,7 +39,6 @@ struct Rules{
         var moveList = [[Int]]()
         if row == 4 {
             if  col - 1 >= 0 && col - 1 == enPassant[0]{
-                //moveList.append([5, col - 1])
                 if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: 5, colTo: col - 1) {
                     moveList.append([5, col - 1])
                 }else if !checkSchack{
@@ -56,7 +46,6 @@ struct Rules{
                 }
             }
             if  col + 1 <= 7 && col + 1 == enPassant[0]{
-                //moveList.append([5, col + 1])
                 if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: 5, colTo: col + 1) {
                     moveList.append([5, col + 1])
                 }else if !checkSchack{
@@ -322,8 +311,6 @@ struct Rules{
                 moveList.append([row - 2 , col - 1])
             }
         }
-        
-        
         return moveList
     }
     
@@ -385,7 +372,6 @@ struct Rules{
                 moveList.append([row - 2 , col - 1])
             }
         }
-        
         return moveList
     }
     
@@ -399,7 +385,6 @@ struct Rules{
             }else if !checkSchack{
                 moveList.append([row + x, col + y])
             }
-            
             x = x + 1
             y = y + 1
         }
@@ -409,9 +394,7 @@ struct Rules{
             }else if !checkSchack{
                 moveList.append([row + x, col + y])
             }
-            
         }
-        
         x = 1
         y = -1
         while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
@@ -429,9 +412,7 @@ struct Rules{
             }else if !checkSchack{
                 moveList.append([row + x, col + y])
             }
-            
         }
-        
         x = -1
         y =  1
         while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
@@ -449,9 +430,7 @@ struct Rules{
             }else if !checkSchack{
                 moveList.append([row + x, col + y])
             }
-            
         }
-        
         x = -1
         y = -1
         while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
@@ -495,9 +474,7 @@ struct Rules{
             }else if !checkSchack{
                 moveList.append([row + x, col + y])
             }
-            
         }
-        
         x = 1
         y = -1
         while inBord(row: row + x, col: col + y) && bord[row + x][col + y] == ""{
@@ -573,10 +550,8 @@ struct Rules{
             }else if !checkSchack{
                 moveList.append([row + x, col])
             }
-            
                x = x + 1
            }
-       
            if inBord(row: row + x, col: col) && lightPices.contains(bord[row + x][col]){
             if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row + x, colTo: col) {
                 moveList.append([row + x, col])
@@ -585,7 +560,6 @@ struct Rules{
             }
            }
            x = 1
-           
            
            while inBord(row: row - x, col:col) && bord[row - x][col] == ""{
             if checkSchack && !moveIsInSchach(bord: bord, player: "Dark", rowFrom: row, colFrom: col, rowTo: row - x, colTo: col) {
@@ -759,14 +733,14 @@ struct Rules{
             if !checkForSchach(bord: tmpBord1, player: "Light") && !checkForSchach(bord: tmpBord2, player: "Light") {
                 return true
             }
-        } else if !bord.kingHasMoved[1] && bord.bord[0][7] == "BR" &&
+        } else if !bord.kingHasMoved[1] && bord.bord[0][7] == "DR" &&
                     bord.bord[0][5] == "" && bord.bord[0][6] == "" && !bord.schach[1]{
             var tmpBord1 = bord.bord
             tmpBord1[0][4] = ""
-            tmpBord1[0][5] = "BK"
+            tmpBord1[0][5] = "DK"
             var tmpBord2 = bord.bord
             tmpBord2[0][4] = ""
-            tmpBord2[0][6] = "BK"
+            tmpBord2[0][6] = "DK"
             if !checkForSchach(bord: tmpBord1, player: "Dark") && !checkForSchach(bord: tmpBord2, player: "Dark") {
                 return true
             }
@@ -786,14 +760,14 @@ struct Rules{
             if !checkForSchach(bord: tmpBord1, player: "Light") && !checkForSchach(bord: tmpBord2, player: "Light") {
                 return true
             }
-        } else if !bord.kingHasMoved[1] && bord.bord[0][0] == "BR" &&
+        } else if !bord.kingHasMoved[1] && bord.bord[0][0] == "DR" &&
                     bord.bord[0][1] == "" && bord.bord[0][2] == "" && bord.bord[0][3] == "" && !bord.schach[1]{
             var tmpBord1 = bord.bord
             tmpBord1[0][4] = ""
-            tmpBord1[0][3] = "BK"
+            tmpBord1[0][3] = "DK"
             var tmpBord2 = bord.bord
             tmpBord2[0][4] = ""
-            tmpBord2[0][2] = "BK"
+            tmpBord2[0][2] = "DK"
             if !checkForSchach(bord: tmpBord1, player: "Dark") && !checkForSchach(bord: tmpBord2, player: "Dark") {
                 return true
             }
@@ -802,7 +776,6 @@ struct Rules{
     }
     
     func SchackMate(bord: [[String]], enPassant: [Int], player: String) -> Bool {
-        print("test checkMate")
         if checkForSchach(bord: bord, player: player){
             var moveList = [[Int]]()
             var pieces: [String]
@@ -813,52 +786,44 @@ struct Rules{
             }else{
                 pieces = darkPices
             }
-            print(pieces)
+            
             for piece in pieces{
                 if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
                     for position in getPiecesPositions(bord: bord, piece: piece) {
-                        print("Position \(position[0]), \(position[1])")
-                        print("piece \(piece)")
-                        print(type(of: piece))
                         switch piece {
-                        case "BB":
+                        case "DB":
                             moveList = moveList + darkBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LB":
                             moveList = moveList + lightBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BK":
+                        case "DK":
                             moveList = moveList + darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                            print("test king")
-                            print(darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1]))
                         case "LK":
                             moveList = moveList + lightKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BN":
+                        case "DN":
                             moveList = moveList + darkKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LN":
                             moveList = moveList + lightKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BP":
+                        case "DP":
                             moveList = moveList + darkPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
                             moveList = moveList + darkPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
                         case "LP":
                             moveList = moveList + lightPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
                             moveList = moveList + lightPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
-                        case "BQ":
+                        case "DQ":
                             moveList = moveList + darkQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LQ":
                             moveList = moveList + lightQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BR":
+                        case "DR":
                             moveList = moveList + darkRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LR":
                             moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         default:
-                            print("Error")
                             _ = true
                             
                         }
                     }
                 }
             }
-            print("TEST SCHACKMATE")
-            print(moveList)
             if moveList.isEmpty{
                 return true
             }
@@ -868,7 +833,6 @@ struct Rules{
     }
     
     func StaleMate(bord: [[String]], enPassant: [Int], player: String) -> Bool {
-        print("test checkMate")
         if !checkForSchach(bord: bord, player: player){
             var moveList = [[Int]]()
             var pieces: [String]
@@ -882,29 +846,29 @@ struct Rules{
                 if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
                     for position in getPiecesPositions(bord: bord, piece: piece) {
                         switch piece {
-                        case "BB":
+                        case "DB":
                             moveList = moveList + darkBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LB":
                             moveList = moveList + lightBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BK":
+                        case "DK":
                             moveList = moveList + darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LK":
                             moveList = moveList + lightKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BN":
+                        case "DN":
                             moveList = moveList + darkKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LN":
                             moveList = moveList + lightKnight(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BP":
+                        case "DP":
                             moveList = moveList + darkPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
                             moveList = moveList + darkPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
                         case "LP":
                             moveList = moveList + lightPawn(bord: bord, checkSchack: true, row: position[0], col: position[1])
                             moveList = moveList + lightPawnEnPassant(bord: bord, checkSchack: true, enPassant: enPassant, row: position[0], col: position[1])
-                        case "BQ":
+                        case "DQ":
                             moveList = moveList + darkQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LQ":
                             moveList = moveList + lightQueen(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                        case "BR":
+                        case "DR":
                             moveList = moveList + darkRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "LR":
                             moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
@@ -915,7 +879,6 @@ struct Rules{
                     }
                 }
             }
-            print(moveList)
             if moveList.isEmpty{
                 return true
             }
@@ -929,9 +892,8 @@ struct Rules{
         if player == "Light" {
              kingPosition = getPiecesPositions(bord: bord, piece: "LK")[0]
         }else{
-             kingPosition = getPiecesPositions(bord: bord, piece: "BK")[0]
+             kingPosition = getPiecesPositions(bord: bord, piece: "DK")[0]
         }
-        print("king position \(kingPosition[0]), \(kingPosition[1])")
         var moveList = [[Int]]()
         
         if player == "Light" {
@@ -939,22 +901,21 @@ struct Rules{
                 let pieces = getPiecesPositions(bord: bord, piece: value)
                 for piece in pieces{
                     switch value {
-                    case "BB":
+                    case "DB":
                         moveList = moveList + darkBishop(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
-                    case "BK":
+                    case "DK":
                         moveList = moveList + darkKing(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
-                    case "BN":
+                    case "DN":
                         moveList = moveList + darkKnight(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
-                    case "BP":
+                    case "DP":
                         moveList = moveList + darkPawn(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
-                    case "BR":
+                    case "DR":
                         moveList = moveList + darkRook(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
-                    case "BQ":
+                    case "DQ":
                         moveList = moveList + darkQueen(bord: bord, checkSchack: false, row: piece[0], col: piece[1])
                     default: break
                     }
                 }
-                print("in light move")
             }
         }else {
             for value in lightPices{
@@ -977,7 +938,6 @@ struct Rules{
                     }
                 }
             }
-            print("in dark move")
         }
         if moveList.contains(kingPosition) {
             return true
@@ -1005,7 +965,7 @@ struct Rules{
         
         var tmpBord = bord
         tmpBord[rowFrom][colFrom] = ""
-        tmpBord[rowTo][colTo] = "BK"
+        tmpBord[rowTo][colTo] = "DK"
         return checkForSchach(bord: tmpBord, player: player)
     }
 }

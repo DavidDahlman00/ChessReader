@@ -1,10 +1,3 @@
-//
-//  ReadPGN.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-16.
-//
-
 import Foundation
 
 
@@ -17,16 +10,16 @@ class ReadPGN {
     var result: String = ""
     var testPGN = """
 
-[Event "URS-ch40"]
-[Site "Baku"]
-[Date "1972.??.??"]
-[Round "?"]
-[White "Mukhin, Mikhail A"]
-[Black "Tukmakov, Vladimir B"]
+[Event: "URS-ch40"]
+[Site: "Baku"]
+[Date: "1972.??.??"]
+[Round: "?"]
+[White: "Mukhin, Mikhail A"]
+[Black: "Tukmakov, Vladimir B"]
 [Result "1/2-1/2"]
-[WhiteElo "2420"]
-[BlackElo "2560"]
-[ECO "E63"]
+[WhiteElo: "2420"]
+[BlackElo: "2560"]
+[ECO: "E63"]
 
 1.c4 Nf6 2.d4 g6 3.Nf3 Bg7 4.g3 O-O 5.Bg2 d6 6.O-O Nc6 7.Nc3 a6 8.Bd2 Rb8
 9.Rc1 b5 10.cxb5 axb5 11.d5 Na5 12.b4 Nc4 13.Be1 Bd7 14.Nd4 Qe8 15.Nc6 Rb7

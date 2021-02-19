@@ -1,10 +1,3 @@
-//
-//  BordView.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-03.
-//
-
 import Foundation
 import SwiftUI
 
@@ -47,7 +40,7 @@ struct BordView: View {
                             .default(Text("Queen")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LQ"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "BQ"
+                                bord.bord[7][bord.promotedPawn[1]] = "DQ"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -58,7 +51,7 @@ struct BordView: View {
                             .default(Text("Rook")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LR"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "BR"
+                                bord.bord[7][bord.promotedPawn[1]] = "DR"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -69,7 +62,7 @@ struct BordView: View {
                             .default(Text("Knight")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LN"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "BN"
+                                bord.bord[7][bord.promotedPawn[1]] = "DN"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -78,7 +71,7 @@ struct BordView: View {
                             .default(Text("Bishop")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LB"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "BB"
+                                bord.bord[7][bord.promotedPawn[1]] = "DB"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -163,9 +156,7 @@ struct SquareView: View {
                 switch action{
                 //case "ChessBordView"      to be done
                 case "SinglePlayerGameView":
-                    print("test \(row), \(col)")
                     bord.squareTuched(row: row, col: col)
-                    print(bord.activityBord[row][col])
                     //action
                 case "Dark":
                     if bord.playerToGo == "Dark" {
@@ -178,9 +169,9 @@ struct SquareView: View {
                 case "ChessBordView": break
                     
                 default:
-                    print("test \(row), \(col)")
+                   
                     bord.squareTuched(row: row, col: col)
-                    print(bord.activityBord[row][col])
+                   
                 }
                 
                 

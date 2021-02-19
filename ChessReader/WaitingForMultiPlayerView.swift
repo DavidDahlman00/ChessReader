@@ -22,33 +22,10 @@ struct WaitingForMultiPlayerView: View {
                 Image("chessTest").resizable().scaledToFit()
                 
                 Button(action: {
-                    print("$$$$$$$$$$$$")
-                    print(auth.auth.currentUser!)
-                    print(auth.auth.currentUser!)
-                    print("$$$$$$$$$$$$")
+                   
                 }, label:{
                     Text("test")})
                 HStack{
-//                Text("Enter your email:")
-//                    .foregroundColor(.white)
-//                TextField("Email", text: $email)
-//                    .textContentType(.emailAddress)
-//                    .cornerRadius(20)
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .background(Color.white)
-//                    .foregroundColor(.black)
-//                    .padding(8)
-//                    
-//                }
-//                HStack{
-//                Text("Enter your password:")
-//                    .foregroundColor(.white)
-//                TextField("Password", text: $password)
-//                    .textContentType(.password)
-//                    .cornerRadius(20)
-//                    .background(Color.white)
-//                    .foregroundColor(.black)
-//                    .padding(8)
                 }
 
                 NavigationLink(
@@ -59,7 +36,7 @@ struct WaitingForMultiPlayerView: View {
                             waitingButton = "Wait."
                             db.collection("waitList").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
-                                    print("Error getting documents: \(err)")
+                                    
                                 } else {
                                     for document in querySnapshot!.documents {
                                         gameNumber = document.data()["toGameCounter"] as! Int
@@ -103,14 +80,10 @@ struct WaitingForMultiPlayerView: View {
     func listenToFireStore() {
                db.collection("waitList").addSnapshotListener{ (snapshot, err) in
                 if err != nil {
-
                     return
-
                 }
 
                 if !(snapshot?.isEmpty ?? true){
-
-                    
 
                     for document in snapshot!.documents {
 
@@ -118,21 +91,17 @@ struct WaitingForMultiPlayerView: View {
 
                         if inCounter > gameNumber && color != "err" {
 
-                            print("Yessss")
-
                             showMultiplayerGame = true
 
                         }
 
                         } else{
-                            print("Error inCounter nil")
+                        
                         }
-                        print(gameNumber)
-                        print(color)
-                      //  print(document.data()["toGameCounter"] )
+                       
                     }
                 } else {
-                    print("snapshot did not work")
+                    
 
                 }
             }
