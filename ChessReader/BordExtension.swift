@@ -1,10 +1,3 @@
-//
-//  BordExtension.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-18.
-//
-
 import Foundation
 
 extension Bord{
@@ -12,7 +5,7 @@ extension Bord{
     //  Major function for bord interaction. handels logic when user tuch the bordView.
     
     func squareTuched(row: Int, col: Int)  {
-        let pices = [["LB", "LK", "LN", "LP", "LR", "LQ"], ["BB", "BK", "BN", "BP", "BR", "BQ"]]
+        let pices = [["LB", "LK", "LN", "LP", "LR", "LQ"], ["DB", "DK", "DN", "DP", "DR", "DQ"]]
         let player: Int
         if playerToGo == "Light" {
             player = 0
@@ -27,14 +20,14 @@ extension Bord{
             if activePice == "LK"{
                 kingHasMoved[0] = true
             }
-            if activePice == "BK" {
+            if activePice == "DK" {
                 kingHasMoved[1] = true
             }
-            if activePice == "LP" && row == 0 {
+            if activePice == "DP" && row == 0 {
                 promotePawn = true
                 promotedPawn = [col, -1]
             }
-            if activePice == "BP" && row == 7 {
+            if activePice == "DP" && row == 7 {
                 promotePawn = true
                 promotedPawn = [-1, col]
             }
@@ -48,17 +41,9 @@ extension Bord{
             if activePice == "LP" && activeSquare![0] - row == 2 {
                 enPassant[0] = col
             }
-            if activePice == "BP" && row - activeSquare![0] == 2 {
+            if activePice == "DP" && row - activeSquare![0] == 2 {
                 enPassant[1] = col
             }
-
-            if playerToGo == "Light" {
-                enPassant[1] = 10
-            }else{
-                enPassant[0] = 10
-            }
-
-            goToNextPlayer()
 
         case "inEnPassantList":
             if playerToGo == "Light" {
@@ -88,13 +73,13 @@ extension Bord{
                 bord[7][4] = ""
             } else if row == 0 && col == 6{
                 bord[0][4] = ""
-                bord[0][5] = "BR"
-                bord[0][6] = "BK"
+                bord[0][5] = "DR"
+                bord[0][6] = "DK"
                 bord[0][7] = ""
             } else if row == 0 && col == 2{
                 bord[0][0] = ""
-                bord[0][3] = "BR"
-                bord[0][2] = "BK"
+                bord[0][3] = "DR"
+                bord[0][2] = "DK"
                 bord[0][4] = ""
             }
             goToNextPlayer()
@@ -169,7 +154,6 @@ extension Bord{
                         activityBord[move[0]][move[1]] = "inEnPassantList"
                     }
             }
-            
         default:
             recetActivityBord()
         }

@@ -1,9 +1,3 @@
-//
-//  Tmp2View.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-03.
-//
 import SwiftUI
 import Firebase
 
@@ -16,7 +10,6 @@ struct SinglePlayerGameView: View {
             ZStack{
                 Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
                 VStack{
-                
                     Text("\(bord.getPlayerToGo())'s turn to move")
                         .font(.largeTitle)
                         .foregroundColor(.gray)
@@ -27,16 +20,13 @@ struct SinglePlayerGameView: View {
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
                     Button(action: {
                         
-                            db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])
-                        
-                            
-                            print("check")}, label: {
+                            db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])},
+                           label: {
                                 Image(systemName: "checkmark.square" ).resizable()
                                     .aspectRatio(contentMode:.fit).frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     })
 
-                    Button(action: {
-                     
+                    Button(action: { //button to reset game
                         self.showingSheet = true
                     }) {
                         Text("Reset").font(.system(size: 20))
@@ -49,7 +39,7 @@ struct SinglePlayerGameView: View {
                            
                         }, .cancel()])
                     }
-                }.alert(isPresented: $bord.gameEnd){
+                }.alert(isPresented: $bord.gameEnd){ //alert when game ends
                     if bord.schachMate[1]{
                         return Alert(title: Text("White won"),
                                      message: Text("Would you like to reset?"),
@@ -89,9 +79,6 @@ struct SinglePlayerGameView: View {
                     }
                     
                 }
-                
-                
-                
                 
             }.edgesIgnoringSafeArea(.all)
             

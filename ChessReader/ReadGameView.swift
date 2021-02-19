@@ -1,10 +1,3 @@
-//
-//  Tmp1View.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-03.
-//
-
 import SwiftUI
 
 struct ReadGameView: View {

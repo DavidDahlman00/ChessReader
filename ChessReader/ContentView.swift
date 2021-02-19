@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-25.
-//
-
 import SwiftUI
 import FirebaseAuth
 

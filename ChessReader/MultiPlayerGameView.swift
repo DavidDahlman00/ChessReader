@@ -1,15 +1,7 @@
-//
-//  Tmp3View.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-03.
-//
-
 import SwiftUI
 import Firebase
 
 struct  MultiPlayerGameView: View {
-    //@State private var items = [Item]()
     let gameNumber: Int
     let color: String
     
@@ -23,7 +15,6 @@ struct  MultiPlayerGameView: View {
             return "Waiting for opponent"
         }
     }
-   
     var body: some View {
         GeometryReader{geo in
             ZStack{
@@ -38,14 +29,10 @@ struct  MultiPlayerGameView: View {
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: color).onAppear(){
                         listenToFireStore()
                     }
-
-                    // knappar och annat
                     Button(action: {
-                        
                             db.collection("game\(gameNumber)").addDocument(data: ["move": move, "state" : bord.bordToString()])
-                            bord.changePlayerToGo()
-                            
-                            print("check")}, label: {
+                            bord.changePlayerToGo()},
+                           label: {
                         Image(systemName: "checkmark.square" )
                     })
                 }
@@ -77,10 +64,6 @@ struct  MultiPlayerGameView: View {
                 bord.changePlayerToGo()
             }
             
-            print(tmpState)
             }
         }
 }
-
-
-
