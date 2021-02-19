@@ -20,7 +20,7 @@ extension Bord{
             if activePice == "DK" {
                 kingHasMoved[1] = true
             }
-            if activePice == "DP" && row == 0 {
+            if activePice == "LP" && row == 0 {
                 promotePawn = true
                 promotedPawn = [col, -1]
             }
