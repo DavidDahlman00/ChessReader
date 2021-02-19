@@ -209,7 +209,7 @@ class Bord: ObservableObject {
                 if move.count == 2{
                     let col = move[0]
                     let row = Int(move[1]) ?? -1
-                    toRow = row - 1
+                    toRow = 8 - row
                     switch col {
                     case "a":
                         toCol = 0
@@ -236,8 +236,8 @@ class Bord: ObservableObject {
                     let rows = move.filter{
                         [ "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
                     if rows.count == 2 {
-                        let row = Int(rows[1]) ?? -1
-                        fromRow = row - 1
+                        let row = Int(rows[0]) ?? -1
+                        fromRow = 8 - row
                     }
                     if colums.count == 2 {
                         let col = colums[0]

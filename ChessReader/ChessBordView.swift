@@ -55,7 +55,7 @@ struct ChessBordView : View {
                         Button(action: {
                             print(game.testPGNInt)
                             print(game.testPGN[game.testPGNInt])
-                            bord.pGNMoveToBord(pgn: "0-0", player: "light")
+                            bord.pGNMoveToBord(pgn: "Nf3", player: "light")
                             print(game.information)
                             print(game.lightMoveList.count)
                             print(game.darkMoveList.count)
