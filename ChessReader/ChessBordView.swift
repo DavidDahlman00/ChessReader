@@ -22,7 +22,7 @@ struct ChessBordView : View {
     var body: some View {
         GeometryReader{geo in
             ZStack{
-                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
+                Color("BackGroundColor")
                 VStack{
                     // text och annat
                     Text(playedGame?.game ?? "Unknown Game")

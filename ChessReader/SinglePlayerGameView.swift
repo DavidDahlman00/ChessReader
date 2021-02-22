@@ -14,12 +14,12 @@ struct SinglePlayerGameView: View {
     var body: some View {
         GeometryReader{geo in
             ZStack{
-                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
+                Color("BackGroundColor")
                 VStack{
                 
                     Text("\(bord.getPlayerToGo())'s turn to move")
                         .font(.largeTitle)
-                        .foregroundColor(.gray)
+                        
                     
                     Button("Temp for buggs in multiPlayer"){
                         bord.stringToBord( fenText: "BRBNBBBQ/.BRBK/.BPBPBPBP/./.BPBP/././././././././././.LP/.BP/./.LQ/.LP/.LPLP/./.BB/./.LB/./././.LPLP/./././.LPLPLRLNLB/./.LRLK/.")
@@ -41,7 +41,7 @@ struct SinglePlayerGameView: View {
                     }) {
                         Text("Reset").font(.system(size: 20))
                     }
-                    .foregroundColor(.gray)
+                    
                     .actionSheet(isPresented: $showingSheet){
                         ActionSheet(title: Text("Would you like to restart?"), buttons: [.default(Text("Yes")){
                             

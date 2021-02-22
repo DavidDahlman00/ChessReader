@@ -15,40 +15,14 @@ struct WaitingForMultiPlayerView: View {
     var body: some View {
         NavigationView{
         ZStack{
-            Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0).edgesIgnoringSafeArea(.all)
+            Color("BackGroundColor").edgesIgnoringSafeArea(.all)
 
             VStack{
-                
+                Text(waitingString).font(.system(size: 30))
                 Image("chessTest").resizable().scaledToFit()
-                
-                Button(action: {
-                    print("$$$$$$$$$$$$")
-                    print(auth.auth.currentUser!)
-                    print(auth.auth.currentUser!)
-                    print("$$$$$$$$$$$$")
-                }, label:{
-                    Text("test")})
+            
                 HStack{
-//                Text("Enter your email:")
-//                    .foregroundColor(.white)
-//                TextField("Email", text: $email)
-//                    .textContentType(.emailAddress)
-//                    .cornerRadius(20)
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
-//                    .background(Color.white)
-//                    .foregroundColor(.black)
-//                    .padding(8)
-//                    
-//                }
-//                HStack{
-//                Text("Enter your password:")
-//                    .foregroundColor(.white)
-//                TextField("Password", text: $password)
-//                    .textContentType(.password)
-//                    .cornerRadius(20)
-//                    .background(Color.white)
-//                    .foregroundColor(.black)
-//                    .padding(8)
+
                 }
 
                 NavigationLink(
@@ -56,7 +30,7 @@ struct WaitingForMultiPlayerView: View {
                     Button(action: {
                         if color == "err"{
                             waitingString = "Waiting for oponent..."
-                            waitingButton = "Wait."
+                            waitingButton = ""
                             db.collection("waitList").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
                                     print("Error getting documents: \(err)")
@@ -81,16 +55,12 @@ struct WaitingForMultiPlayerView: View {
                     }){
                     Text(waitingButton)
                         .font(.title)
-                        .foregroundColor(.gray)
                         .fontWeight(.bold)
-                        .background(Color(red: 20.0/255.0, green: 20.0/255.0, blue: 48.0/255.0))
-                        .cornerRadius(25)
-                        .padding(20)
+
+                        .padding(30)
                         
                         
-                }.background(Color(red: 20.0/255.0, green: 20.0/255.0, blue: 48.0/255.0))
-                    .cornerRadius(25)
-                    .padding(25)
+                }
             }
                
             }.edgesIgnoringSafeArea(.all)

@@ -30,7 +30,7 @@ struct BordView: View {
     var body: some View {
         VStack(spacing: 0){
             Text(schach)
-                .foregroundColor(.gray)
+                
             RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 2, image: image[2], action: action)

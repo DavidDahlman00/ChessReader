@@ -27,14 +27,14 @@ struct  MultiPlayerGameView: View {
     var body: some View {
         GeometryReader{geo in
             ZStack{
-                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
+                Color("BackGroundColor")
                 VStack{
                     Text(color)
                     Text("\(gameNumber)")
                     Text("Multiplayer")
-                        .foregroundColor(.gray)
+                        
                     Text(playerToMove)
-                        .foregroundColor(.gray)
+                       
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: color).onAppear(){
                         listenToFireStore()
                     }

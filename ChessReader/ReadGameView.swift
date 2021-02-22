@@ -11,7 +11,8 @@ struct ReadGameView: View {
     @ObservedObject var gameList = GameList()
     init(){
         UITableView.appearance().backgroundColor = .clear
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.gray]
+        UINavigationBar.appearance()
+            //.largeTitleTextAttributes = [.foregroundColor: UIColor.gray]
     }
     
      var body: some View {
@@ -19,27 +20,26 @@ struct ReadGameView: View {
            
          NavigationView{
             ZStack{
-                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 31.0/255.0).edgesIgnoringSafeArea(.all)
+                Color("BackGroundColor").edgesIgnoringSafeArea(.all)
              List() {
                  ForEach(gameList.entries){ entry in
                     NavigationLink(destination: ChessBordView()){ // temp removed playedGame: entry
                          ListRowView(entry: entry)
                             
                      }
-                    .listRowBackground(Color(red: 14.0/255.0, green: 14.0/255.0, blue: 31.0/255.0))
+                    .listRowBackground(Color("BackGroundColor"))
                     
                  }.onDelete(perform: { indexSet in
                      gameList.entries.remove(atOffsets: indexSet)
                  })
              }
-             
-             .foregroundColor(.gray)
+            
              .navigationBarTitle("Chess Reader")
              
              .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
              
             }
-            .foregroundColor(.red)
+            
                 
          }
          
