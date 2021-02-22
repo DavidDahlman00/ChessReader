@@ -118,30 +118,30 @@ struct SquareView: View {
             }
         case "active":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 19.0/255.0, green: 196.0/255.0, blue: 202.0/255.0)
+                return Color("ActiveLightSquareColor")
             }else{
-                return Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
+                return Color("DarkLightSquareColor")
             }
         case "inMoveList":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+                return Color("LightMoveToSquareColor")
             }else{
-                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+                return Color("DarkMoveToSquareColor")
             }
         case "inEnPassantList":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+                return Color("LightMoveToSquareColor")
             }else{
-                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+                return Color("DarkMoveToSquareColor")
             }
         case "casteling":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+                return Color("LightMoveToSquareColor")
             }else{
-                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+                return Color("DarkMoveToSquareColor")
             }
         default:
-            return Color(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0)
+            return Color(.purple)
         }
     }
     var pice: String
