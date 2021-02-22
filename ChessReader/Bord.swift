@@ -184,18 +184,18 @@ class Bord: ObservableObject {
         var _ = false
         
         if !["0-0", "0-0-0"].contains(pgn){
-            if ["B"].contains(pgn) {
-                piece = "Bishop"
-            }else if ["K"].contains(pgn) {
-                piece = "King"
-            }else if ["N"].contains(pgn) {
-                piece = "Knight"
-            }else if ["Q"].contains(pgn) {
-                piece = "Queen"
-            }else if ["R"].contains(pgn) {
-                piece = "Rook"
+            if pgn.contains("B") {
+                piece = "B"
+            }else if pgn.contains("K") {
+                piece = "K"
+            }else if pgn.contains("N") {
+                piece = "N"
+            }else if pgn.contains("Q") {
+                piece = "Q"
+            }else if pgn.contains("R") {
+                piece = "R"
             }else{
-                piece = "Pawn"
+                piece = "P"
             }
             let move = pgn.filter{
                 ["a", "b", "c", "d", "e", "f", "g", "h", "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
@@ -273,7 +273,8 @@ class Bord: ObservableObject {
                 bord[7][3] = "LR"
                 bord[7][4] = ""
             default:
-                pGNMove(piece: piece, fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol, schacked: schacked)
+                var pieceWithColor = "L" + piece
+                pGNMove(piece: pieceWithColor, fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol, schacked: schacked)
             }
         }else{
             switch pgn {
@@ -289,7 +290,8 @@ class Bord: ObservableObject {
                 bord[0][3] = "BR"
                 bord[0][4] = ""
             default:
-                pGNMove(piece: piece, fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol, schacked: schacked)
+                var pieceWithColor = "B" + piece
+                pGNMove(piece: pieceWithColor, fromRow: fromRow, fromCol: fromCol, toRow: toRow, toCol: toCol, schacked: schacked)
             }
         }
     }
@@ -358,7 +360,7 @@ class Bord: ObservableObject {
         var moveList = [[Int]]()
         for row in 0...7{
             for col in 0...7{
-                if bord[row][col] == "BR" {
+                if bord[row][col] == piece {
                     moveList.append([row, col])
                 }
             }
@@ -369,7 +371,7 @@ class Bord: ObservableObject {
     func getPositionsOfPiecesKnownRow(piece: String, row: Int) -> [[Int]] {
         var moveList = [[Int]]()
             for col in 0...7{
-                if bord[row][col] == "BR" {
+                if bord[row][col] == piece {
                     moveList.append([row, col])
                 }
         }
@@ -379,7 +381,7 @@ class Bord: ObservableObject {
     func getPositionsOfPiecesKnownCol(piece: String, col: Int) -> [[Int]] {
         var moveList = [[Int]]()
         for row in 0...7{
-                if bord[row][col] == "BR" {
+                if bord[row][col] == piece {
                     moveList.append([row, col])
             }
         }
