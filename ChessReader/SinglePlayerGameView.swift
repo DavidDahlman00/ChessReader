@@ -46,7 +46,9 @@ struct SinglePlayerGameView: View {
                      
                         self.showingSheet = true
                     }) {
-                        Text("Reset").font(.system(size: 20))
+                        Text("Reset")
+                            .gradientForeground(colors: [.blue, Color("TextColor2")])
+                            .font(.title)
                     }
                     
                     .actionSheet(isPresented: $showingSheet){
