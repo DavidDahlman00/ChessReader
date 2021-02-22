@@ -203,6 +203,6 @@ struct SquareView: View {
                     .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
             
-        }
+        }.shadow(color: .gray, radius: 3.0, x: 0, y: 0)
     }
 }
