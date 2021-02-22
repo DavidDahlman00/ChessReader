@@ -31,15 +31,10 @@ struct ChessBordView : View {
                 VStack{
                     // text och annat
                     Text(playedGame?.game ?? "Unknown Game")
-                        .foregroundColor(.gray)
                         .bold()
+                        .padding(.bottom)
                 
-                    Button("Game Info") {
-                               showingAlert = true
-                           }
-                           .alert(isPresented: $showingAlert) {
-                            Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
-                           }
+
                     HStack{
                         Text(lightTestString)
                         Text(darkTestString)
@@ -55,7 +50,7 @@ struct ChessBordView : View {
                         }) {
                             Image(systemName: "backward.fill")
                         }
-                        .foregroundColor(.gray)
+                     //   .foregroundColor(.gray)
                         
                         Button(action: {
                             if color == "light" {
@@ -79,25 +74,20 @@ struct ChessBordView : View {
                                     color = "light"
                                 }
                             }
-//                            for move in game.lightMoveList{
-//                                print(move)
-//                            }
-//                            print("====================")
-//                            for move in game.darkMoveList{
-//                                print(move)
-//                            }
-//                            game.moveForward()
                         }) {
                             Image(systemName: "forward.fill")
                         }
-                        
-                        .foregroundColor(.gray)
-                    }
+                    }.padding(.bottom)
                     
                     Text(playedGame?.coment ?? "Nobody coment this game, yet")
-                        .foregroundColor(.gray)
                         .bold()
-                    
+                   
+                    Button("Game Info") {
+                               showingAlert = true
+                           }
+                           .alert(isPresented: $showingAlert) {
+                            Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
+                           }
                     
                     // knappar och annat
                 }
