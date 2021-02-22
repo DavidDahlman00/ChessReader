@@ -14,8 +14,20 @@ struct ChessBordView : View {
     @State var color = "light"
     @State var lightCount = 0
     @State var darkCount = 0
-    @State var lightTestString = ""
-    @State var darkTestString = ""
+    var lightTestString : String{
+        if lightCount == 0 {
+            return ""
+        }else{
+            return "Light's \(lightCount) move: \(game.lightMoveList[lightCount])"
+        }
+    }
+    var darkTestString : String{
+        if darkCount == 0 {
+            return ""
+        }else{
+            return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount])"
+        }
+    }
     var game = ReadPGN()
     var db = Firestore.firestore()
     @State private var showingAlert = false
@@ -72,7 +84,6 @@ struct ChessBordView : View {
                                     print(lightCount)
                                     bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
                                     bord.pgnBordHist.append(bord.bord)
-                                    lightTestString = "\(lightCount + 1): \(color):  \(game.lightMoveList[lightCount])"
                                     lightCount = lightCount + 1
                                     color = "dark"
                                 }
@@ -82,7 +93,6 @@ struct ChessBordView : View {
                                     print(darkCount)
                                     bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
                                     bord.pgnBordHist.append(bord.bord)
-                                    darkTestString = "\(darkCount + 1): \(color):  \(game.darkMoveList[darkCount])"
                                     darkCount = darkCount + 1
                                     color = "light"
                                 }
