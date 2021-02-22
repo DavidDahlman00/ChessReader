@@ -23,6 +23,7 @@ struct ChessBordView : View {
     
     init() {
         game.readGame()
+        bord.pgnBordHist.append(bord.bord)
     }
     var body: some View {
         GeometryReader{geo in
@@ -39,10 +40,8 @@ struct ChessBordView : View {
 
                     HStack{
                         Text(lightTestString)
-                            .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                             .font(.footnote)
                         Text(darkTestString)
-                            .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                             .font(.footnote)
                     }
                     
@@ -50,13 +49,21 @@ struct ChessBordView : View {
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
                     HStack{
                         Button(action: {
-                            game.moveBackward()
-                            print(game.testPGN[game.testPGNInt])
+                            if bord.pgnBordHist.count > 1{
+                                bord.pgnBordHist.remove(at: bord.pgnBordHist.count - 1)
+                                bord.bord = bord.pgnBordHist[bord.pgnBordHist.count - 1]
+                                if color == "light"{
+                                    darkCount = darkCount - 1
+                                    color = "dark"
+                                }else {
+                                    lightCount = lightCount - 1
+                                    color = "light"
+                                }
+                            }
                             
                         }) {
                             Image(systemName: "backward.fill")
                         }
-                     //   .foregroundColor(.gray)
                         
                         Button(action: {
                             if color == "light" {
@@ -64,7 +71,7 @@ struct ChessBordView : View {
                                     print(game.lightMoveList[lightCount])
                                     print(lightCount)
                                     bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
-                                    
+                                    bord.pgnBordHist.append(bord.bord)
                                     lightTestString = "\(lightCount + 1): \(color):  \(game.lightMoveList[lightCount])"
                                     lightCount = lightCount + 1
                                     color = "dark"
@@ -74,7 +81,7 @@ struct ChessBordView : View {
                                     print(game.darkMoveList[darkCount])
                                     print(darkCount)
                                     bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
-                                    
+                                    bord.pgnBordHist.append(bord.bord)
                                     darkTestString = "\(darkCount + 1): \(color):  \(game.darkMoveList[darkCount])"
                                     darkCount = darkCount + 1
                                     color = "light"

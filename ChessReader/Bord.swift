@@ -21,6 +21,7 @@ class Bord: ObservableObject {
     @Published var staleMate : [Bool] = [false, false]
     @Published var staleMateEnd : Bool = false
     @Published var kingHasMoved : [Bool] = [false, false]   // indicates i the king's has moved.
+    @Published var pgnBordHist : [[[String]]] = [[[String]]]()
     var drawByRepitation : Bool = false   // returns true when the game has ended draw by repetation.
     var activeSquare: [Int]? = nil
     var activePice: String? = nil      // returns piece that is currently clicked
@@ -32,7 +33,6 @@ class Bord: ObservableObject {
     init() {
 
         bord = [["BR", "BN", "BB", "BQ", "BK", "BB", "BN", "BR"], ["BP","BP","BP","BP","BP","BP","BP","BP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
-       
        
         
         activityBord = [["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",]]

@@ -29,19 +29,14 @@ struct  MultiPlayerGameView: View {
             ZStack{
                 Color("BackGroundColor")
                 VStack{
-                    Text(color)
-                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                        .font(.title)
-                    Text("\(gameNumber)")
-                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                        .font(.title)
-                    Text("Multiplayer")
-                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                        .font(.title)
                         
                     Text(playerToMove)
                         .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                         .font(.title)
+                        .padding()
+                    
+                    Text("\(gameNumber)")
+                        .font(.footnote)
                        
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: color).onAppear(){
                         listenToFireStore()
