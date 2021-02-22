@@ -112,9 +112,9 @@ struct SquareView: View {
         switch bord.activityBord[row][col] {
         case "none":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 171.0/255.0, green: 171.0/255.0, blue: 171.0/255.0)
+                return Color("LightSquareColor")
             }else{
-                return Color(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0)
+                return Color("DarkSquareColor")
             }
         case "active":
             if (row + col).isMultiple(of: 2) {
