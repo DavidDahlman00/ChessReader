@@ -14,6 +14,8 @@ struct ChessBordView : View {
     @State var color = "light"
     @State var lightCount = 0
     @State var darkCount = 0
+    @State var lightTestString = ""
+    @State var darkTestString = ""
     var game = ReadPGN()
     var db = Firestore.firestore()
     @State private var showingAlert = false
@@ -31,18 +33,18 @@ struct ChessBordView : View {
                     Text(playedGame?.game ?? "Unknown Game")
                         .foregroundColor(.gray)
                         .bold()
-                    
-                    Button("Temp send to DB"){
-                        let content = game.testPGN 
-                        db.collection("contentTest").addDocument(data: ["game" : content])
-                    }
+                
                     Button("Game Info") {
                                showingAlert = true
                            }
                            .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
                            }
-                       
+                    HStack{
+                        Text(lightTestString)
+                        Text(darkTestString)
+                    }
+                    
                    
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
                     HStack{
@@ -59,14 +61,20 @@ struct ChessBordView : View {
                             if color == "light" {
                                 if lightCount < game.lightMoveList.count{
                                     print(game.lightMoveList[lightCount])
+                                    print(lightCount)
                                     bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
+                                    
+                                    lightTestString = "\(lightCount + 1): \(color):  \(game.lightMoveList[lightCount])"
                                     lightCount = lightCount + 1
                                     color = "dark"
                                 }
                             }else {
                                 if darkCount < game.darkMoveList.count{
                                     print(game.darkMoveList[darkCount])
+                                    print(darkCount)
                                     bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
+                                    
+                                    darkTestString = "\(darkCount + 1): \(color):  \(game.darkMoveList[darkCount])"
                                     darkCount = darkCount + 1
                                     color = "light"
                                 }
