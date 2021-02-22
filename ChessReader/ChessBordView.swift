@@ -32,12 +32,18 @@ struct ChessBordView : View {
                     // text och annat
                     Text(playedGame?.game ?? "Unknown Game")
                         .bold()
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.title)
                         .padding(.bottom)
                 
 
                     HStack{
                         Text(lightTestString)
+                            .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                            .font(.footnote)
                         Text(darkTestString)
+                            .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                            .font(.footnote)
                     }
                     
                    
@@ -80,7 +86,9 @@ struct ChessBordView : View {
                     }.padding(.bottom)
                     
                     Text(playedGame?.coment ?? "Nobody coment this game, yet")
-                        .bold()
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.footnote)
+                        .padding()
                    
                     Button("Game Info") {
                                showingAlert = true

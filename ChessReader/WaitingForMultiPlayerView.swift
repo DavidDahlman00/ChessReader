@@ -19,6 +19,8 @@ struct WaitingForMultiPlayerView: View {
 
             VStack{
                 Text(waitingString).font(.system(size: 30))
+                    .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                    .font(.title)
                 Image("chessTest").resizable().scaledToFit()
             
                 HStack{

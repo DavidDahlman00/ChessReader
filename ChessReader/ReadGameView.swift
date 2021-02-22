@@ -34,7 +34,8 @@ struct ReadGameView: View {
                  })
              }
             
-             .navigationBarTitle("Chess Reader")
+             //.navigationBarTitle("Chess Reader")
+             
              
              .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
              
@@ -62,6 +63,8 @@ struct ListRowView: View {
            
             Spacer()
             Text(entry.game.prefix(30) + "   ")
+                .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                .font(.title)
         }
     }
 }
