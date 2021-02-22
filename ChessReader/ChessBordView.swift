@@ -11,6 +11,9 @@ import Firebase
 struct ChessBordView : View {
     var playedGame : GameListEntry? = nil
     var testText: String = "Test"
+    @State var color = "light"
+    @State var lightCount = 0
+    @State var darkCount = 0
     var game = ReadPGN()
     var db = Firestore.firestore()
     @State private var showingAlert = false
@@ -53,20 +56,29 @@ struct ChessBordView : View {
                         .foregroundColor(.gray)
                         
                         Button(action: {
-                            print(game.testPGNInt)
-                            print(game.testPGN[game.testPGNInt])
-                            bord.pGNMoveToBord(pgn: "Nf3", player: "light")
-                            print(game.information)
-                            print(game.lightMoveList.count)
-                            print(game.darkMoveList.count)
-                            for move in game.lightMoveList{
-                                print(move)
+                            if color == "light" {
+                                if lightCount < game.lightMoveList.count{
+                                    print(game.lightMoveList[lightCount])
+                                    bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
+                                    lightCount = lightCount + 1
+                                    color = "dark"
+                                }
+                            }else {
+                                if darkCount < game.darkMoveList.count{
+                                    print(game.darkMoveList[darkCount])
+                                    bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
+                                    darkCount = darkCount + 1
+                                    color = "light"
+                                }
                             }
-                            print("====================")
-                            for move in game.darkMoveList{
-                                print(move)
-                            }
-                            game.moveForward()
+//                            for move in game.lightMoveList{
+//                                print(move)
+//                            }
+//                            print("====================")
+//                            for move in game.darkMoveList{
+//                                print(move)
+//                            }
+//                            game.moveForward()
                         }) {
                             Image(systemName: "forward.fill")
                         }
