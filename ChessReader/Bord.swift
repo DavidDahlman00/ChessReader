@@ -191,15 +191,15 @@ class Bord: ObservableObject {
         var _ = false
         
         if !["0-0", "0-0-0"].contains(pgn){
-            if [pgn].contains("B") {
+            if pgn.contains("B") {
                 piece = "B"
-            }else if ["K"].contains(pgn) {
+            }else if pgn.contains("K") {
                 piece = "K"
             }else if pgn.contains("N") {
-                piece = "K"
-            }else if ["Q"].contains(pgn) {
+                piece = "N"
+            }else if pgn.contains("Q") {
                 piece = "Q"
-            }else if ["R"].contains(pgn) {
+            }else if pgn.contains("R") {
                 piece = "R"
             }else{
                 piece = "P"
