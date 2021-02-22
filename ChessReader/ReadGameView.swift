@@ -37,7 +37,7 @@ struct ReadGameView: View {
              //.navigationBarTitle("Chess Reader")
              
              
-             .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
+//             .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
              
             }
             
