@@ -119,36 +119,36 @@ struct SquareView: View {
         switch bord.activityBord[row][col] {
         case "none":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 171.0/255.0, green: 171.0/255.0, blue: 171.0/255.0)
+                return Color("LightSquareColor")
             }else{
-                return Color(red: 56.0/255.0, green: 56.0/255.0, blue: 56.0/255.0)
+                return Color("DarkSquareColor")
             }
         case "active":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 19.0/255.0, green: 196.0/255.0, blue: 202.0/255.0)
+                return Color("ActiveLightSquareColor")
             }else{
-                return Color(red: 12.0/255.0, green: 119.0/255.0, blue: 122.0/255.0)
+                return Color("ActiveDarkSquareColor")
             }
         case "inMoveList":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+                return Color("MoveLightSquareColor")
             }else{
-                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+                return Color("MoveDarkSquareColor")
             }
         case "inEnPassantList":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+                return Color("MoveLightSquareColor")
             }else{
-                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+                return Color("MoveDarkSquareColor")
             }
         case "casteling":
             if (row + col).isMultiple(of: 2) {
-                return Color(red: 21.0/255.0, green: 239.0/255.0, blue: 246.0/255.0)
+                return Color("MoveLightSquareColor")
             }else{
-                return Color(red: 16.0/255.0, green: 156.0/255.0, blue: 161.0/255.0)
+                return Color("MoveDarkSquareColor")
             }
         default:
-            return Color(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0)
+            return Color(.purple)
         }
     }
     var pice: String
