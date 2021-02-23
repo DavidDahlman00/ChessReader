@@ -14,8 +14,20 @@ struct ChessBordView : View {
     @State var color = "light"
     @State var lightCount = 0
     @State var darkCount = 0
-    @State var lightTestString = ""
-    @State var darkTestString = ""
+    var lightTestString : String{
+        if lightCount == 0 {
+            return ""
+        }else{
+            return "Light's \(lightCount) move: \(game.lightMoveList[lightCount])"
+        }
+    }
+    var darkTestString : String{
+        if darkCount == 0 {
+            return ""
+        }else{
+            return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount])"
+        }
+    }
     var game = ReadPGN()
     var db = Firestore.firestore()
     @State private var showingAlert = false
@@ -23,6 +35,7 @@ struct ChessBordView : View {
     
     init() {
         game.readGame()
+        bord.pgnBordHist.append(bord.bord)
     }
     var body: some View {
         GeometryReader{geo in
@@ -32,25 +45,37 @@ struct ChessBordView : View {
                     // text och annat
                     Text(playedGame?.game ?? "Unknown Game")
                         .bold()
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.title)
                         .padding(.bottom)
                 
 
                     HStack{
                         Text(lightTestString)
+                            .font(.footnote)
                         Text(darkTestString)
+                            .font(.footnote)
                     }
                     
                    
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
                     HStack{
                         Button(action: {
-                            game.moveBackward()
-                            print(game.testPGN[game.testPGNInt])
+                            if bord.pgnBordHist.count > 1{
+                                bord.pgnBordHist.remove(at: bord.pgnBordHist.count - 1)
+                                bord.bord = bord.pgnBordHist[bord.pgnBordHist.count - 1]
+                                if color == "light"{
+                                    darkCount = darkCount - 1
+                                    color = "dark"
+                                }else {
+                                    lightCount = lightCount - 1
+                                    color = "light"
+                                }
+                            }
                             
                         }) {
                             Image(systemName: "backward.fill")
                         }
-                     //   .foregroundColor(.gray)
                         
                         Button(action: {
                             if color == "light" {
@@ -58,8 +83,7 @@ struct ChessBordView : View {
                                     print(game.lightMoveList[lightCount])
                                     print(lightCount)
                                     bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
-                                    
-                                    lightTestString = "\(lightCount + 1): \(color):  \(game.lightMoveList[lightCount])"
+                                    bord.pgnBordHist.append(bord.bord)
                                     lightCount = lightCount + 1
                                     color = "dark"
                                 }
@@ -68,8 +92,7 @@ struct ChessBordView : View {
                                     print(game.darkMoveList[darkCount])
                                     print(darkCount)
                                     bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
-                                    
-                                    darkTestString = "\(darkCount + 1): \(color):  \(game.darkMoveList[darkCount])"
+                                    bord.pgnBordHist.append(bord.bord)
                                     darkCount = darkCount + 1
                                     color = "light"
                                 }
@@ -80,7 +103,9 @@ struct ChessBordView : View {
                     }.padding(.bottom)
                     
                     Text(playedGame?.coment ?? "Nobody coment this game, yet")
-                        .bold()
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.footnote)
+                        .padding()
                    
                     Button("Game Info") {
                                showingAlert = true

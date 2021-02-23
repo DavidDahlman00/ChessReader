@@ -18,8 +18,19 @@ struct WaitingForMultiPlayerView: View {
             Color("BackGroundColor").edgesIgnoringSafeArea(.all)
 
             VStack{
-                Text(waitingString).font(.system(size: 30))
-                Image("chessTest").resizable().scaledToFit()
+                Text(waitingString)
+                    .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                    .font(.title)
+                ZStack{
+                    Circle()
+                        .fill(Color.black)
+                            .frame(width: 300, height: 300)
+                    Image("chessTest").resizable().scaledToFit()
+                    Rectangle()
+                            .foregroundColor(.clear)
+                        .background(RadialGradient(gradient: Gradient(colors: [.clear, Color("BackGroundColor")]), center: .center, startRadius: 30, endRadius: 150)).scaledToFit()
+                }
+                
             
                 HStack{
 
@@ -54,8 +65,8 @@ struct WaitingForMultiPlayerView: View {
                         listenToFireStore()
                     }){
                     Text(waitingButton)
+                        .gradientForeground(colors: [.blue, Color("TextColor2")])
                         .font(.title)
-                        .fontWeight(.bold)
 
                         .padding(30)
                         

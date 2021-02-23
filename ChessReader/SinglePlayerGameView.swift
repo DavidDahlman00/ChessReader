@@ -32,21 +32,24 @@ struct SinglePlayerGameView: View {
                         .font(.title)
 
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
-                    Button(action: {
-                        
-                            db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])
-                        
-                            
-                            print("check")}, label: {
-                                Image(systemName: "checkmark.square" ).resizable()
-                                    .aspectRatio(contentMode:.fit).frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    })
+                    
+//                    Button(action: {
+//
+//                            db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])
+//
+//
+//                            print("check")}, label: {
+//                                Image(systemName: "checkmark.square" ).resizable()
+//                                    .aspectRatio(contentMode:.fit).frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//                    })
 
                     Button(action: {
                      
                         self.showingSheet = true
                     }) {
-                        Text("Reset").font(.system(size: 20))
+                        Text("Reset")
+                            .gradientForeground(colors: [.blue, Color("TextColor2")])
+                            .font(.title)
                     }
                     
                     .actionSheet(isPresented: $showingSheet){
