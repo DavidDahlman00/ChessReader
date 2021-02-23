@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReadGameView: View {
     
+    @State private var searchTerm: String = ""
+    
     @ObservedObject var gameList = GameList()
     init(){
         UITableView.appearance().backgroundColor = .clear
@@ -17,17 +19,18 @@ struct ReadGameView: View {
     }
     
      var body: some View {
-        
-       // @State private var searchTerm: String = ""
            
          NavigationView{
             ZStack{
                 Color("BackGroundColor").edgesIgnoringSafeArea(.all)
-             List() {
-                
+                VStack{
                 SearchBar(text: $searchTerm)
+             List {
                 
-                 ForEach(gameList.entries){ entry in
+                
+                
+                ForEach(self.gameList.entries.filter {
+                            self.searchTerm.isEmpty ? true: $0.ocation?.localizedStandardContains(self.searchTerm) as! Bool ||   $0.players?.localizedStandardContains(self.searchTerm) as! Bool            }){ entry in
                     NavigationLink(destination: ChessBordView(playedGame: entry)){  //playedGame: entry
                         VStack{
                            ListRowView(entry: entry)
@@ -39,8 +42,9 @@ struct ReadGameView: View {
                      gameList.entries.remove(atOffsets: indexSet)
                  })
              }
-            
-             //.navigationBarTitle("Chess Reader")
+                }
+                .navigationBarTitle("Chess Reader")
+                
              
              
 //             .navigationBarItems(trailing: NavigationLink(destination: SinglePlayerGameView(), label: {Image(systemName: "magnifyingglass.circle")}))
