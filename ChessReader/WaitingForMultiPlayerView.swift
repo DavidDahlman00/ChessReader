@@ -18,10 +18,19 @@ struct WaitingForMultiPlayerView: View {
             Color("BackGroundColor").edgesIgnoringSafeArea(.all)
 
             VStack{
-                Text(waitingString).font(.system(size: 30))
+                Text(waitingString)
                     .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                     .font(.title)
-                Image("chessTest").resizable().scaledToFit()
+                ZStack{
+                    Circle()
+                        .fill(Color.black)
+                            .frame(width: 300, height: 300)
+                    Image("chessTest").resizable().scaledToFit()
+                    Rectangle()
+                            .foregroundColor(.clear)
+                        .background(RadialGradient(gradient: Gradient(colors: [.clear, Color("BackGroundColor")]), center: .center, startRadius: 30, endRadius: 150)).scaledToFit()
+                }
+                
             
                 HStack{
 
