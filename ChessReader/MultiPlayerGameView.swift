@@ -22,6 +22,7 @@ struct  MultiPlayerGameView: View {
         }else{
             return "Waiting for opponent"
         }
+        
     }
    
     var body: some View {
@@ -43,14 +44,17 @@ struct  MultiPlayerGameView: View {
                     }
 
                     // knappar och annat
-                    Button(action: {
-                        
+                    if bord.playerToGo != color {
+                        Button(action: {
                             db.collection("game\(gameNumber)").addDocument(data: ["move": move, "state" : bord.bordToString()])
                             bord.changePlayerToGo()
-                            
-                            print("check")}, label: {
-                        Image(systemName: "checkmark.square" )
-                    })
+                            }, label: {
+                                Text("Commit move")
+                                    .gradientForeground(colors: [.blue, Color("TextColor2")])
+                            .font(.title)
+                            .padding()
+                                })
+                            }
                 }
                 
             }.edgesIgnoringSafeArea(.all)

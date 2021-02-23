@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Firebase
 
 class Bord: ObservableObject {
-
+    var db = Firestore.firestore()
     @Published var bord : [[String]]        // keep's track on current bord positions.
     @Published var activityBord : [[String]] // keep's track on which square is clicked and which squares are posible to move to.
     @Published var promotedPawn: [Int] = [-1, -1]   // -1 = no pawn to promote. else on which line the pawn sttands. first index for light, second for dark.
@@ -393,6 +394,11 @@ class Bord: ObservableObject {
             }
         }
         return moveList
+    }
+    
+    func sendToDBMultiplayer(game: Int, move: Int){
+        db.collection("game\(game)").addDocument(data: ["move": move, "state" : bordToString()])
+       changePlayerToGo()
     }
     
 }
