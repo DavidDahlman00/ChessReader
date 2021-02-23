@@ -1,6 +1,16 @@
 import Firebase
 import SwiftUI
 
+
+extension View {
+    public func gradient(colors: [Color]) -> some View {
+        self.overlay(LinearGradient(gradient: .init(colors: colors),
+                                    startPoint: .top,
+                                    endPoint: .bottom))
+            .mask(self)
+    }
+}
+
 struct WaitingForMultiPlayerView: View {
     @State var showMultiplayerGame: Bool = false
     @ObservedObject var auth: GlobalAuth
@@ -31,7 +41,11 @@ struct WaitingForMultiPlayerView: View {
                         .background(RadialGradient(gradient: Gradient(colors: [.clear, Color("BackGroundColor")]), center: .center, startRadius: 30, endRadius: 150)).scaledToFit()
                 }
                 
-            
+
+                Text(waitingString).font(.system(size: 30))
+                  
+                Image("chessTest").resizable().scaledToFit()
+                               
                 HStack{
 
                 }
@@ -67,13 +81,10 @@ struct WaitingForMultiPlayerView: View {
                     Text(waitingButton)
                         .gradientForeground(colors: [.blue, Color("TextColor2")])
                         .font(.title)
-
                         .padding(30)
-                        
                         
                 }
             }
-               
             }.edgesIgnoringSafeArea(.all)
             
             
