@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct ChessBordView : View {
-    var playedGame : GameListEntry? = nil
+    var playedGame : GameListEntry
     var testText: String = "Test"
     @State var color = "light"
     @State var lightCount = 0
@@ -33,20 +33,28 @@ struct ChessBordView : View {
     @State private var showingAlert = false
     @ObservedObject var bord = Bord()
     
-    init() {
-        game.readGame()
-        bord.pgnBordHist.append(bord.bord)
-    }
+//    init() {
+//
+//        game.readGame()
+//        bord.pgnBordHist.append(bord.bord)
+//
+//    }
+    
     var body: some View {
         GeometryReader{geo in
             ZStack{
                 Color("BackGroundColor")
                 VStack{
                     // text och annat
-                    Text(playedGame?.game ?? "Unknown Game")
+                    Text(playedGame.ocation ?? "Unknown Event")
                         .bold()
                         .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                        .font(.title)
+                        .font(.title2)
+                        .padding(.bottom)
+                    Text(playedGame.players ?? "?? - ??")
+                        .bold()
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.title2)
                         .padding(.bottom)
                 
 
@@ -102,10 +110,7 @@ struct ChessBordView : View {
                         }
                     }.padding(.bottom)
                     
-                    Text(playedGame?.coment ?? "Nobody coment this game, yet")
-                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                        .font(.footnote)
-                        .padding()
+
                    
                     Button("Game Info") {
                                showingAlert = true

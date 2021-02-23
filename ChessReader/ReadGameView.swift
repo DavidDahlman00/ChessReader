@@ -23,7 +23,7 @@ struct ReadGameView: View {
                 Color("BackGroundColor").edgesIgnoringSafeArea(.all)
              List() {
                  ForEach(gameList.entries){ entry in
-                    NavigationLink(destination: ChessBordView()){ // playedGame: entry
+                    NavigationLink(destination: ChessBordView(playedGame: entry)){  //playedGame: entry
                         VStack{
                            ListRowView(entry: entry)
                         }

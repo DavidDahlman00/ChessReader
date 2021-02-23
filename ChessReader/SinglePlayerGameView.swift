@@ -20,6 +20,26 @@ struct SinglePlayerGameView: View {
     var db = Firestore.firestore()
     @State private var showingSheet = false
     @ObservedObject var bord = Bord()
+    
+    var tempOcation = "SovietChamp1972"
+    var tempPlayers = "Razuvaev, Yuri S - Zhidkov, Valery S"
+    var tempGame = """
+
+[Event "URS-ch40"]
+[Site "Baku"]
+[Date "1972.??.??"]
+[Round "?"]
+[White "Razuvaev, Yuri S"]
+[Black "Zhidkov, Valery S"]
+[Result "1/2-1/2"]
+[WhiteElo "2490"]
+[BlackElo "2490"]
+[ECO "E04"]
+
+1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 a6 6.a4 Bd7 7.Nbd2 Bb4 8.Qc2 Bc6
+9.Qxc4 a5 10.O-O Nbd7 11.Qd3 O-O 12.b3 Re8 13.Bb2 Bxd2 14.Qxd2  1/2-1/2
+
+"""
     var body: some View {
         GeometryReader{geo in
             ZStack{
@@ -33,15 +53,15 @@ struct SinglePlayerGameView: View {
 
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
                     
-//                    Button(action: {
-//
-//                            db.collection("testItems1").addDocument(data: ["state" : bord.bordToString()])
-//
-//
-//                            print("check")}, label: {
-//                                Image(systemName: "checkmark.square" ).resizable()
-//                                    .aspectRatio(contentMode:.fit).frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                    })
+                    Button(action: {
+
+                            db.collection("gameList").addDocument(data: ["ocation" : tempOcation, "players" : tempPlayers, "game" : tempGame])
+
+
+                            print("check")}, label: {
+                                Image(systemName: "checkmark.square" ).resizable()
+                                    .aspectRatio(contentMode:.fit).frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    })
 
                     Button(action: {
                      
