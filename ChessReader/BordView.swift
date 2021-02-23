@@ -156,9 +156,22 @@ struct SquareView: View {
     let col: Int
     var body: some View {
         ZStack{
+            if row == 0 {
+                color
+                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).mask(LinearGradient(gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: color, location: 0.25)
+                    ]), startPoint: .top, endPoint: .bottom))
+            } else if row == 7 {
+                color
+                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).mask(LinearGradient(gradient: Gradient(stops: [
+                        .init(color: color, location: 0.75),
+                        .init(color: .clear, location: 1.0)
+                    ]), startPoint: .top, endPoint: .bottom))
+            }else {
             color
                 .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-        
+            }
             Button(action: {
                 switch action{
                 //case "ChessBordView"      to be done

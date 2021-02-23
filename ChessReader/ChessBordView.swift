@@ -11,6 +11,11 @@ import Firebase
 struct ChessBordView : View {
     var playedGame : GameListEntry? = nil
     var testText: String = "Test"
+    @State var color = "light"
+    @State var lightCount = 0
+    @State var darkCount = 0
+    @State var lightTestString = ""
+    @State var darkTestString = ""
     var game = ReadPGN()
     var db = Firestore.firestore()
     @State private var showingAlert = false
@@ -26,20 +31,15 @@ struct ChessBordView : View {
                 VStack{
                     // text och annat
                     Text(playedGame?.game ?? "Unknown Game")
-                        .foregroundColor(.gray)
                         .bold()
-                    
-                    Button("Temp send to DB"){
-                        let content = game.testPGN 
-                        db.collection("contentTest").addDocument(data: ["game" : content])
+                        .padding(.bottom)
+                
+
+                    HStack{
+                        Text(lightTestString)
+                        Text(darkTestString)
                     }
-                    Button("Game Info") {
-                               showingAlert = true
-                           }
-                           .alert(isPresented: $showingAlert) {
-                            Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
-                           }
-                       
+                    
                    
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
                     HStack{
@@ -50,34 +50,44 @@ struct ChessBordView : View {
                         }) {
                             Image(systemName: "backward.fill")
                         }
-                        .foregroundColor(.gray)
+                     //   .foregroundColor(.gray)
                         
                         Button(action: {
-                            print(game.testPGNInt)
-                            print(game.testPGN[game.testPGNInt])
-                            bord.pGNMoveToBord(pgn: "Nf3", player: "light")
-                            print(game.information)
-                            print(game.lightMoveList.count)
-                            print(game.darkMoveList.count)
-                            for move in game.lightMoveList{
-                                print(move)
+                            if color == "light" {
+                                if lightCount < game.lightMoveList.count{
+                                    print(game.lightMoveList[lightCount])
+                                    print(lightCount)
+                                    bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
+                                    
+                                    lightTestString = "\(lightCount + 1): \(color):  \(game.lightMoveList[lightCount])"
+                                    lightCount = lightCount + 1
+                                    color = "dark"
+                                }
+                            }else {
+                                if darkCount < game.darkMoveList.count{
+                                    print(game.darkMoveList[darkCount])
+                                    print(darkCount)
+                                    bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
+                                    
+                                    darkTestString = "\(darkCount + 1): \(color):  \(game.darkMoveList[darkCount])"
+                                    darkCount = darkCount + 1
+                                    color = "light"
+                                }
                             }
-                            print("====================")
-                            for move in game.darkMoveList{
-                                print(move)
-                            }
-                            game.moveForward()
                         }) {
                             Image(systemName: "forward.fill")
                         }
-                        
-                        .foregroundColor(.gray)
-                    }
+                    }.padding(.bottom)
                     
                     Text(playedGame?.coment ?? "Nobody coment this game, yet")
-                        .foregroundColor(.gray)
                         .bold()
-                    
+                   
+                    Button("Game Info") {
+                               showingAlert = true
+                           }
+                           .alert(isPresented: $showingAlert) {
+                            Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
+                           }
                     
                     // knappar och annat
                 }

@@ -268,12 +268,12 @@ class Bord: ObservableObject {
         
         if player == "light" {
             switch pgn {
-            case "0-0":
+            case "O-O":
                 bord[7][4] = ""
                 bord[7][5] = "LR"
                 bord[7][6] = "LK"
                 bord[7][7] = ""
-            case "0-0-0":
+            case "O-O-O":
                 bord[7][0] = ""
                 bord[7][1] = ""
                 bord[7][2] = "LK"
@@ -285,12 +285,12 @@ class Bord: ObservableObject {
             }
         }else{
             switch pgn {
-            case "0-0":
+            case "O-O":
                 bord[0][4] = ""
                 bord[0][5] = "BR"
                 bord[0][6] = "BK"
                 bord[0][7] = ""
-            case "0-0-0":
+            case "O-O-O":
                 bord[0][0] = ""
                 bord[0][1] = ""
                 bord[0][2] = "BK"

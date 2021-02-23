@@ -7,6 +7,15 @@
 import SwiftUI
 import Firebase
 
+extension View {
+    public func gradientForeground(colors: [Color]) -> some View {
+        self.overlay(LinearGradient(gradient: .init(colors: colors),
+                                    startPoint: .top,
+                                    endPoint: .bottom))
+            .mask(self)
+    }
+}
+
 struct SinglePlayerGameView: View {
     var db = Firestore.firestore()
     @State private var showingSheet = false
@@ -19,11 +28,9 @@ struct SinglePlayerGameView: View {
                 
                     Text("\(bord.getPlayerToGo())'s turn to move")
                         .font(.largeTitle)
-                        
-                    
-                    Button("Temp for buggs in multiPlayer"){
-                        bord.stringToBord( fenText: "BRBNBBBQ/.BRBK/.BPBPBPBP/./.BPBP/././././././././././.LP/.BP/./.LQ/.LP/.LPLP/./.BB/./.LB/./././.LPLP/./././.LPLPLRLNLB/./.LRLK/.")
-                    }
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.title)
+
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
                     Button(action: {
                         
