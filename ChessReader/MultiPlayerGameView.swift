@@ -62,10 +62,6 @@ struct  MultiPlayerGameView: View {
         }
     }
     
-    func testFunc(){
-        print("func test 3")
-    }
-    
  func listenToFireStore() {
         
         db.collection("game\(gameNumber)").addSnapshotListener{ (snapshot, err) in
