@@ -1,7 +1,15 @@
+//
+//  Tmp3View.swift
+//  ChessReader
+//
+//  Created by David Dahlman on 2021-02-03.
+//
+
 import SwiftUI
 import Firebase
 
 struct  MultiPlayerGameView: View {
+    //@State private var items = [Item]()
     let gameNumber: Int
     let color: String
     
@@ -14,36 +22,44 @@ struct  MultiPlayerGameView: View {
         }else{
             return "Waiting for opponent"
         }
+        
     }
+   
     var body: some View {
         GeometryReader{geo in
             ZStack{
-                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
+                Color("BackGroundColor")
                 VStack{
-                    Text(color)
-                    Text("\(gameNumber)")
-                    Text("Multiplayer")
-                        .foregroundColor(.gray)
+                        
                     Text(playerToMove)
-                        .foregroundColor(.gray)
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.title)
+                        .padding()
+                    
+                    Text("\(gameNumber)")
+                        .font(.footnote)
+                       
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: color).onAppear(){
                         listenToFireStore()
                     }
-                    Button(action: {
+
+                    // knappar och annat
+                    if bord.playerToGo != color {
+                        Button(action: {
                             db.collection("game\(gameNumber)").addDocument(data: ["move": move, "state" : bord.bordToString()])
-                            bord.changePlayerToGo()},
-                           label: {
-                        Image(systemName: "checkmark.square" )
-                    })
+                            bord.changePlayerToGo()
+                            }, label: {
+                                Text("Commit move")
+                                    .gradientForeground(colors: [.blue, Color("TextColor2")])
+                            .font(.title)
+                            .padding()
+                                })
+                            }
                 }
                 
             }.edgesIgnoringSafeArea(.all)
             
         }
-    }
-    
-    func testFunc(){
-        print("func test 3")
     }
     
  func listenToFireStore() {
@@ -64,6 +80,10 @@ struct  MultiPlayerGameView: View {
                 bord.changePlayerToGo()
             }
             
+            print(tmpState)
             }
         }
 }
+
+
+

@@ -15,17 +15,25 @@ struct WaitingForMultiPlayerView: View {
     var body: some View {
         NavigationView{
         ZStack{
-            Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0).edgesIgnoringSafeArea(.all)
+            Color("BackGroundColor").edgesIgnoringSafeArea(.all)
 
             VStack{
+                Text(waitingString)
+                    .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                    .font(.title)
+                ZStack{
+                    Circle()
+                        .fill(Color.black)
+                            .frame(width: 300, height: 300)
+                    Image("chessTest").resizable().scaledToFit()
+                    Rectangle()
+                            .foregroundColor(.clear)
+                        .background(RadialGradient(gradient: Gradient(colors: [.clear, Color("BackGroundColor")]), center: .center, startRadius: 30, endRadius: 150)).scaledToFit()
+                }
                 
-                Image("chessTest").resizable().scaledToFit()
-                
-                Button(action: {
-                   
-                }, label:{
-                    Text("test")})
+            
                 HStack{
+
                 }
 
                 NavigationLink(
@@ -33,10 +41,10 @@ struct WaitingForMultiPlayerView: View {
                     Button(action: {
                         if color == "err"{
                             waitingString = "Waiting for oponent..."
-                            waitingButton = "Wait."
+                            waitingButton = ""
                             db.collection("waitList").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
-                                    
+                                    print("Error getting documents: \(err)")
                                 } else {
                                     for document in querySnapshot!.documents {
                                         gameNumber = document.data()["toGameCounter"] as! Int
@@ -57,17 +65,13 @@ struct WaitingForMultiPlayerView: View {
                         listenToFireStore()
                     }){
                     Text(waitingButton)
+                        .gradientForeground(colors: [.blue, Color("TextColor2")])
                         .font(.title)
-                        .foregroundColor(.gray)
-                        .fontWeight(.bold)
-                        .background(Color(red: 20.0/255.0, green: 20.0/255.0, blue: 48.0/255.0))
-                        .cornerRadius(25)
-                        .padding(20)
+
+                        .padding(30)
                         
                         
-                }.background(Color(red: 20.0/255.0, green: 20.0/255.0, blue: 48.0/255.0))
-                    .cornerRadius(25)
-                    .padding(25)
+                }
             }
                
             }.edgesIgnoringSafeArea(.all)
@@ -80,10 +84,14 @@ struct WaitingForMultiPlayerView: View {
     func listenToFireStore() {
                db.collection("waitList").addSnapshotListener{ (snapshot, err) in
                 if err != nil {
+
                     return
+
                 }
 
                 if !(snapshot?.isEmpty ?? true){
+
+                    
 
                     for document in snapshot!.documents {
 
@@ -91,17 +99,21 @@ struct WaitingForMultiPlayerView: View {
 
                         if inCounter > gameNumber && color != "err" {
 
+                            print("Yessss")
+
                             showMultiplayerGame = true
 
                         }
 
                         } else{
-                        
+                            print("Error inCounter nil")
                         }
-                       
+                        print(gameNumber)
+                        print(color)
+                      //  print(document.data()["toGameCounter"] )
                     }
                 } else {
-                    
+                    print("snapshot did not work")
 
                 }
             }

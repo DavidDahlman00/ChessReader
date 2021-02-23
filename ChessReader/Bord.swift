@@ -1,7 +1,8 @@
 import Foundation
+import Firebase
 
 class Bord: ObservableObject {
-
+    var db = Firestore.firestore()
     @Published var bord : [[String]]        // keep's track on current bord positions.
     @Published var activityBord : [[String]] // keep's track on which square is clicked and which squares are posible to move to.
     @Published var promotedPawn: [Int] = [-1, -1]   // -1 = no pawn to promote. else on which line the pawn sttands. first index for light, second for dark.
@@ -14,6 +15,7 @@ class Bord: ObservableObject {
     @Published var staleMate : [Bool] = [false, false]
     @Published var staleMateEnd : Bool = false
     @Published var kingHasMoved : [Bool] = [false, false]   // indicates i the king's has moved.
+    @Published var pgnBordHist : [[[String]]] = [[[String]]]()
     var drawByRepitation : Bool = false   // returns true when the game has ended draw by repetation.
     var activeSquare: [Int]? = nil
     var activePice: String? = nil      // returns piece that is currently clicked
@@ -25,7 +27,6 @@ class Bord: ObservableObject {
     init() {
 
         bord = [["DR", "DN", "DB", "DQ", "DK", "DB", "DN", "DR"], ["DP","DP","DP","DP","DP","DP","DP","DP"], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["","","","","","","",""], ["LP","LP","LP","LP","LP","LP","LP","LP"], ["LR", "LN", "LB", "LQ", "LK", "LB", "LN", "LR"]]
-       
        
         
         activityBord = [["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",], ["none", "none", "none", "none", "none", "none", "none", "none",]]
@@ -261,12 +262,12 @@ class Bord: ObservableObject {
         
         if player == "light" {
             switch pgn {
-            case "0-0":
+            case "O-O":
                 bord[7][4] = ""
                 bord[7][5] = "LR"
                 bord[7][6] = "LK"
                 bord[7][7] = ""
-            case "0-0-0":
+            case "O-O-O":
                 bord[7][0] = ""
                 bord[7][1] = ""
                 bord[7][2] = "LK"
@@ -278,12 +279,12 @@ class Bord: ObservableObject {
             }
         }else{
             switch pgn {
-            case "0-0":
+            case "O-O":
                 bord[0][4] = ""
                 bord[0][5] = "BR"
                 bord[0][6] = "BK"
                 bord[0][7] = ""
-            case "0-0-0":
+            case "O-O-O":
                 bord[0][0] = ""
                 bord[0][1] = ""
                 bord[0][2] = "BK"
@@ -386,6 +387,11 @@ class Bord: ObservableObject {
             }
         }
         return moveList
+    }
+    
+    func sendToDBMultiplayer(game: Int, move: Int){
+        db.collection("game\(game)").addDocument(data: ["move": move, "state" : bordToString()])
+       changePlayerToGo()
     }
     
 }

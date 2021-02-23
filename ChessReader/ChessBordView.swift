@@ -2,75 +2,124 @@ import SwiftUI
 import Firebase
 
 struct ChessBordView : View {
-    var playedGame : GameListEntry? = nil
+    var playedGame : GameListEntry
     var testText: String = "Test"
-    var game = ReadPGN()
+    @State var color = "light"
+    @State var lightCount = 0
+    @State var darkCount = 0
+    var lightTestString : String{
+        if lightCount == 0 {
+            return ""
+        }else{
+            return "Light's \(lightCount) move: \(game.lightMoveList[lightCount])"
+        }
+    }
+    var darkTestString : String{
+        if darkCount == 0 {
+            return ""
+        }else{
+            return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount])"
+        }
+    }
+    var game : ReadPGN
     var db = Firestore.firestore()
     @State private var showingAlert = false
     @ObservedObject var bord = Bord()
     
-    init() {
+    init(playedGame: GameListEntry) {
+
+        self.playedGame = playedGame
+        game = ReadPGN(testPGN: playedGame.game)
         game.readGame()
+        bord.pgnBordHist.append(bord.bord)
+
     }
+    
     var body: some View {
         GeometryReader{geo in
             ZStack{
-                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 38.0/255.0)
+                Color("BackGroundColor")
                 VStack{
                     // text och annat
-                    Text(playedGame?.game ?? "Unknown Game")
-                        .foregroundColor(.gray)
+                    Text(playedGame.ocation ?? "Unknown Event")
                         .bold()
-                    
-                    Button("Temp send to DB"){
-                        let content = game.testPGN 
-                        db.collection("contentTest").addDocument(data: ["game" : content])
+                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.title)
+               
+                    Text(playedGame.players ?? "?? - ??")
+                        .bold()
+                        .foregroundColor(.gray)
+//                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.subheadline)
+                        .padding(.bottom)
+                
+
+                    HStack{
+                        Text(lightTestString)
+                            .font(.footnote)
+                        Text(darkTestString)
+                            .font(.footnote)
                     }
+                    
+                   
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
+                    HStack{
+                        Button(action: {
+                            if bord.pgnBordHist.count > 1{
+                                bord.pgnBordHist.remove(at: bord.pgnBordHist.count - 1)
+                                bord.bord = bord.pgnBordHist[bord.pgnBordHist.count - 1]
+                                if color == "light"{
+                                    darkCount = darkCount - 1
+                                    color = "dark"
+                                }else {
+                                    lightCount = lightCount - 1
+                                    color = "light"
+                                }
+                            }
+                            
+                        }) {
+                            Image(systemName: "backward.fill")
+                                .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                .font(.title)
+                        }
+                        
+                        Button(action: {
+                            if color == "light" {
+                                if lightCount < game.lightMoveList.count{
+                                    print(game.lightMoveList[lightCount])
+                                    print(lightCount)
+                                    bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
+                                    bord.pgnBordHist.append(bord.bord)
+                                    lightCount = lightCount + 1
+                                    color = "dark"
+                                }
+                            }else {
+                                if darkCount < game.darkMoveList.count{
+                                    print(game.darkMoveList[darkCount])
+                                    print(darkCount)
+                                    bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
+                                    bord.pgnBordHist.append(bord.bord)
+                                    darkCount = darkCount + 1
+                                    color = "light"
+                                }
+                            }
+                        }) {
+                            Image(systemName: "forward.fill")
+                                .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                .font(.title)
+                        }
+                    }.padding(.bottom)
+                    
+
+                   
                     Button("Game Info") {
                                showingAlert = true
                            }
                            .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
                            }
-                       
-                   
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
-                    HStack{
-                        Button(action: {
-                            game.moveBackward()
-                            print(game.testPGN[game.testPGNInt])
-                            
-                        }) {
-                            Image(systemName: "backward.fill")
-                        }
-                        .foregroundColor(.gray)
-                        
-                        Button(action: {
-                            print(game.testPGNInt)
-                            print(game.testPGN[game.testPGNInt])
-                            bord.pGNMoveToBord(pgn: "Nf3", player: "light")
-                            print(game.information)
-                            print(game.lightMoveList.count)
-                            print(game.darkMoveList.count)
-                            for move in game.lightMoveList{
-                                print(move)
-                            }
-                            print("====================")
-                            for move in game.darkMoveList{
-                                print(move)
-                            }
-                            game.moveForward()
-                        }) {
-                            Image(systemName: "forward.fill")
-                        }
-                        
-                        .foregroundColor(.gray)
-                    }
-                    
-                    Text(playedGame?.coment ?? "Nobody coment this game, yet")
-                        .foregroundColor(.gray)
-                        .bold()
-                    
+                    .gradientForeground(colors: [.blue, Color("TextColor2")])
+                    .font(.title)
                     
                     // knappar och annat
                 }

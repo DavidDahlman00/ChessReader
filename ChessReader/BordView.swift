@@ -1,3 +1,10 @@
+//
+//  BordView.swift
+//  ChessReader
+//
+//  Created by David Dahlman on 2021-02-03.
+//
+
 import Foundation
 import SwiftUI
 
@@ -23,7 +30,7 @@ struct BordView: View {
     var body: some View {
         VStack(spacing: 0){
             Text(schach)
-                .foregroundColor(.gray)
+                
             RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 2, image: image[2], action: action)
@@ -40,7 +47,7 @@ struct BordView: View {
                             .default(Text("Queen")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LQ"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "DQ"
+                                bord.bord[7][bord.promotedPawn[1]] = "BQ"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -51,7 +58,7 @@ struct BordView: View {
                             .default(Text("Rook")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LR"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "DR"
+                                bord.bord[7][bord.promotedPawn[1]] = "BR"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -62,7 +69,7 @@ struct BordView: View {
                             .default(Text("Knight")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LN"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "DN"
+                                bord.bord[7][bord.promotedPawn[1]] = "BN"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -71,7 +78,7 @@ struct BordView: View {
                             .default(Text("Bishop")) { if bord.promotedPawn[0] != -1{
                                 bord.bord[0][bord.promotedPawn[0]] = "LB"
                             }else{
-                                bord.bord[7][bord.promotedPawn[1]] = "DB"
+                                bord.bord[7][bord.promotedPawn[1]] = "BB"
                             }
                             bord.promotePawn = false
                             bord.promotedPawn = [-1, -1]
@@ -120,25 +127,25 @@ struct SquareView: View {
             if (row + col).isMultiple(of: 2) {
                 return Color("ActiveLightSquareColor")
             }else{
-                return Color("DarkLightSquareColor")
+                return Color("ActiveDarkSquareColor")
             }
         case "inMoveList":
             if (row + col).isMultiple(of: 2) {
-                return Color("LightMoveToSquareColor")
+                return Color("MoveLightSquareColor")
             }else{
-                return Color("DarkMoveToSquareColor")
+                return Color("MoveDarkSquareColor")
             }
         case "inEnPassantList":
             if (row + col).isMultiple(of: 2) {
-                return Color("LightMoveToSquareColor")
+                return Color("MoveLightSquareColor")
             }else{
-                return Color("DarkMoveToSquareColor")
+                return Color("MoveDarkSquareColor")
             }
         case "casteling":
             if (row + col).isMultiple(of: 2) {
-                return Color("LightMoveToSquareColor")
+                return Color("MoveLightSquareColor")
             }else{
-                return Color("DarkMoveToSquareColor")
+                return Color("MoveDarkSquareColor")
             }
         default:
             return Color(.purple)
@@ -149,14 +156,29 @@ struct SquareView: View {
     let col: Int
     var body: some View {
         ZStack{
+            if row == 0 {
+                color
+                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).mask(LinearGradient(gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: color, location: 0.25)
+                    ]), startPoint: .top, endPoint: .bottom))
+            } else if row == 7 {
+                color
+                    .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).mask(LinearGradient(gradient: Gradient(stops: [
+                        .init(color: color, location: 0.75),
+                        .init(color: .clear, location: 1.0)
+                    ]), startPoint: .top, endPoint: .bottom))
+            }else {
             color
                 .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-        
+            }
             Button(action: {
                 switch action{
                 //case "ChessBordView"      to be done
                 case "SinglePlayerGameView":
+                    print("test \(row), \(col)")
                     bord.squareTuched(row: row, col: col)
+                    print(bord.activityBord[row][col])
                     //action
                 case "Dark":
                     if bord.playerToGo == "Dark" {
@@ -169,9 +191,9 @@ struct SquareView: View {
                 case "ChessBordView": break
                     
                 default:
-                   
+                    print("test \(row), \(col)")
                     bord.squareTuched(row: row, col: col)
-                   
+                    print(bord.activityBord[row][col])
                 }
                 
                 
@@ -181,6 +203,6 @@ struct SquareView: View {
                     .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
             
-        }
+        }.shadow(color: .gray, radius: 3.0, x: 0, y: 0)
     }
 }

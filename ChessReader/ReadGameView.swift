@@ -1,38 +1,49 @@
 import SwiftUI
 
 struct ReadGameView: View {
+    
+    @State private var searchTerm: String = ""
+    
     @ObservedObject var gameList = GameList()
     init(){
         UITableView.appearance().backgroundColor = .clear
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.gray]
+        UINavigationBar.appearance()
+            //.largeTitleTextAttributes = [.foregroundColor: UIColor.gray]
     }
     
      var body: some View {
-        
            
          NavigationView{
             ZStack{
-                Color(red: 14.0/255.0, green: 14.0/255.0, blue: 31.0/255.0).edgesIgnoringSafeArea(.all)
-             List() {
-                 ForEach(gameList.entries){ entry in
-                    NavigationLink(destination: ChessBordView()){ // temp removed playedGame: entry
-                         ListRowView(entry: entry)
-                            
+                Color("BackGroundColor").edgesIgnoringSafeArea(.all)
+                VStack{
+                SearchBar(text: $searchTerm)
+             List {
+                
+                
+                
+                ForEach(self.gameList.entries.filter {
+                            self.searchTerm.isEmpty ? true: $0.ocation?.localizedStandardContains(self.searchTerm) as! Bool ||   $0.players?.localizedStandardContains(self.searchTerm) as! Bool            }){ entry in
+                    NavigationLink(destination: ChessBordView(playedGame: entry)){  //playedGame: entry
+                        VStack{
+                           ListRowView(entry: entry)
+                        }
                      }
-                    .listRowBackground(Color(red: 14.0/255.0, green: 14.0/255.0, blue: 31.0/255.0))
+                    .listRowBackground(Color("BackGroundColor"))
                     
                  }.onDelete(perform: { indexSet in
                      gameList.entries.remove(atOffsets: indexSet)
                  })
              }
+                }
+                .navigationBarTitle("Chess Reader")
+                
              
-             .foregroundColor(.gray)
-             .navigationBarTitle("Chess Reader")
              
-             .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
+//             .navigationBarItems(trailing: NavigationLink(destination: SinglePlayerGameView(), label: {Image(systemName: "magnifyingglass.circle")}))
              
             }
-            .foregroundColor(.red)
+            
                 
          }
          
@@ -51,11 +62,17 @@ struct ListRowView: View {
    
     
     var body: some View {
-        HStack {
+        VStack {
            
             Spacer()
-            Text(entry.game.prefix(30) + "   ")
-        }
+            Text(entry.ocation ?? "Unknown event")
+                .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                .font(.title)
+            Text(entry.players ?? "??")
+                .foregroundColor(.gray)
+                .font(.footnote)
+            Spacer()
+        }.shadow(color: .gray, radius: 1.0, x: 0, y: 0)
     }
 }
 
