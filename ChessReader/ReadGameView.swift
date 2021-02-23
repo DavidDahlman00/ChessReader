@@ -38,7 +38,7 @@ struct ReadGameView: View {
              //.navigationBarTitle("Chess Reader")
              
              
-//             .navigationBarItems(trailing: NavigationLink(destination: ChessBordView(), label: {Image(systemName: "plus.circle")}))
+//             .navigationBarItems(trailing: NavigationLink(destination: SinglePlayerGameView(), label: {Image(systemName: "magnifyingglass.circle")}))
              
             }
             
@@ -69,6 +69,7 @@ struct ListRowView: View {
             Text(entry.players ?? "??")
                 .foregroundColor(.gray)
                 .font(.footnote)
+            Spacer()
         }.shadow(color: .gray, radius: 1.0, x: 0, y: 0)
     }
 }

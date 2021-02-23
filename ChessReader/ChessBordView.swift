@@ -28,17 +28,19 @@ struct ChessBordView : View {
             return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount])"
         }
     }
-    var game = ReadPGN()
+    var game : ReadPGN
     var db = Firestore.firestore()
     @State private var showingAlert = false
     @ObservedObject var bord = Bord()
     
-//    init() {
-//
-//        game.readGame()
-//        bord.pgnBordHist.append(bord.bord)
-//
-//    }
+    init(playedGame: GameListEntry) {
+
+        self.playedGame = playedGame
+        game = ReadPGN(testPGN: playedGame.game)
+        game.readGame()
+        bord.pgnBordHist.append(bord.bord)
+
+    }
     
     var body: some View {
         GeometryReader{geo in
