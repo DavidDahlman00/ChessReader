@@ -65,10 +65,11 @@ struct ListRowView: View {
             Spacer()
             Text(entry.ocation ?? "Unknown event")
                 .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                .font(.title2)
+                .font(.title)
             Text(entry.players ?? "??")
+                .foregroundColor(.gray)
                 .font(.footnote)
-        }
+        }.shadow(color: .gray, radius: 1.0, x: 0, y: 0)
     }
 }
 

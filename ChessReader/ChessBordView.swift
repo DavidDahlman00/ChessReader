@@ -49,12 +49,13 @@ struct ChessBordView : View {
                     Text(playedGame.ocation ?? "Unknown Event")
                         .bold()
                         .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                        .font(.title2)
-                        .padding(.bottom)
+                        .font(.title)
+               
                     Text(playedGame.players ?? "?? - ??")
                         .bold()
-                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                        .font(.title2)
+                        .foregroundColor(.gray)
+//                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                        .font(.subheadline)
                         .padding(.bottom)
                 
 
@@ -83,6 +84,8 @@ struct ChessBordView : View {
                             
                         }) {
                             Image(systemName: "backward.fill")
+                                .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                .font(.title)
                         }
                         
                         Button(action: {
@@ -107,6 +110,8 @@ struct ChessBordView : View {
                             }
                         }) {
                             Image(systemName: "forward.fill")
+                                .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                .font(.title)
                         }
                     }.padding(.bottom)
                     
@@ -118,6 +123,8 @@ struct ChessBordView : View {
                            .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
                            }
+                    .gradientForeground(colors: [.blue, Color("TextColor2")])
+                    .font(.title)
                     
                     // knappar och annat
                 }
