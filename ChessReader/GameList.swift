@@ -13,7 +13,8 @@ class GameList: ObservableObject {
     var db = Firestore.firestore()
     
     init() {
-        addMocData()
+        //addMocData()
+        listenToFireStore()
     }
     
     func addMocData() {
@@ -32,7 +33,7 @@ class GameList: ObservableObject {
     func listenToFireStore() {
            
            db.collection("gameList").addSnapshotListener{ (snapshot, err) in
-
+            self.entries.removeAll()
                for document in snapshot!.documents {
                 let ocation = document["ocation"] ?? "Unknown Ocation"
                 let players = document["players"] ?? "?? - ??"

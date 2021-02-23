@@ -22,22 +22,25 @@ struct SinglePlayerGameView: View {
     @ObservedObject var bord = Bord()
     
     var tempOcation = "SovietChamp1972"
-    var tempPlayers = "Razuvaev, Yuri S - Zhidkov, Valery S"
+    var tempPlayers = "Mukhin, Mikhail A - Razuvaev, Yuri S"
     var tempGame = """
 
 [Event "URS-ch40"]
 [Site "Baku"]
 [Date "1972.??.??"]
 [Round "?"]
-[White "Razuvaev, Yuri S"]
-[Black "Zhidkov, Valery S"]
+[White "Mukhin, Mikhail A"]
+[Black "Kholmov, Ratmir D"]
 [Result "1/2-1/2"]
-[WhiteElo "2490"]
-[BlackElo "2490"]
-[ECO "E04"]
+[WhiteElo "2420"]
+[BlackElo "2550"]
+[ECO "E55"]
 
-1.d4 Nf6 2.c4 e6 3.g3 d5 4.Nf3 dxc4 5.Bg2 a6 6.a4 Bd7 7.Nbd2 Bb4 8.Qc2 Bc6
-9.Qxc4 a5 10.O-O Nbd7 11.Qd3 O-O 12.b3 Re8 13.Bb2 Bxd2 14.Qxd2  1/2-1/2
+1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 c5 5.Bd3 d5 6.Nf3 dxc4 7.Bxc4 O-O 8.O-O Nbd7
+9.Qe2 b6 10.Rd1 cxd4 11.exd4 Bb7 12.Bg5 Bxc3 13.bxc3 Qc7 14.Nd2 Rfe8 15.Rac1 e5
+16.Qd3 h6 17.Bh4 Rac8 18.Bg3 Qd8 19.Re1 exd4 20.cxd4 Rxe1+ 21.Rxe1 Nf8 22.h3 Ng6
+23.Bb3 Bd5 24.Nc4 Qd7 25.Nd6 Rd8 26.Bxd5 Nxd5 27.Qf3 Nf6 28.Nf5 Nd5 29.Nd6 Nf6
+30.Nf5 Nd5  1/2-1/2
 
 """
     var body: some View {
