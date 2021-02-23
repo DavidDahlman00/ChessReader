@@ -23,9 +23,10 @@ struct ReadGameView: View {
                 Color("BackGroundColor").edgesIgnoringSafeArea(.all)
              List() {
                  ForEach(gameList.entries){ entry in
-                    NavigationLink(destination: ChessBordView()){ // temp removed playedGame: entry
-                         ListRowView(entry: entry)
-                            
+                    NavigationLink(destination: ChessBordView()){ // playedGame: entry
+                        VStack{
+                           ListRowView(entry: entry)
+                        }
                      }
                     .listRowBackground(Color("BackGroundColor"))
                     
@@ -59,12 +60,14 @@ struct ListRowView: View {
    
     
     var body: some View {
-        HStack {
+        VStack {
            
             Spacer()
-            Text(entry.game.prefix(30) + "   ")
+            Text(entry.ocation ?? "Unknown event")
                 .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
-                .font(.title)
+                .font(.title2)
+            Text(entry.players ?? "??")
+                .font(.footnote)
         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct GameListEntry: Identifiable {
     var id = UUID()
-    var game : String
-    var coment : String? = nil
+    var ocation : String? = nil
+    var players : String? = nil
     
 }
