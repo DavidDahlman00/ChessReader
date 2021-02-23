@@ -21,26 +21,34 @@ struct SinglePlayerGameView: View {
     @State private var showingSheet = false
     @ObservedObject var bord = Bord()
     
-    var tempOcation = "SovietChamp1972"
-    var tempPlayers = "Mukhin, Mikhail A - Razuvaev, Yuri S"
+    var tempOcation = "Stavanger 2020"
+    var tempPlayers = "Caruana,F - Tari,A"
     var tempGame = """
 
-[Event "URS-ch40"]
-[Site "Baku"]
-[Date "1972.??.??"]
-[Round "?"]
-[White "Mukhin, Mikhail A"]
-[Black "Kholmov, Ratmir D"]
-[Result "1/2-1/2"]
-[WhiteElo "2420"]
-[BlackElo "2550"]
-[ECO "E55"]
+[Event "8th Norway Armageddon"]
+[Site "Stavanger NOR"]
+[Date "2020.10.16"]
+[Round "10.3"]
+[White "Caruana,F"]
+[Black "Tari,A"]
+[Result "1-0"]
+[WhiteTitle "GM"]
+[BlackTitle "GM"]
+[WhiteElo "2828"]
+[BlackElo "2633"]
+[ECO "C84"]
+[Opening "Ruy Lopez"]
+[Variation "closed defence"]
+[WhiteFideId "2020009"]
+[BlackFideId "1510045"]
+[EventDate "2020.10.05"]
 
-1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 c5 5.Bd3 d5 6.Nf3 dxc4 7.Bxc4 O-O 8.O-O Nbd7
-9.Qe2 b6 10.Rd1 cxd4 11.exd4 Bb7 12.Bg5 Bxc3 13.bxc3 Qc7 14.Nd2 Rfe8 15.Rac1 e5
-16.Qd3 h6 17.Bh4 Rac8 18.Bg3 Qd8 19.Re1 exd4 20.cxd4 Rxe1+ 21.Rxe1 Nf8 22.h3 Ng6
-23.Bb3 Bd5 24.Nc4 Qd7 25.Nd6 Rd8 26.Bxd5 Nxd5 27.Qf3 Nf6 28.Nf5 Nd5 29.Nd6 Nf6
-30.Nf5 Nd5  1/2-1/2
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. d3 b5 7. Bb3 d6 8. Bd2
+O-O 9. h3 Rb8 10. Re1 h6 11. a3 Re8 12. Nc3 Bf8 13. Ne2 Be6 14. Ng3 d5 15. Qe2
+dxe4 16. dxe4 Bxb3 17. cxb3 Nd4 18. Nxd4 exd4 19. b4 Nd7 20. Bf4 Rc8 21. Rad1 c5
+22. bxc5 Nxc5 23. Qg4 Kh8 24. e5 Ne6 25. Nf5 Rc2 26. Nd6 Bxd6 27. exd6 Qf6 28.
+Bg3 Rd8 29. Bh4 g5 30. Bg3 Kh7 31. Qe4+ Qg6 32. Qb7 Rxb2 33. Qe7 Rg8 34. d7 Qh5
+35. Rxe6 Qxd1+ 36. Kh2 Rb1 37. Qxf7+ Rg7 38. Qf5+ 1-0
 
 """
     var body: some View {

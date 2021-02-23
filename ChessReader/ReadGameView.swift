@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReadGameView: View {
+    
     @ObservedObject var gameList = GameList()
     init(){
         UITableView.appearance().backgroundColor = .clear
@@ -17,11 +18,15 @@ struct ReadGameView: View {
     
      var body: some View {
         
+       // @State private var searchTerm: String = ""
            
          NavigationView{
             ZStack{
                 Color("BackGroundColor").edgesIgnoringSafeArea(.all)
              List() {
+                
+                SearchBar(text: $searchTerm)
+                
                  ForEach(gameList.entries){ entry in
                     NavigationLink(destination: ChessBordView(playedGame: entry)){  //playedGame: entry
                         VStack{
