@@ -33,11 +33,7 @@ struct ContentView: View {
     var body: some View {
         //Image("chessImage")
         TabView{
-            ReadGameView()
-                .tabItem{
-                    Image(systemName: "text.book.closed.fill")
-                    Text("Read games")
-                }
+            
             SinglePlayerGameView()
                 .tabItem{
                     Image(systemName: "person.fill")
@@ -50,6 +46,12 @@ struct ContentView: View {
                     Image(systemName: "person.2.fill")
                     Text("multiplayer game")
                     
+                }
+            
+            ReadGameView()
+                .tabItem{
+                    Image(systemName: "text.book.closed.fill")
+                    Text("Read games")
                 }
         }
     }
