@@ -62,6 +62,7 @@ struct SinglePlayerGameView: View {
                         .font(.title)
 
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
+                        
                     
 //                    Button(action: {
 //
@@ -78,7 +79,7 @@ struct SinglePlayerGameView: View {
                         self.showingSheet = true
                     }) {
                         Text("Reset")
-                            .gradientForeground(colors: [.blue, Color("TextColor2")])
+                            .gradientForeground(colors: [Color("TextColor2"), .blue])
                             .font(.title)
                     }
                     
@@ -128,7 +129,7 @@ struct SinglePlayerGameView: View {
                                      })
                     }
                     
-                }
+                }.padding(.top)
                 
                 
                 

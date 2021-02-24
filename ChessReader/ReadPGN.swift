@@ -45,7 +45,7 @@ class ReadPGN {
     func readGame() {
         var i = 0
         var tmpBuffert = ""
-        while tmpBuffert != "1/2-1/2" && i < 500 {
+        while tmpBuffert != "1-0" && tmpBuffert != "0-1" && tmpBuffert != "1/2-1/2" && i < 2000 {
             if getCurrentChar() == "[" {
                 moveForward()
                 while getCurrentChar() != "]" {
@@ -53,7 +53,20 @@ class ReadPGN {
                     moveForward()
                 }
                 information.append("\n")
+                moveForward()
             }else if getCurrentChar() == " " {
+                if tmpBuffert != "" {
+                    if player == "light"{
+                        lightMoveList.append(tmpBuffert)
+                        player = "dark"
+                    }else{
+                        darkMoveList.append(tmpBuffert)
+                        player = "light"
+                    }
+                }
+                tmpBuffert = ""
+                moveForward()
+            }else if getCurrentChar() == "\n" {
                 if tmpBuffert != "" {
                     if player == "light"{
                         lightMoveList.append(tmpBuffert)

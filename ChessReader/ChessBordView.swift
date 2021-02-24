@@ -33,6 +33,7 @@ struct ChessBordView : View {
     @State private var showingAlert = false
     @ObservedObject var bord = Bord()
     
+    
     init(playedGame: GameListEntry) {
 
         self.playedGame = playedGame
@@ -115,18 +116,25 @@ struct ChessBordView : View {
                                 .gradientForeground(colors: [.blue, Color("TextColor2")])
                                 .font(.title)
                         }
+                        
+                        
+                        
+                        
+                        
                     }.padding(.bottom)
                     
 
                    
-                    Button("Game Info") {
-                               showingAlert = true
+                    Button(action: {
+                        self.showingAlert = true
+                    }) {
+                        Text("Game Info")
+                            .gradientForeground(colors: [Color("TextColor2"), .blue])
+                            .font(.title)
                            }
                            .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
                            }
-                    .gradientForeground(colors: [.blue, Color("TextColor2")])
-                    .font(.title)
                     
                     // knappar och annat
                 }

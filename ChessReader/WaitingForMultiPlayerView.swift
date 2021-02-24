@@ -68,7 +68,7 @@ struct WaitingForMultiPlayerView: View {
                         listenToFireStore()
                     }){
                     Text(waitingButton)
-                        .gradientForeground(colors: [.blue, Color("TextColor2")])
+                        .gradientForeground(colors: [Color("TextColor2"), .blue])
                         .font(.title)
 
                         .padding(30)
