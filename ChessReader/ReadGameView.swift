@@ -19,9 +19,7 @@ struct ReadGameView: View {
                 VStack{
                 SearchBar(text: $searchTerm)
              List {
-                
-                
-                
+            
                 ForEach(self.gameList.entries.filter {
                             self.searchTerm.isEmpty ? true: $0.ocation?.localizedStandardContains(self.searchTerm) as! Bool ||   $0.players?.localizedStandardContains(self.searchTerm) as! Bool            }){ entry in
                     NavigationLink(destination: ChessBordView(playedGame: entry)){  //playedGame: entry
@@ -38,15 +36,10 @@ struct ReadGameView: View {
                 }
                 .navigationBarTitle("Chess Reader")
                 
-             
-             
 //             .navigationBarItems(trailing: NavigationLink(destination: SinglePlayerGameView(), label: {Image(systemName: "magnifyingglass.circle")}))
              
             }
-            
-                
          }
-         
      }
 }
 
@@ -56,11 +49,9 @@ struct ReadGame_Previews: PreviewProvider {
     }
 }
 
-
 struct ListRowView: View {
     var entry : GameListEntry
    
-    
     var body: some View {
         VStack {
            

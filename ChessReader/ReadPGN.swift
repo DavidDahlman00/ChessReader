@@ -3,10 +3,8 @@
 //  ChessReader
 //
 //  Created by David Dahlman on 2021-02-16.
-//
 
 import Foundation
-
 
 class ReadPGN {
     var testPGNInt = 0
@@ -32,7 +30,6 @@ class ReadPGN {
             testPGNInt = testPGNInt - 1
         }
     }
-    
     
     func getCurrentChar() -> String {
         if testPGNInt < testPGN.count - 1 && testPGNInt > 0 {
@@ -79,6 +76,4 @@ class ReadPGN {
         information = information.filter{ $0 != "\""}
         testPGNInt = 0
     }
-    
-    
 }

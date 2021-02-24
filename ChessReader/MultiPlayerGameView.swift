@@ -22,9 +22,7 @@ struct  MultiPlayerGameView: View {
         }else{
             return "Waiting for opponent"
         }
-        
     }
-   
     var body: some View {
         GeometryReader{geo in
             ZStack{
