@@ -207,6 +207,9 @@ class Bord: ObservableObject {
             }
             let move = pgn.filter{
                 ["a", "b", "c", "d", "e", "f", "g", "h", "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
+            print("!!!!!!!!!!!!!!!!!!!")
+            print(move.count)
+            print(move)
                 if move.count == 2{
                     let col = move[0]
                     let row = Int(move[1]) ?? -1
@@ -237,12 +240,17 @@ class Bord: ObservableObject {
                     let rows = move.filter{
                         [ "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
                     if rows.count == 2 {
-                        let row = Int(rows[0]) ?? -1
-                        fromRow = 8 - row
+                        let rowfrom = Int(rows[0]) ?? -1
+                        fromRow = 8 - rowfrom
+                        let rowto = Int(rows[1]) ?? -1
+                        toRow = 8 - rowto
+                    }else{
+                        let rowto = Int(rows[0]) ?? -1
+                        toRow = 8 - rowto
                     }
                     if colums.count == 2 {
-                        let col = colums[0]
-                        switch col {
+                        //let col = colums[0]
+                        switch colums[0] {
                         case "a":
                             fromCol = 0
                         case "b":
@@ -262,11 +270,56 @@ class Bord: ObservableObject {
                         default:
                             _ = true
                         }
+                        switch colums[1] {
+                        case "a":
+                            toCol = 0
+                        case "b":
+                            toCol = 1
+                        case "c":
+                            toCol = 2
+                        case "d":
+                            toCol = 3
+                        case "e":
+                            toCol = 4
+                        case "f":
+                            toCol = 5
+                        case "g":
+                            toCol = 6
+                        case "h":
+                            toCol = 7
+                        default:
+                            _ = true
+                        }
+                    }else{
+                        switch colums[0] {
+                        case "a":
+                            toCol = 0
+                        case "b":
+                            toCol = 1
+                        case "c":
+                            toCol = 2
+                        case "d":
+                            toCol = 3
+                        case "e":
+                            toCol = 4
+                        case "f":
+                            toCol = 5
+                        case "g":
+                            toCol = 6
+                        case "h":
+                            toCol = 7
+                        default:
+                            _ = true
+                        }
                     }
                 }
-            
         }
-        
+        print("!!!!!!!!!!!!!!!!!!!")
+
+        print(toRow)
+        print(fromRow)
+        print(toCol)
+        print(fromCol)
         if player == "light" {
             switch pgn {
             case "O-O":
