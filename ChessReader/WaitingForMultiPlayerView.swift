@@ -18,9 +18,12 @@ struct WaitingForMultiPlayerView: View {
             Color("BackGroundColor").edgesIgnoringSafeArea(.all)
 
             VStack{
-                Text(waitingString)
+                Text("Multiplayer!")
                     .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                     .font(.title)
+                Text(waitingString)
+                    .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+                    .font(.title2)
                 ZStack{
                     Circle()
                         .fill(Color.black)
