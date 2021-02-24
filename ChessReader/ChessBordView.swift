@@ -18,14 +18,14 @@ struct ChessBordView : View {
         if lightCount == 0 {
             return ""
         }else{
-            return "Light's \(lightCount) move: \(game.lightMoveList[lightCount])"
+            return "Light's \(lightCount) move: \(game.lightMoveList[lightCount - 1])"
         }
     }
     var darkTestString : String{
         if darkCount == 0 {
             return ""
         }else{
-            return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount])"
+            return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount - 1])"
         }
     }
     var game : ReadPGN
