@@ -44,8 +44,9 @@ class ReadPGN {
     // sets information, light and dark movelist from PGN string.
     func readGame() {
         var i = 0
+        let endText = ["1-0","1-", "0-1", "0-", "1/2-1/2", "1/2-1/"]
         var tmpBuffert = ""
-        while tmpBuffert != "1-0" && tmpBuffert != "0-1" && tmpBuffert != "1/2-1/2" && i < 2000 {
+        while !endText.contains(tmpBuffert) && i < 3000 {
             if getCurrentChar() == "[" {
                 moveForward()
                 while getCurrentChar() != "]" {
