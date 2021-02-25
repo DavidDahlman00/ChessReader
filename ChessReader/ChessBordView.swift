@@ -14,7 +14,6 @@ struct ChessBordView : View {
     @State var color = "light"
     @State var lightCount = 0
     @State var darkCount = 0
-    @State var hasReadGame = false
     var lightTestString : String{
         if lightCount == 0 {
             return ""
@@ -39,7 +38,6 @@ struct ChessBordView : View {
 
         self.playedGame = playedGame
         game = ReadPGN(testPGN: playedGame.game)
-        //game.readGame()
         bord.pgnBordHist.append(bord.bord)
 
     }
@@ -93,11 +91,6 @@ struct ChessBordView : View {
                         }
                         
                         Button(action: {
-                           
-                            if !hasReadGame{
-                                game.readGame()
-                                hasReadGame = true
-                            }
                             
                             if color == "light" {
                                 if lightCount < game.lightMoveList.count{
@@ -133,10 +126,6 @@ struct ChessBordView : View {
 
                    
                     Button(action: {
-                        if !hasReadGame{
-                            game.readGame()
-                            hasReadGame = true
-                        }
                         self.showingAlert = true
                     }) {
                         Text("Game Info")
@@ -152,6 +141,8 @@ struct ChessBordView : View {
                 
             }.edgesIgnoringSafeArea(.all)
             
+        }.onAppear(){
+            game.readGame()
         }
     }
 
