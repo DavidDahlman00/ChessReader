@@ -70,7 +70,7 @@ struct ChessBordView : View {
                     }
                     
                    
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["ChessBordView"])
 //                        .alert(isPresented: $showingWinnerAlert) {
 //                        Alert(title: Text("Winner"), message: Text(game.winner), dismissButton: .default(Text("Got it!")))
 //                       }

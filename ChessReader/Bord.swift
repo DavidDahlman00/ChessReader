@@ -23,6 +23,7 @@ class Bord: ObservableObject {
     @Published var staleMateEnd : Bool = false
     @Published var kingHasMoved : [Bool] = [false, false]   // indicates i the king's has moved.
     @Published var pgnBordHist : [[[String]]] = [[[String]]]()
+    @Published var multiplayerMoveCount = 0
     var drawByRepitation : Bool = false   // returns true when the game has ended draw by repetation.
     var activeSquare: [Int]? = nil
     var activePice: String? = nil      // returns piece that is currently clicked

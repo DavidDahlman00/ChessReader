@@ -7,12 +7,13 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 struct BordView: View {
    @ObservedObject var bord: Bord
     let imageSize: CGFloat
     var image: [[String]]
-    let action: String
+    let action: [Any]
     var schach: String{
         if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
             return "StaleMate"
@@ -93,7 +94,7 @@ struct RowView: View {
     let imageSize: CGFloat
     let row: Int
     let image: [String]
-    let action: String
+    let action: [Any]
     
     var body: some View {
         HStack(spacing: 0){
@@ -112,8 +113,9 @@ struct RowView: View {
 
 struct SquareView: View {
     @ObservedObject var bord: Bord
+    var db = Firestore.firestore()
     var size: CGFloat
-    let action: String
+    var action: [Any]
     
     var color: Color{
         switch bord.activityBord[row][col] {
@@ -154,6 +156,20 @@ struct SquareView: View {
     var pice: String
     let row: Int
     let col: Int
+    
+    func multiplayerActions() {
+        if bord.playerToGo == action[2] as! String {
+            let tmpBord = bord.bord
+            bord.squareTuched(row: row, col: col)
+            if tmpBord != bord.bord{
+                let gameName = action[1] as! String
+                bord.multiplayerMoveCount = bord.multiplayerMoveCount + 1
+                db.collection("game\(gameName)").addDocument(data: ["move": bord.multiplayerMoveCount, "state" : bord.bordToString()])
+                bord.changePlayerToGo()
+            }
+        }
+    }
+    
     var body: some View {
         ZStack{
             if row == 0 {
@@ -173,7 +189,7 @@ struct SquareView: View {
                 .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
             Button(action: {
-                switch action{
+                switch action[0] as! String{
                 //case "ChessBordView"      to be done
                 case "SinglePlayerGameView":
                     print("test \(row), \(col)")
@@ -188,6 +204,8 @@ struct SquareView: View {
                     if bord.playerToGo == "Light" {
                         bord.squareTuched(row: row, col: col)
                     }
+                case "Multiplayer":
+                    multiplayerActions()
                 case "ChessBordView": break
                     
                 default:
@@ -202,7 +220,8 @@ struct SquareView: View {
                     .resizable()
                     .aspectRatio(contentMode:.fit).frame(width: size, height: size, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
-            
         }.shadow(color: .gray, radius: 3.0, x: 0, y: 0)
     }
+    
+
 }

@@ -61,7 +61,7 @@ struct SinglePlayerGameView: View {
                         .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                         .font(.title)
 
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["SinglePlayerGameView"])
                         
                     
 //                    Button(action: {
