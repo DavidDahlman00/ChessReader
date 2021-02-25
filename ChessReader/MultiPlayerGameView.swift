@@ -25,6 +25,7 @@ struct  MultiPlayerGameView: View {
         
     }
    
+   
     var body: some View {
         GeometryReader{geo in
             ZStack{
@@ -37,24 +38,25 @@ struct  MultiPlayerGameView: View {
                         .padding()
                     
                     Text("\(gameNumber)")
-                        .font(.footnote)
-                       
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["Multiplayer", gameNumber, color]).onAppear(){
+                     .font(.footnote)
+                    
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["Multiplayer", gameNumber, color])
+                        .onAppear(){
                         listenToFireStore()
                     }
 
                     // knappar och annat
-                    if bord.playerToGo != color {
-                        Button(action: {
-                            db.collection("game\(gameNumber)").addDocument(data: ["move": move, "state" : bord.bordToString()])
-                            bord.changePlayerToGo()
-                            }, label: {
-                                Text("Commit move")
-                                    .gradientForeground(colors: [.blue, Color("TextColor2")])
-                            .font(.title)
-                            .padding()
-                                })
-                            }
+//                    if bord.playerToGo != color {
+//                        Button(action: {
+//                            db.collection("game\(gameNumber)").addDocument(data: ["move": move, "state" : bord.bordToString()])
+//                            bord.changePlayerToGo()
+//                            }, label: {
+//                                Text("Commit move")
+//                                    .gradientForeground(colors: [.blue, Color("TextColor2")])
+//                            .font(.title)
+//                            .padding()
+//                                })
+//                            }
                 }
                 
             }.edgesIgnoringSafeArea(.all)

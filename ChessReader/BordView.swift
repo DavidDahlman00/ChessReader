@@ -158,11 +158,12 @@ struct SquareView: View {
     let col: Int
     
     func multiplayerActions() {
+
         if bord.playerToGo == action[2] as! String {
             let tmpBord = bord.bord
             bord.squareTuched(row: row, col: col)
             if tmpBord != bord.bord{
-                let gameName = action[1] as! String
+                let gameName = action[1] as! Int
                 bord.multiplayerMoveCount = bord.multiplayerMoveCount + 1
                 db.collection("game\(gameName)").addDocument(data: ["move": bord.multiplayerMoveCount, "state" : bord.bordToString()])
                 bord.changePlayerToGo()
