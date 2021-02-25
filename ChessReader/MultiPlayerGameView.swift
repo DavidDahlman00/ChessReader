@@ -74,6 +74,7 @@ struct  MultiPlayerGameView: View {
                     tmpState = document["state"] as! String
                     tmpMove = document["move"] as! Int
                     bord.enPassant = document["enpassant"] as! [Int]
+                    bord.schach = document["schack"] as! [Bool]
                 }
                     
                }
