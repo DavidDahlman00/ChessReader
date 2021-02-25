@@ -165,8 +165,9 @@ struct SquareView: View {
             if tmpBord != bord.bord{
                 let gameName = action[1] as! Int
                 bord.multiplayerMoveCount = bord.multiplayerMoveCount + 1
-                db.collection("game\(gameName)").addDocument(data: ["move": bord.multiplayerMoveCount, "state" : bord.bordToString(), "enpassant" : bord.enPassant, "schack" : bord.schach])
                 bord.changePlayerToGo()
+                db.collection("game\(gameName)").addDocument(data: ["move": bord.multiplayerMoveCount, "state" : bord.bordToString(), "enpassant" : bord.enPassant, "playerToGo" : bord.playerToGo])
+                //bord.changePlayerToGo()
             }
         }
     }
