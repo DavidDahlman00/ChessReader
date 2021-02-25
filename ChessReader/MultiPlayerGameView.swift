@@ -73,6 +73,7 @@ struct  MultiPlayerGameView: View {
                 if document["move"] as! Int > tmpMove {
                     tmpState = document["state"] as! String
                     tmpMove = document["move"] as! Int
+                    bord.enPassant = document["enpassant"] as! [Int]
                 }
                     
                }
