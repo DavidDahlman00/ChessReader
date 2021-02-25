@@ -43,7 +43,7 @@ struct WaitingForMultiPlayerView: View {
                     destination: MultiPlayerGameView(gameNumber: gameNumber, color: color ), isActive: $showMultiplayerGame){
                     Button(action: {
                         if color == "err"{
-                            waitingString = "Waiting for oponent..."
+                            waitingString = "Waiting for opponent..."
                             waitingButton = ""
                             db.collection("waitList").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
