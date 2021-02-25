@@ -14,6 +14,7 @@ struct ChessBordView : View {
     @State var color = "light"
     @State var lightCount = 0
     @State var darkCount = 0
+    @State var hasReadGame = false
     var lightTestString : String{
         if lightCount == 0 {
             return ""
@@ -38,7 +39,7 @@ struct ChessBordView : View {
 
         self.playedGame = playedGame
         game = ReadPGN(testPGN: playedGame.game)
-        game.readGame()
+        //game.readGame()
         bord.pgnBordHist.append(bord.bord)
 
     }
@@ -48,7 +49,7 @@ struct ChessBordView : View {
             ZStack{
                 Color("BackGroundColor")
                 VStack{
-                    // text och annat
+
                     Text(playedGame.ocation ?? "Unknown Event")
                         .bold()
                         .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
@@ -57,7 +58,7 @@ struct ChessBordView : View {
                     Text(playedGame.players ?? "?? - ??")
                         .bold()
                         .foregroundColor(.gray)
-//                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+
                         .font(.subheadline)
                         .padding(.bottom)
                 
@@ -92,6 +93,12 @@ struct ChessBordView : View {
                         }
                         
                         Button(action: {
+                           
+                            if !hasReadGame{
+                                game.readGame()
+                                hasReadGame = true
+                            }
+                            
                             if color == "light" {
                                 if lightCount < game.lightMoveList.count{
                                     print(game.lightMoveList[lightCount])
@@ -126,6 +133,10 @@ struct ChessBordView : View {
 
                    
                     Button(action: {
+                        if !hasReadGame{
+                            game.readGame()
+                            hasReadGame = true
+                        }
                         self.showingAlert = true
                     }) {
                         Text("Game Info")
