@@ -79,9 +79,10 @@ struct ChessBordView : View {
                                   message: Text(game.winner),
                                   primaryButton: .destructive(Text("Reset")){
                                    resetGame()
+                                    showingSheet = false
                                   },
                                   secondaryButton: .default(Text("View Game!")){
-                                    
+                                    showingSheet = false
                                   })
                         }
                     HStack{
@@ -114,6 +115,8 @@ struct ChessBordView : View {
                                     bord.pgnBordHist.append(bord.bord)
                                     lightCount = lightCount + 1
                                     color = "dark"
+                                }else{
+                                    showingSheet = true
                                 }
                             }else if darkCount < game.darkMoveList.count{
                                     print(game.darkMoveList[darkCount])
