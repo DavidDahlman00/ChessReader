@@ -76,17 +76,15 @@ struct  MultiPlayerGameView: View {
                     bord.enPassant = document["enpassant"] as! [Int]
                     bord.playerToGo = document["playerToGo"] as! String
                 }
-                    
-               }
+            }
             move = tmpMove + 1
             if tmpState != "" {
                 bord.stringToBord(fenText: tmpState)
                // bord.changePlayerToGo()
             }
-            
             print(tmpState)
-            }
         }
+    }
 }
 
 

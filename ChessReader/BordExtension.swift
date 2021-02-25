@@ -97,7 +97,9 @@ extension Bord{
                 bord[0][2] = "BK"
                 bord[0][4] = ""
             }
+            
             goToNextPlayer()
+            
         case "none":
             if pices[player].contains(bord[row][col]){
                 recetActivityBord()
