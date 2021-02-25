@@ -16,6 +16,7 @@ class ReadPGN {
     var player = "light"
     var result: String = ""
     var testPGN : String
+    var winner = ""
         
     init(testPGN: String) {
         self.testPGN = testPGN
@@ -92,6 +93,15 @@ class ReadPGN {
         print(i)
         information = information.filter{ $0 != "\""}
         testPGNInt = 0
+        if ["1-0", "1-"].contains(tmpBuffert) {
+            winner = "white"
+        }else if ["0-1", "0-"].contains(tmpBuffert) {
+            winner = "black"
+        }else if ["1/2-1/2", "1/2-1/"].contains(tmpBuffert){
+            winner = "draw"
+        }else{
+            winner = "Error: game wasn't read correctly"
+        }
     }
     
     

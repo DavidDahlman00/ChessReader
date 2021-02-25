@@ -31,6 +31,7 @@ struct ChessBordView : View {
     var game : ReadPGN
     var db = Firestore.firestore()
     @State private var showingAlert = false
+    @State private var showingWinnerAlert = false
     @ObservedObject var bord = Bord()
     
     
@@ -70,6 +71,9 @@ struct ChessBordView : View {
                     
                    
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
+                        .alert(isPresented: $showingWinnerAlert) {
+                        Alert(title: Text("Winner"), message: Text(game.winner), dismissButton: .default(Text("Got it!")))
+                       }
                     HStack{
                         Button(action: {
                             if bord.pgnBordHist.count > 1{
@@ -101,16 +105,17 @@ struct ChessBordView : View {
                                     lightCount = lightCount + 1
                                     color = "dark"
                                 }
-                            }else {
-                                if darkCount < game.darkMoveList.count{
+                            }else if darkCount < game.darkMoveList.count{
                                     print(game.darkMoveList[darkCount])
                                     print(darkCount)
                                     bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
                                     bord.pgnBordHist.append(bord.bord)
                                     darkCount = darkCount + 1
                                     color = "light"
-                                }
+                            }else{
+                                self.showingWinnerAlert = true
                             }
+                            
                         }) {
                             Image(systemName: "forward.fill")
                                 .gradientForeground(colors: [.blue, Color("TextColor2")])
