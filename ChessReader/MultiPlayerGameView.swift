@@ -63,29 +63,28 @@ struct  MultiPlayerGameView: View {
             
         }
     }
-
- func listenToFireStore() {
-        
-    db.collection("multiplayerGames").document("games").collection("game\(gameNumber)").addSnapshotListener{ (snapshot, err) in
-            var tmpState = ""
-            var tmpMove = 0
-            for document in snapshot!.documents {
-                if document["move"] as! Int > tmpMove {
-                    tmpState = document["state"] as! String
-                    tmpMove = document["move"] as! Int
-                    bord.enPassant = document["enpassant"] as! [Int]
-                    bord.playerToGo = document["playerToGo"] as! String
-                }
-            }
-            move = tmpMove + 1
-            if tmpState != "" {
-                bord.stringToBord(fenText: tmpState)
-               // bord.changePlayerToGo()
-            }
-            print(tmpState)
-        }
-    }
-
+    
+// func listenToFireStore() {
+//        
+//    db.collection("multiplayerGames").document("games").collection("game\(gameNumber)").addSnapshotListener{ (snapshot, err) in
+//            var tmpState = ""
+//            var tmpMove = 0
+//            for document in snapshot!.documents {
+//                if document["move"] as! Int > tmpMove {
+//                    tmpState = document["state"] as! String
+//                    tmpMove = document["move"] as! Int
+//                    bord.enPassant = document["enpassant"] as! [Int]
+//                    bord.playerToGo = document["playerToGo"] as! String
+//                }
+//            }
+//            move = tmpMove + 1
+//            if tmpState != "" {
+//                bord.stringToBord(fenText: tmpState)
+//               // bord.changePlayerToGo()
+//            }
+//            print(tmpState)
+//        }
+//    }
 }
 
 
