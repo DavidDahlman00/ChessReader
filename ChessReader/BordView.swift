@@ -15,7 +15,7 @@ struct BordView: View {
     let imageSize: CGFloat
     var image: [[String]]
     let action: [Any]
-    var schach: String = ""
+    @State var schach: String = ""
         
 //        String{
 //        if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
@@ -48,6 +48,7 @@ struct BordView: View {
         .onAppear(){
             if action[0] as! String == "Multiplayer" {
                 listenToFireStore()
+                setSchack()
             }
         }
 
@@ -97,18 +98,34 @@ struct BordView: View {
     }
     
     func setSchack() -> String {
-        if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
-            return "StaleMate"
-        }else
-        if bord.drawByRepitation{
-            return "drawByRepitation"
-        }else if  (bord.playerToGo == "Light" && bord.schachMate[0]) || (bord.playerToGo == "Dark" && bord.schachMate[1]){
-            return "SchackMate"
-        }else if (bord.playerToGo == "Light" && bord.schach[0]) || (bord.playerToGo == "Dark" && bord.schach[1]){
-            return "Schack"
-        }else {
-            return ""
+        if action[0] as! String != "Multiplayer" {
+            if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
+                return "StaleMate"
+            }else
+            if bord.drawByRepitation{
+                return "drawByRepitation"
+            }else if  (bord.playerToGo == "Light" && bord.schachMate[0]) || (bord.playerToGo == "Dark" && bord.schachMate[1]){
+                return "SchackMate"
+            }else if (bord.playerToGo == "Light" && bord.schach[0]) || (bord.playerToGo == "Dark" && bord.schach[1]){
+                return "Schack"
+            }else {
+                return ""
+            }
+        }else{
+            if (action[2] as! String == "Light" && bord.staleMate[0]) || (action[2] as! String == "Dark" && bord.staleMate[1]){
+                return "StaleMate"
+            }else
+            if bord.drawByRepitation{
+                return "drawByRepitation"
+            }else if  (action[2] as! String == "Light" && bord.schachMate[0]) || (action[2] as! String == "Dark" && bord.schachMate[1]){
+                return "SchackMate"
+            }else if (action[2] as! String == "Light" && bord.schach[0]) || (action[2] as! String == "Dark" && bord.schach[1]){
+                return "Schack"
+            }else {
+                return ""
+            }
         }
+     
     }
     
     func listenToFireStore() {
