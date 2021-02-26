@@ -11,6 +11,7 @@ import Firebase
 
 struct BordView: View {
    @ObservedObject var bord: Bord
+    var db = Firestore.firestore()
     let imageSize: CGFloat
     var image: [[String]]
     let action: [Any]
@@ -42,6 +43,11 @@ struct BordView: View {
             RowView(bord: bord, imageSize: imageSize, row: 7, image: image[7], action: action)
         }
         .padding()
+        .onAppear(){
+            if action[0] as! String == "Multiplayer" {
+                listenToFireStore()
+            }
+        }
 
         .actionSheet(isPresented: $bord.promotePawn){
             ActionSheet(title: Text("Promote pawn to"), buttons: [
@@ -87,6 +93,29 @@ struct BordView: View {
                             },])
         }
     }
+    
+    func listenToFireStore() {
+        let gameName = action[1] as! Int
+       db.collection("multiplayerGames").document("games").collection("game\(gameName)").addSnapshotListener{ (snapshot, err) in
+               var tmpState = ""
+               var tmpMove = 0
+               for document in snapshot!.documents {
+                   if document["move"] as! Int > tmpMove {
+                       tmpState = document["state"] as! String
+                       tmpMove = document["move"] as! Int
+                       bord.enPassant = document["enpassant"] as! [Int]
+                       bord.playerToGo = document["playerToGo"] as! String
+                       bord.multiplayerMoveCount = tmpMove
+                   }
+               }
+               //move = tmpMove + 1
+               if tmpState != "" {
+                   bord.stringToBord(fenText: tmpState)
+                  // bord.changePlayerToGo()
+               }
+               print(tmpState)
+           }
+       }
 }
 
 struct RowView: View {
