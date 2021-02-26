@@ -57,9 +57,9 @@ extension Bord{
             }else{
                 enPassant[0] = 10
             }
-
+            
             goToNextPlayer()
-
+            
         case "inEnPassantList":
             if playerToGo == "Light" {
                 bord[3][col] = ""

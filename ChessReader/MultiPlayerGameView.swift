@@ -74,7 +74,7 @@ struct  MultiPlayerGameView: View {
                     tmpState = document["state"] as! String
                     tmpMove = document["move"] as! Int
                     bord.enPassant = document["enpassant"] as! [Int]
-                    bord.playerToGo = document["playerToGo"] as! String
+                        bord.playerToGo = document["playerToGo"] as! String
                 }
             }
             move = tmpMove + 1
