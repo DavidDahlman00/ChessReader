@@ -42,7 +42,7 @@ struct  MultiPlayerGameView: View {
                     
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["Multiplayer", gameNumber, color])
                         .onAppear(){
-                        listenToFireStore()
+                       // listenToFireStore()
                     }
 
                     // knappar och annat
@@ -63,7 +63,7 @@ struct  MultiPlayerGameView: View {
             
         }
     }
-    
+
  func listenToFireStore() {
         
     db.collection("multiplayerGames").document("games").collection("game\(gameNumber)").addSnapshotListener{ (snapshot, err) in
@@ -74,7 +74,7 @@ struct  MultiPlayerGameView: View {
                     tmpState = document["state"] as! String
                     tmpMove = document["move"] as! Int
                     bord.enPassant = document["enpassant"] as! [Int]
-                        bord.playerToGo = document["playerToGo"] as! String
+                    bord.playerToGo = document["playerToGo"] as! String
                 }
             }
             move = tmpMove + 1
@@ -85,6 +85,7 @@ struct  MultiPlayerGameView: View {
             print(tmpState)
         }
     }
+
 }
 
 
