@@ -66,7 +66,7 @@ struct  MultiPlayerGameView: View {
     
  func listenToFireStore() {
         
-        db.collection("game\(gameNumber)").addSnapshotListener{ (snapshot, err) in
+    db.collection("multiplayerGames").document("games").collection("game\(gameNumber)").addSnapshotListener{ (snapshot, err) in
             var tmpState = ""
             var tmpMove = 0
             for document in snapshot!.documents {
