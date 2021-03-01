@@ -111,8 +111,8 @@ struct WaitingForMultiPlayerView: View {
                         } else{
                             print("Error inCounter nil")
                         }
-                        print(gameNumber)
-                        print(color)
+                        //print(gameNumber)
+                        //print(color)
                       //  print(document.data()["toGameCounter"] )
                     }
                 } else {

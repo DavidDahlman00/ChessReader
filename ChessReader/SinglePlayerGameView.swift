@@ -21,6 +21,8 @@ struct SinglePlayerGameView: View {
     @State private var showingSheet = false
     @ObservedObject var bord = Bord()
     
+    
+    // Code for adding new games to database. DON'T REMOVE!!!
 //    var tempOcation = "Stavanger 2020"
 //    var tempPlayers = "Caruana,F - Tari,A"
 //    var tempGame = """
@@ -63,7 +65,7 @@ struct SinglePlayerGameView: View {
 
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["SinglePlayerGameView"])
                         
-                    
+                    // Code for adding new games to database. DON'T REMOVE!!!
 //                    Button(action: {
 //
 //                            db.collection("gameList").addDocument(data: ["ocation" : tempOcation, "players" : tempPlayers, "game" : tempGame])

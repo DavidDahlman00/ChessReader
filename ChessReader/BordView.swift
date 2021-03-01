@@ -124,10 +124,9 @@ struct BordView: View {
                        bord.multiplayerMoveCount = tmpMove
                    }
                }
-               //move = tmpMove + 1
+
                if tmpState != "" {
                    bord.stringToBord(fenText: tmpState)
-                  // bord.changePlayerToGo()
                }
                print(tmpState)
         bord.checkSchach()
@@ -215,14 +214,8 @@ struct SquareView: View {
             if tmpBord != bord.bord{
                 let gameName = action[1] as! Int
                 bord.multiplayerMoveCount = bord.multiplayerMoveCount + 1
-                //bord.changePlayerToGo()
                 bord.checkSchach()
-                print("!!!!!!!!!!")
-                print(bord.schach[0])
-                print(bord.schach[1])
                 db.collection("multiplayerGames").document("games").collection("game\(gameName)").addDocument(data: ["move": bord.multiplayerMoveCount, "state" : bord.bordToString(), "enpassant" : bord.enPassant, "playerToGo" : bord.playerToGo, "schack" : bord.schach])
-                print(bord.playerToGo)
-                
             }
         }
     }
@@ -249,9 +242,7 @@ struct SquareView: View {
                 switch action[0] as! String{
                 //case "ChessBordView"      to be done
                 case "SinglePlayerGameView":
-                    print("test \(row), \(col)")
                     bord.squareTuched(row: row, col: col)
-                    print(bord.activityBord[row][col])
                     //action
                 case "Dark":
                     if bord.playerToGo == "Dark" {
@@ -266,9 +257,7 @@ struct SquareView: View {
                 case "ChessBordView": break
                     
                 default:
-                    print("test \(row), \(col)")
                     bord.squareTuched(row: row, col: col)
-                    print(bord.activityBord[row][col])
                 }
                 
                 
