@@ -179,6 +179,22 @@ class Bord: ObservableObject {
             gameEnd = true
         }
     }
+    func updateMultiplayer() {
+        checkSchach()
+        checkStaleMate()
+        checkSchackMate()
+        histBord[6] = histBord[5]
+        histBord[5] = histBord[4]
+        histBord[4] = histBord[3]
+        histBord[3] = histBord[2]
+        histBord[2] = histBord[1]
+        histBord[1] = histBord[0]
+        histBord[0] = bord
+        if histBord[0] == histBord[4] && histBord[1] == histBord[5] && histBord[2] == histBord[6]{
+            drawByRepitation = true
+            gameEnd = true
+        }
+    }
     
     // Takes a move from a PGN "Portable game notation" and updates bord.
     func pGNMoveToBord(pgn: String, player: String) {
