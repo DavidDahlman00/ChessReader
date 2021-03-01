@@ -37,8 +37,8 @@ struct  MultiPlayerGameView: View {
                         .font(.title)
                         .padding()
                     
-                    Text("\(gameNumber)")
-                     .font(.footnote)
+//                    Text("\(gameNumber)")
+//                     .font(.footnote)
                     
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["Multiplayer", gameNumber, color])
                         .onAppear(){

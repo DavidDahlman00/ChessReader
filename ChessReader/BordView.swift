@@ -32,28 +32,20 @@ struct BordView: View {
             return ""
         }
     }
-
-    var MultiplayerSchach: String{
-        if bord.schach[0] || bord.schach[0]{
+    
+   var schachMultiplayer: String{
+        if bord.schach[0] || bord.schach[0] {
             return "schack"
         }
         return ""
     }
-
-
+    
     var body: some View {
         VStack(spacing: 0){
-            if action[0] as! String != "Multiplayer"{
-                Text(schach)
-            } else {
-                Text(str1)
-                Text(str2)
-                Text(MultiplayerSchach)
-                Text(bord.playerToGo)
-            }
+            
+            Text(schach)
            
-
-                
+            
             RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 2, image: image[2], action: action)
@@ -67,7 +59,7 @@ struct BordView: View {
         .onAppear(){
             if action[0] as! String == "Multiplayer" {
                 listenToFireStore()
-
+            
                 
             }
         }
@@ -158,8 +150,7 @@ struct BordView: View {
                        tmpMove = document["move"] as! Int
                        bord.enPassant = document["enpassant"] as! [Int]
                        bord.playerToGo = document["playerToGo"] as! String
-
-                    bord.schach = document["schack"] as! [Bool]
+                       bord.schach = document["schack"] as! [Bool]
                        bord.multiplayerMoveCount = tmpMove
                    }
                }
@@ -174,8 +165,9 @@ struct BordView: View {
         str2 = String(bord.schach[1])
            }
         
-    }
-
+    
+       }
+}
 
 struct RowView: View {
     @ObservedObject var bord: Bord
@@ -253,12 +245,11 @@ struct SquareView: View {
             if tmpBord != bord.bord{
                 let gameName = action[1] as! Int
                 bord.multiplayerMoveCount = bord.multiplayerMoveCount + 1
-
-                
-                bord.checkSchach()
                 //bord.changePlayerToGo()
                 bord.checkSchach()
-
+                print("!!!!!!!!!!")
+                print(bord.schach[0])
+                print(bord.schach[1])
                 db.collection("multiplayerGames").document("games").collection("game\(gameName)").addDocument(data: ["move": bord.multiplayerMoveCount, "state" : bord.bordToString(), "enpassant" : bord.enPassant, "playerToGo" : bord.playerToGo, "schack" : bord.schach])
                 print(bord.playerToGo)
                 
