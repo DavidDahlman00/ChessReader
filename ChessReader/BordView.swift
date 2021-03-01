@@ -41,17 +41,10 @@ struct BordView: View {
     
     var body: some View {
         VStack(spacing: 0){
-            if action[0] as! String != "Multiplayer" {
-                Text(schach)
-            }else{
             
-                Text(str1)
-                Text(str2)
-                Text(schachMultiplayer)
-                Text(bord.playerToGo)
-            }
+            Text(schach)
+           
             
-                
             RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 2, image: image[2], action: action)
