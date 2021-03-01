@@ -160,6 +160,8 @@ class Bord: ObservableObject {
         }
     }
     
+ 
+    
     // Should run all functions necessary to move over to next player after one player have made a move.
     func goToNextPlayer() {
         changePlayerToGo()

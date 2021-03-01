@@ -17,7 +17,7 @@ struct BordView: View {
     let action: [Any]
     @State var str1: String = ""
     @State var str2: String = ""
-    
+
     var schach: String{
         if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
             return "StaleMate"
@@ -32,12 +32,14 @@ struct BordView: View {
             return ""
         }
     }
+
     var MultiplayerSchach: String{
         if bord.schach[0] || bord.schach[0]{
             return "schack"
         }
         return ""
     }
+
 
     var body: some View {
         VStack(spacing: 0){
@@ -50,6 +52,7 @@ struct BordView: View {
                 Text(bord.playerToGo)
             }
            
+
                 
             RowView(bord: bord, imageSize: imageSize, row: 0, image: image[0], action: action)
             RowView(bord: bord, imageSize: imageSize, row: 1, image: image[1], action: action)
@@ -64,7 +67,7 @@ struct BordView: View {
         .onAppear(){
             if action[0] as! String == "Multiplayer" {
                 listenToFireStore()
-               
+
                 
             }
         }
@@ -155,6 +158,7 @@ struct BordView: View {
                        tmpMove = document["move"] as! Int
                        bord.enPassant = document["enpassant"] as! [Int]
                        bord.playerToGo = document["playerToGo"] as! String
+
                     bord.schach = document["schack"] as! [Bool]
                        bord.multiplayerMoveCount = tmpMove
                    }
@@ -170,10 +174,8 @@ struct BordView: View {
         str2 = String(bord.schach[1])
            }
         
-        
-        
-       }
-}
+    }
+
 
 struct RowView: View {
     @ObservedObject var bord: Bord
@@ -251,8 +253,12 @@ struct SquareView: View {
             if tmpBord != bord.bord{
                 let gameName = action[1] as! Int
                 bord.multiplayerMoveCount = bord.multiplayerMoveCount + 1
+
                 
                 bord.checkSchach()
+                //bord.changePlayerToGo()
+                bord.checkSchach()
+
                 db.collection("multiplayerGames").document("games").collection("game\(gameName)").addDocument(data: ["move": bord.multiplayerMoveCount, "state" : bord.bordToString(), "enpassant" : bord.enPassant, "playerToGo" : bord.playerToGo, "schack" : bord.schach])
                 print(bord.playerToGo)
                 
@@ -314,4 +320,5 @@ struct SquareView: View {
     }
     
 
+}
 }
