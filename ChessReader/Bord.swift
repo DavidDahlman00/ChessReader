@@ -1,10 +1,3 @@
-//
-//  Bord.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-29.
-//
-
 import Foundation
 import Firebase
 
@@ -226,9 +219,7 @@ class Bord: ObservableObject {
             }
             let move = pgn.filter{
                 ["a", "b", "c", "d", "e", "f", "g", "h", "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
-            print("!!!!!!!!!!!!!!!!!!!")
-            print(move.count)
-            print(move)
+           
                 if move.count == 2{
                     let col = move[0]
                     let row = Int(move[1]) ?? -1
@@ -333,12 +324,7 @@ class Bord: ObservableObject {
                     }
                 }
         }
-        print("!!!!!!!!!!!!!!!!!!!")
-
-        print(toRow)
-        print(fromRow)
-        print(toCol)
-        print(fromCol)
+      
         if player == "light" {
             switch pgn {
             case "O-O":

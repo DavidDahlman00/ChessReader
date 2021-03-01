@@ -1,10 +1,3 @@
-//
-//  Rules.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-29.
-//
-
 import Foundation
 
 struct Rules{
@@ -802,7 +795,7 @@ struct Rules{
     }
     
     func SchackMate(bord: [[String]], enPassant: [Int], player: String) -> Bool {
-        print("test checkMate")
+        
         if checkForSchach(bord: bord, player: player){
             var moveList = [[Int]]()
             var pieces: [String]
@@ -813,13 +806,11 @@ struct Rules{
             }else{
                 pieces = darkPices
             }
-            print(pieces)
+            
             for piece in pieces{
                 if !getPiecesPositions(bord: bord, piece: piece).isEmpty{
                     for position in getPiecesPositions(bord: bord, piece: piece) {
-                        print("Position \(position[0]), \(position[1])")
-                        print("piece \(piece)")
-                        print(type(of: piece))
+                        
                         switch piece {
                         case "BB":
                             moveList = moveList + darkBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
@@ -827,8 +818,7 @@ struct Rules{
                             moveList = moveList + lightBishop(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "BK":
                             moveList = moveList + darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
-                            print("test king")
-                            print(darkKing(bord: bord, checkSchack: true, row: position[0], col: position[1]))
+                            
                         case "LK":
                             moveList = moveList + lightKing(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         case "BN":
@@ -850,15 +840,14 @@ struct Rules{
                         case "LR":
                             moveList = moveList + lightRook(bord: bord, checkSchack: true, row: position[0], col: position[1])
                         default:
-                            print("Error")
+                           
                             _ = true
                             
                         }
                     }
                 }
             }
-            print("TEST SCHACKMATE")
-            print(moveList)
+            
             if moveList.isEmpty{
                 return true
             }
@@ -868,7 +857,7 @@ struct Rules{
     }
     
     func StaleMate(bord: [[String]], enPassant: [Int], player: String) -> Bool {
-        print("test checkMate")
+        
         if !checkForSchach(bord: bord, player: player){
             var moveList = [[Int]]()
             var pieces: [String]
@@ -915,7 +904,7 @@ struct Rules{
                     }
                 }
             }
-            print(moveList)
+           
             if moveList.isEmpty{
                 return true
             }
@@ -931,7 +920,6 @@ struct Rules{
         }else{
              kingPosition = getPiecesPositions(bord: bord, piece: "BK")[0]
         }
-        print("king position \(kingPosition[0]), \(kingPosition[1])")
         var moveList = [[Int]]()
         
         if player == "Light" {
@@ -954,7 +942,7 @@ struct Rules{
                     default: break
                     }
                 }
-                print("in light move")
+               
             }
         }else {
             for value in lightPices{
@@ -977,7 +965,7 @@ struct Rules{
                     }
                 }
             }
-            print("in dark move")
+           
         }
         if moveList.contains(kingPosition) {
             return true
