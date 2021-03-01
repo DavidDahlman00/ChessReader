@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-25.
-//
-
 import SwiftUI
 import FirebaseAuth
 
@@ -18,16 +11,9 @@ struct ContentView: View {
     init() {
      
         auth.auth.signInAnonymously{ (result, err) in
-            print("!!!!!!!!")
             if let err = err {
-                
-                
-                print(err.localizedDescription)
-                print("!!!!!!!!!!")
                 return
             }
-            
-            print("Success Auth")
         }
     }
     var body: some View {
@@ -38,8 +24,6 @@ struct ContentView: View {
                 .tabItem{
                     Image(systemName: "person.fill")
                     Text("Singleplayer game")
-                    
-                    
                 }
             WaitingForMultiPlayerView(auth: auth)
                 .tabItem{

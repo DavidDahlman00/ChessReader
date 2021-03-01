@@ -1,10 +1,3 @@
-//
-//  ChessBordView.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-27.
-//
-
 import SwiftUI
 import Firebase
 
@@ -109,8 +102,7 @@ struct ChessBordView : View {
                             
                             if color == "light" {
                                 if lightCount < game.lightMoveList.count{
-                                    print(game.lightMoveList[lightCount])
-                                    print(lightCount)
+                                   
                                     bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
                                     bord.pgnBordHist.append(bord.bord)
                                     lightCount = lightCount + 1
@@ -119,8 +111,7 @@ struct ChessBordView : View {
                                     showingSheet = true
                                 }
                             }else if darkCount < game.darkMoveList.count{
-                                    print(game.darkMoveList[darkCount])
-                                    print(darkCount)
+                                   
                                     bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
                                     bord.pgnBordHist.append(bord.bord)
                                     darkCount = darkCount + 1
@@ -162,10 +153,6 @@ struct ChessBordView : View {
         }.onAppear(){
             game.readGame()
         }
-    }
-
-    func testFunc(){
-        print("func test 1 ")
     }
     
     func resetGame() {

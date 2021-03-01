@@ -1,10 +1,3 @@
-//
-//  Bord.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-01-29.
-//
-
 import Foundation
 import Firebase
 
@@ -181,6 +174,22 @@ class Bord: ObservableObject {
             gameEnd = true
         }
     }
+    func updateMultiplayer() {
+        checkSchach()
+        checkStaleMate()
+        checkSchackMate()
+        histBord[6] = histBord[5]
+        histBord[5] = histBord[4]
+        histBord[4] = histBord[3]
+        histBord[3] = histBord[2]
+        histBord[2] = histBord[1]
+        histBord[1] = histBord[0]
+        histBord[0] = bord
+        if histBord[0] == histBord[4] && histBord[1] == histBord[5] && histBord[2] == histBord[6]{
+            drawByRepitation = true
+            gameEnd = true
+        }
+    }
     
     // Takes a move from a PGN "Portable game notation" and updates bord.
     func pGNMoveToBord(pgn: String, player: String) {
@@ -210,9 +219,7 @@ class Bord: ObservableObject {
             }
             let move = pgn.filter{
                 ["a", "b", "c", "d", "e", "f", "g", "h", "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
-            print("!!!!!!!!!!!!!!!!!!!")
-            print(move.count)
-            print(move)
+           
                 if move.count == 2{
                     let col = move[0]
                     let row = Int(move[1]) ?? -1
@@ -317,12 +324,7 @@ class Bord: ObservableObject {
                     }
                 }
         }
-        print("!!!!!!!!!!!!!!!!!!!")
-
-        print(toRow)
-        print(fromRow)
-        print(toCol)
-        print(fromCol)
+      
         if player == "light" {
             switch pgn {
             case "O-O":

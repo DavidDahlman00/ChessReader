@@ -1,10 +1,3 @@
-//
-//  ReadPGN.swift
-//  ChessReader
-//
-//  Created by David Dahlman on 2021-02-16.
-//
-
 import Foundation
 
 
@@ -89,8 +82,7 @@ class ReadPGN {
             }
          i = i + 1
         }
-        print(tmpBuffert)
-        print(i)
+        
         information = information.filter{ $0 != "\""}
         testPGNInt = 0
         if ["1-0", "1-"].contains(tmpBuffert) {

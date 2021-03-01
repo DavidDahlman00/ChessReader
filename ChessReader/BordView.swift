@@ -17,6 +17,7 @@ struct BordView: View {
     let action: [Any]
     @State var str1: String = ""
     @State var str2: String = ""
+
     var schach: String{
         if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
             return "StaleMate"
@@ -107,7 +108,36 @@ struct BordView: View {
                             },])
         }
     }
-
+    
+    func setSchack() -> String {
+        if action[0] as! String != "Multiplayer2" {
+            if (bord.playerToGo == "Light" && bord.staleMate[0]) || (bord.playerToGo == "Dark" && bord.staleMate[1]){
+                return "StaleMate"
+            }else
+            if bord.drawByRepitation{
+                return "drawByRepitation"
+            }else if  (bord.playerToGo == "Light" && bord.schachMate[0]) || (bord.playerToGo == "Dark" && bord.schachMate[1]){
+                return "SchackMate"
+            }else if (bord.playerToGo == "Light" && bord.schach[0]) || (bord.playerToGo == "Dark" && bord.schach[1]){
+                return "Schack"
+            }else {
+                return ""
+            }
+        }else{
+            if (bord.playerToGo != "Light" && bord.staleMate[1]) || (bord.playerToGo == "Dark" && bord.staleMate[0]){
+                return "StaleMate"
+            }else
+            if bord.drawByRepitation{
+                return "drawByRepitation"
+            }else if  (bord.playerToGo != "Light" && bord.schachMate[1]) || (bord.playerToGo == "Dark" && bord.schachMate[0]){
+                return "SchackMate"
+            }else if (bord.playerToGo != "Light" && bord.schach[1]) || (bord.playerToGo == "Dark" && bord.schach[0]){
+                return "Schack"
+            }else {
+                return ""
+            }
+        }
+    }
     
     func listenToFireStore() {
         let gameName = action[1] as! Int
@@ -271,3 +301,4 @@ struct SquareView: View {
     
 
 }
+
