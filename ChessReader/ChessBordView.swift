@@ -11,26 +11,29 @@ struct ChessBordView : View {
         if lightCount == 0 {
             return ""
         }else{
-            return "Light's \(lightCount) move: \(game.lightMoveList[lightCount])"
+            return "Light's \(lightCount) move: \(game.lightMoveList[lightCount - 1])"
         }
     }
     var darkTestString : String{
         if darkCount == 0 {
             return ""
         }else{
-            return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount])"
+            return "Dark's \(darkCount) move:  \(game.darkMoveList[darkCount - 1])"
         }
     }
     var game : ReadPGN
     var db = Firestore.firestore()
     @State private var showingAlert = false
+    @State private var showingSheet = false
     @ObservedObject var bord = Bord()
+    @State private var gameComment = ""
+    @State private var showDialog = false
+    @State private var showComment = false
     
     init(playedGame: GameListEntry) {
 
         self.playedGame = playedGame
         game = ReadPGN(testPGN: playedGame.game)
-        game.readGame()
         bord.pgnBordHist.append(bord.bord)
 
     }
@@ -40,7 +43,7 @@ struct ChessBordView : View {
             ZStack{
                 Color("BackGroundColor")
                 VStack{
-                    // text och annat
+
                     Text(playedGame.ocation ?? "Unknown Event")
                         .bold()
                         .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
@@ -49,9 +52,12 @@ struct ChessBordView : View {
                     Text(playedGame.players ?? "?? - ??")
                         .bold()
                         .foregroundColor(.gray)
-//                        .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
+
                         .font(.subheadline)
-                        .padding(.bottom)
+                        //.padding(.bottom)
+                    
+                  
+                        
                 
 
                     HStack{
@@ -61,76 +67,180 @@ struct ChessBordView : View {
                             .font(.footnote)
                     }
                     
+
+                
                    
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "ChessBordView")
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["ChessBordView"])
+//                        .alert(isPresented: $showingWinnerAlert) {
+//                        Alert(title: Text("Winner"), message: Text(game.winner), dismissButton: .default(Text("Got it!")))
+//                       }
+                        .alert(isPresented: $showingSheet){
+                            Alert(title: Text("Winner"),
+                                  message: Text(game.winner),
+                                  primaryButton: .destructive(Text("Reset")){
+                                   resetGame()
+                                    showingSheet = false
+                                  },
+                                  secondaryButton: .default(Text("View Game!")){
+                                    showingSheet = false
+                                  })
+                        }
+                        .alert(isPresented: $showComment) {
+                         if lightCount > darkCount {
+                             return  Alert(title: Text("Comment"), message: Text(game.lighCommentList[lightCount - 1]), dismissButton: .default(Text("Got it!")))
+                         }else{
+                             return  Alert(title: Text("Comment"), message: Text(game.darkCommentList[darkCount - 1]), dismissButton: .default(Text("Got it!")))
+                         }
+                        
+                        }
                     HStack{
-                        Button(action: {
-                            if bord.pgnBordHist.count > 1{
-                                bord.pgnBordHist.remove(at: bord.pgnBordHist.count - 1)
-                                bord.bord = bord.pgnBordHist[bord.pgnBordHist.count - 1]
-                                if color == "light"{
-                                    darkCount = darkCount - 1
-                                    color = "dark"
-                                }else {
-                                    lightCount = lightCount - 1
-                                    color = "light"
+                        
+                       
+                            
+                        
+                        
+                        HStack(alignment: .center){
+                            Button(action: {
+                                if bord.pgnBordHist.count > 1{
+                                    bord.pgnBordHist.remove(at: bord.pgnBordHist.count - 1)
+                                    bord.bord = bord.pgnBordHist[bord.pgnBordHist.count - 1]
+                                    if color == "light"{
+                                        darkCount = darkCount - 1
+                                        color = "dark"
+                                    }else {
+                                        lightCount = lightCount - 1
+                                        color = "light"
+                                    }
                                 }
+                                
+                            }) {
+                                Image(systemName: "backward.fill")
+                                    .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                    .font(.title)
                             }
                             
-                        }) {
-                            Image(systemName: "backward.fill")
-                                .gradientForeground(colors: [.blue, Color("TextColor2")])
-                                .font(.title)
+                            Button(action: {
+                                
+                                if color == "light" {
+                                    if lightCount < game.lightMoveList.count{
+                                       
+                                        bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
+                                        bord.pgnBordHist.append(bord.bord)
+                                        lightCount = lightCount + 1
+                                        color = "dark"
+                                    }else{
+                                        showingSheet = true
+                                    }
+                                }else if darkCount < game.darkMoveList.count{
+                                       
+                                        bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
+                                        bord.pgnBordHist.append(bord.bord)
+                                        darkCount = darkCount + 1
+                                        color = "light"
+                                }else{
+                                    self.showingSheet = true
+                                }
+                                
+                            }) {
+                                Image(systemName: "forward.fill")
+                                    .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                    .font(.title)
+                            }
                         }
                         
-                        Button(action: {
-                            if color == "light" {
-                                if lightCount < game.lightMoveList.count{
-                                    print(game.lightMoveList[lightCount])
-                                    print(lightCount)
-                                    bord.pGNMoveToBord(pgn: game.lightMoveList[lightCount], player: "light")
-                                    bord.pgnBordHist.append(bord.bord)
-                                    lightCount = lightCount + 1
-                                    color = "dark"
-                                }
-                            }else {
-                                if darkCount < game.darkMoveList.count{
-                                    print(game.darkMoveList[darkCount])
-                                    print(darkCount)
-                                    bord.pGNMoveToBord(pgn: game.darkMoveList[darkCount], player: "dark")
-                                    bord.pgnBordHist.append(bord.bord)
-                                    darkCount = darkCount + 1
-                                    color = "light"
-                                }
-                            }
-                        }) {
-                            Image(systemName: "forward.fill")
-                                .gradientForeground(colors: [.blue, Color("TextColor2")])
-                                .font(.title)
-                        }
                     }.padding(.bottom)
                     
+                    
+      
 
-                   
-                    Button("Game Info") {
-                               showingAlert = true
-                           }
-                           .alert(isPresented: $showingAlert) {
-                            Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
-                           }
-                    .gradientForeground(colors: [.blue, Color("TextColor2")])
-                    .font(.title)
                     
                     // knappar och annat
+                    HStack{
+                        Button(action: {
+                            self.showingAlert = true
+                        }) {
+                            Text("Game Info")
+                                .gradientForeground(colors: [Color("TextColor2"), .blue])
+                                .font(.title)
+                               }
+                        .alert(isPresented: $showingAlert) {
+                         Alert(title: Text("Game Info"), message: Text(game.information), dismissButton: .default(Text("Got it!")))
+                        }
+                        
+                        HStack{
+                            if lightCount > 0 {
+                                Button(action: {showDialog = true
+                                    
+                                }){
+                                    Image(systemName: "pencil")
+                                        .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                        .font(.title)
+                                }
+                                
+                            }
+                        }
+                        
+                        HStack{
+                            if lightCount > darkCount {
+                                if lightCount > 0 && game.lighCommentList[lightCount - 1] != "" {
+                                    Button(action: {showComment = true
+                                        
+                                    }){
+                                        Image(systemName: "eye")
+                                            .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                            .font(.title)
+                                    }
+                                                               }
+                            }else if darkCount > 0 && game.darkCommentList[darkCount - 1] != "" {
+                                Button(action: {showComment = true
+                                    
+                                }){
+                                    Image(systemName: "eye")
+                                        .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                        .font(.title)
+                                }
+                                
+                            }
+                        }
+                    }
+                   
                 }
                 
             }.edgesIgnoringSafeArea(.all)
             
+        }  .alert(isPresented: $showDialog,
+                  TextAlert(title: "Title",
+                                message: "Message",
+                                keyboardType: .default) { result in
+                    if let text = result {
+                        if lightCount > darkCount {
+                            if lightCount > 0 {
+                          game.lighCommentList[lightCount - 1] = text
+                                print(game.lighCommentList[lightCount])
+                            }
+                        }else{
+                            if darkCount > 0 {
+                          game.darkCommentList[darkCount - 1] = text
+                                print(game.darkCommentList[darkCount])
+                            }
+                        }
+                       
+                    } else {
+                      // The dialog was cancelled
+                    }
+                  }
+     ).onAppear(){
+            game.readGame()
         }
     }
-
-    func testFunc(){
-        print("func test 1 ")
+    
+    func resetGame() {
+        lightCount = 0
+        darkCount = 0
+        color = "light"
+        let tmp = bord.pgnBordHist[0]
+        bord.pgnBordHist = [tmp]
+        bord.bord = tmp
     }
     
 }

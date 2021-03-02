@@ -18,7 +18,7 @@ struct WaitingForMultiPlayerView: View {
             Color("BackGroundColor").edgesIgnoringSafeArea(.all)
 
             VStack{
-                Text("Multiplayer!")
+                Text("Multiplayer")
                     .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                     .font(.title)
                 Text(waitingString)
@@ -43,7 +43,7 @@ struct WaitingForMultiPlayerView: View {
                     destination: MultiPlayerGameView(gameNumber: gameNumber, color: color ), isActive: $showMultiplayerGame){
                     Button(action: {
                         if color == "err"{
-                            waitingString = "Waiting for oponent..."
+                            waitingString = "Waiting for opponent..."
                             waitingButton = ""
                             db.collection("waitList").getDocuments() { (querySnapshot, err) in
                                 if let err = err {
@@ -68,7 +68,7 @@ struct WaitingForMultiPlayerView: View {
                         listenToFireStore()
                     }){
                     Text(waitingButton)
-                        .gradientForeground(colors: [.blue, Color("TextColor2")])
+                        .gradientForeground(colors: [Color("TextColor2"), .blue])
                         .font(.title)
 
                         .padding(30)
@@ -111,8 +111,8 @@ struct WaitingForMultiPlayerView: View {
                         } else{
                             print("Error inCounter nil")
                         }
-                        print(gameNumber)
-                        print(color)
+                        //print(gameNumber)
+                        //print(color)
                       //  print(document.data()["toGameCounter"] )
                     }
                 } else {

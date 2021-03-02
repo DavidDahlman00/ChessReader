@@ -21,6 +21,8 @@ struct SinglePlayerGameView: View {
     @State private var showingSheet = false
     @ObservedObject var bord = Bord()
     
+    
+    // Code for adding new games to database. DON'T REMOVE!!!
 //    var tempOcation = "Stavanger 2020"
 //    var tempPlayers = "Caruana,F - Tari,A"
 //    var tempGame = """
@@ -61,8 +63,9 @@ struct SinglePlayerGameView: View {
                         .gradientForeground(colors: [Color("TextColor1"), Color("TextColor2")])
                         .font(.title)
 
-                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: "SinglePlayerGameView")
-                    
+                    BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["SinglePlayerGameView"])
+                        
+                    // Code for adding new games to database. DON'T REMOVE!!!
 //                    Button(action: {
 //
 //                            db.collection("gameList").addDocument(data: ["ocation" : tempOcation, "players" : tempPlayers, "game" : tempGame])
@@ -78,7 +81,7 @@ struct SinglePlayerGameView: View {
                         self.showingSheet = true
                     }) {
                         Text("Reset")
-                            .gradientForeground(colors: [.blue, Color("TextColor2")])
+                            .gradientForeground(colors: [Color("TextColor2"), .blue])
                             .font(.title)
                     }
                     
@@ -128,7 +131,7 @@ struct SinglePlayerGameView: View {
                                      })
                     }
                     
-                }
+                }.padding(.top)
                 
                 
                 

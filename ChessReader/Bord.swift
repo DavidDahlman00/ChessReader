@@ -16,6 +16,7 @@ class Bord: ObservableObject {
     @Published var staleMateEnd : Bool = false
     @Published var kingHasMoved : [Bool] = [false, false]   // indicates i the king's has moved.
     @Published var pgnBordHist : [[[String]]] = [[[String]]]()
+    @Published var multiplayerMoveCount = 0
     var drawByRepitation : Bool = false   // returns true when the game has ended draw by repetation.
     var activeSquare: [Int]? = nil
     var activePice: String? = nil      // returns piece that is currently clicked
@@ -152,10 +153,28 @@ class Bord: ObservableObject {
         }
     }
     
+ 
+    
     // Should run all functions necessary to move over to next player after one player have made a move.
     func goToNextPlayer() {
         changePlayerToGo()
         recetActivityBord()
+        checkSchach()
+        checkStaleMate()
+        checkSchackMate()
+        histBord[6] = histBord[5]
+        histBord[5] = histBord[4]
+        histBord[4] = histBord[3]
+        histBord[3] = histBord[2]
+        histBord[2] = histBord[1]
+        histBord[1] = histBord[0]
+        histBord[0] = bord
+        if histBord[0] == histBord[4] && histBord[1] == histBord[5] && histBord[2] == histBord[6]{
+            drawByRepitation = true
+            gameEnd = true
+        }
+    }
+    func updateMultiplayer() {
         checkSchach()
         checkStaleMate()
         checkSchackMate()
@@ -200,6 +219,7 @@ class Bord: ObservableObject {
             }
             let move = pgn.filter{
                 ["a", "b", "c", "d", "e", "f", "g", "h", "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
+           
                 if move.count == 2{
                     let col = move[0]
                     let row = Int(move[1]) ?? -1
@@ -230,12 +250,17 @@ class Bord: ObservableObject {
                     let rows = move.filter{
                         [ "1", "2", "3", "4", "5", "6", "7", "8"].contains($0)}
                     if rows.count == 2 {
-                        let row = Int(rows[0]) ?? -1
-                        fromRow = 8 - row
+                        let rowfrom = Int(rows[0]) ?? -1
+                        fromRow = 8 - rowfrom
+                        let rowto = Int(rows[1]) ?? -1
+                        toRow = 8 - rowto
+                    }else{
+                        let rowto = Int(rows[0]) ?? -1
+                        toRow = 8 - rowto
                     }
                     if colums.count == 2 {
-                        let col = colums[0]
-                        switch col {
+                        //let col = colums[0]
+                        switch colums[0] {
                         case "a":
                             fromCol = 0
                         case "b":
@@ -255,11 +280,51 @@ class Bord: ObservableObject {
                         default:
                             _ = true
                         }
+                        switch colums[1] {
+                        case "a":
+                            toCol = 0
+                        case "b":
+                            toCol = 1
+                        case "c":
+                            toCol = 2
+                        case "d":
+                            toCol = 3
+                        case "e":
+                            toCol = 4
+                        case "f":
+                            toCol = 5
+                        case "g":
+                            toCol = 6
+                        case "h":
+                            toCol = 7
+                        default:
+                            _ = true
+                        }
+                    }else{
+                        switch colums[0] {
+                        case "a":
+                            toCol = 0
+                        case "b":
+                            toCol = 1
+                        case "c":
+                            toCol = 2
+                        case "d":
+                            toCol = 3
+                        case "e":
+                            toCol = 4
+                        case "f":
+                            toCol = 5
+                        case "g":
+                            toCol = 6
+                        case "h":
+                            toCol = 7
+                        default:
+                            _ = true
+                        }
                     }
                 }
-            
         }
-        
+      
         if player == "light" {
             switch pgn {
             case "O-O":
