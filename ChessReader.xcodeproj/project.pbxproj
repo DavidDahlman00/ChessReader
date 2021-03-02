@@ -28,6 +28,7 @@
 		51B80A5B25CAA0130036656F /* ReadGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A5A25CAA0130036656F /* ReadGameView.swift */; };
 		51B80A6025CAA0340036656F /* SinglePlayerGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A5F25CAA0340036656F /* SinglePlayerGameView.swift */; };
 		51B80A6225CAA04A0036656F /* MultiPlayerGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B80A6125CAA04A0036656F /* MultiPlayerGameView.swift */; };
+		51CA77AE25EE317C00AEE8E4 /* TextAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA77AD25EE317C00AEE8E4 /* TextAlert.swift */; };
 		6838950FE8D367A0ACEC52CF /* Pods_ChessReaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A90AC6103B87D0952376FD8 /* Pods_ChessReaderTests.framework */; };
 		773B995E25C98A2F003E9CEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 773B995D25C98A2F003E9CEA /* GoogleService-Info.plist */; };
 		7785278725E5301500A5DE7E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7785278625E5301400A5DE7E /* SearchBar.swift */; };
@@ -82,6 +83,7 @@
 		51B80A5A25CAA0130036656F /* ReadGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadGameView.swift; sourceTree = "<group>"; };
 		51B80A5F25CAA0340036656F /* SinglePlayerGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGameView.swift; sourceTree = "<group>"; };
 		51B80A6125CAA04A0036656F /* MultiPlayerGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPlayerGameView.swift; sourceTree = "<group>"; };
+		51CA77AD25EE317C00AEE8E4 /* TextAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAlert.swift; sourceTree = "<group>"; };
 		773B995D25C98A2F003E9CEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7785278625E5301400A5DE7E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		77BFBD7A25D1C96400D38B8C /* WaitingForMultiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForMultiPlayerView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				51B80A5A25CAA0130036656F /* ReadGameView.swift */,
 				77BFBD7A25D1C96400D38B8C /* WaitingForMultiPlayerView.swift */,
 				51B80A5F25CAA0340036656F /* SinglePlayerGameView.swift */,
+				51CA77AD25EE317C00AEE8E4 /* TextAlert.swift */,
 				517864BA25DEA5B2009AAC95 /* BordExtension.swift */,
 				51B80A6125CAA04A0036656F /* MultiPlayerGameView.swift */,
 				512750A025CAAD3200E1FF8D /* BordView.swift */,
@@ -463,6 +466,7 @@
 				518229A025BF092A00974B3F /* AppDelegate.swift in Sources */,
 				5180DFEC25C42C8900DF9B74 /* Rules.swift in Sources */,
 				517864BB25DEA5B2009AAC95 /* BordExtension.swift in Sources */,
+				51CA77AE25EE317C00AEE8E4 /* TextAlert.swift in Sources */,
 				517864B625DE9DD7009AAC95 /* StringExtension.swift in Sources */,
 				518229A225BF092A00974B3F /* SceneDelegate.swift in Sources */,
 				512750A125CAAD3200E1FF8D /* BordView.swift in Sources */,

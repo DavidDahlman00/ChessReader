@@ -6,6 +6,8 @@ class ReadPGN {
     var information: String = ""
     var darkMoveList = [String]()
     var lightMoveList = [String]()
+    var darkCommentList = [String]()
+    var lighCommentList = [String]()
     var player = "light"
     var result: String = ""
     var testPGN : String
@@ -27,6 +29,10 @@ class ReadPGN {
         }
     }
     
+    func createCommnetLists(lightLenght : Int, darkLenght : Int){
+        lighCommentList = [String](repeating: "", count: lightLenght)
+        darkCommentList = [String](repeating: "", count: darkLenght)
+    }
     
     func getCurrentChar() -> String {
         if testPGNInt < testPGN.count - 1 && testPGNInt > 0 {
@@ -94,6 +100,10 @@ class ReadPGN {
         }else{
             winner = "Error: game wasn't read correctly"
         }
+        
+        createCommnetLists(lightLenght: lightMoveList.count, darkLenght: darkMoveList.count)
+        print("WWwwwww")
+        print("light \(lighCommentList.count), dark \(darkCommentList.count)")
     }
     
     
