@@ -167,7 +167,7 @@ struct ChessBordView : View {
                                     
                                 }){
                                     Image(systemName: "pencil")
-                                        .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                        .gradientForeground(colors: [Color("TextColor2"), .blue])
                                         .font(.title)
                                 }
                                 
@@ -181,7 +181,7 @@ struct ChessBordView : View {
                                         
                                     }){
                                         Image(systemName: "eye")
-                                            .gradientForeground(colors: [.blue, Color("TextColor2")])
+                                            .gradientForeground(colors: [Color("TextColor2"), .blue])
                                             .font(.title)
                                     }
                                                                }
