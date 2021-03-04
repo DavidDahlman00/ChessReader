@@ -92,18 +92,17 @@ class ReadPGN {
         information = information.filter{ $0 != "\""}
         testPGNInt = 0
         if ["1-0", "1-"].contains(tmpBuffert) {
-            winner = "white"
+            winner = "Light player won"
         }else if ["0-1", "0-"].contains(tmpBuffert) {
-            winner = "black"
+            winner = "Dark player won"
         }else if ["1/2-1/2", "1/2-1/"].contains(tmpBuffert){
-            winner = "draw"
+            winner = "Game ended in a draw"
         }else{
             winner = "Error: game wasn't read correctly"
         }
         
         createCommnetLists(lightLenght: lightMoveList.count, darkLenght: darkMoveList.count)
-        print("WWwwwww")
-        print("light \(lighCommentList.count), dark \(darkCommentList.count)")
+    
     }
     
     

@@ -66,25 +66,22 @@ struct ChessBordView : View {
                         Text(darkTestString)
                             .font(.footnote)
                     }
+                    .alert(isPresented: $showingSheet){
+                        Alert(title: Text("Game Ended"),
+                              message: Text(game.winner),
+                              primaryButton: .destructive(Text("Reset")){
+                               resetGame()
+                                showingSheet = false
+                              },
+                              secondaryButton: .default(Text("View Game!")){
+                                showingSheet = false
+                              })
+                    }
                     
 
                 
                    
                     BordView(bord: bord, imageSize: 0.92 * geo.size.width / 8, image: bord.bord, action: ["ChessBordView"])
-//                        .alert(isPresented: $showingWinnerAlert) {
-//                        Alert(title: Text("Winner"), message: Text(game.winner), dismissButton: .default(Text("Got it!")))
-//                       }
-                        .alert(isPresented: $showingSheet){
-                            Alert(title: Text("Winner"),
-                                  message: Text(game.winner),
-                                  primaryButton: .destructive(Text("Reset")){
-                                   resetGame()
-                                    showingSheet = false
-                                  },
-                                  secondaryButton: .default(Text("View Game!")){
-                                    showingSheet = false
-                                  })
-                        }
                         .alert(isPresented: $showComment) {
                          if lightCount > darkCount {
                              return  Alert(title: Text("Comment"), message: Text(game.lighCommentList[lightCount - 1]), dismissButton: .default(Text("Got it!")))
@@ -151,10 +148,7 @@ struct ChessBordView : View {
                     }.padding(.bottom)
                     
                     
-      
 
-                    
-                    // knappar och annat
                     HStack{
                         Button(action: {
                             self.showingAlert = true
