@@ -8,36 +8,83 @@
 import Foundation
 import SwiftUI
 
-struct SearchBar: UIViewRepresentable{
-    
-    @Binding var text: String
+struct CustomSearchBar: UIViewControllerRepresentable {
     
     
-    class Coordinator: NSObject, UISearchBarDelegate {
+    
+    func makeCoordinator() -> Coordinator {
+        return CustomSearchBar.Coordinator(parent: self)
+    }
+    
+    var view: ReadGameView
+    
+    var largeTitle: Bool
+    var title: String
+    var placeHolder: String
+    
+    var onSearch: (String)->()
+    var onCancel: ()->()
+    
+    init(view: ReadGameView,onSearch: @escaping (String)->(), onCancel: @escaping ()->()) {
+        self.title = title
+        self.largeTitle = largeTitle!
+        self.placeHolder = placeHolder!
+        self.view = view
+        self.onSearch = onSearch
+        self.onCancel = onCancel
+    }
+    
+    func makeUIViewController(context: Context) -> UINavigationController {
         
-        @Binding var text: String
+        let childView = UIHostingController(rootView: view)
         
-        init(text: Binding<String>) {
-            _text = text
+        let controller = UINavigationController(rootViewController: childView)
+        
+        controller.navigationBar.topItem?.title = title
+        controller.navigationBar.prefersLargeTitles = largeTitle
+        
+        
+        let searchController = UISearchController()
+        searchController.searchBar.placeholder = placeHolder
+        
+        searchController.searchBar.delegate = context.coordinator
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        controller.navigationBar.topItem?.hidesSearchBarWhenScrolling = false
+        controller.navigationBar.topItem?.searchController = searchController
+        
+        return controller
+        
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        uiViewController.navigationBar.topItem?.title = title
+        uiViewController.navigationBar.topItem?.searchController?.searchBar.placeholder = placeHolder
+        uiViewController.navigationBar.preferensLargeTitles = largeTitle
+    }
+    
+    
+    class Coordinator: NSObject,UISearchBarDelegate{
+        
+        var parent: CustomSearchBar
+        
+        init(parent: CustomSearchBar) {
+            self.parent = parent
         }
         
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            text = searchText
+        func searchBar(_searchBar: UISearchBar, textDidChange searchText: String){
+            
+            self.parent.onSearch(searchText)
+        }
+        
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+         
+            self.parent.onCancel()
+            
+            
+            
         }
     }
-    
-    func makeCoordinator() -> SearchBar.Coordinator {
-        return Coordinator(text: $text)
-    }
-    
-    func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
-        let searchBar = UISearchBar(frame: .zero)
-        searchBar.delegate = context.coordinator
-        return searchBar
-    }
-    
-    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
-        uiView.text = text
-    }
-    
 }
+

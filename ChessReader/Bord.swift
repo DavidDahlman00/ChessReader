@@ -67,6 +67,7 @@ class Bord: ObservableObject {
         return fenText
     }
     
+    
     // transform a FEN "Forsyth-Edwards Notation" to a bord in form of [[String]]
     func stringToBord(fenText: String) {
         var n = 0

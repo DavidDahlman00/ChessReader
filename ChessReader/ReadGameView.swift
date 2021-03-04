@@ -17,7 +17,13 @@ struct ReadGameView: View {
             ZStack{
                 Color("BackGroundColor").edgesIgnoringSafeArea(.all)
                 VStack{
-                SearchBar(text: $searchTerm)
+                    CustomSearchBar(view: ReadGameView(searchterm: $searchTerm), onSearch: { (txt) in
+                        
+                    }, onCancel: {
+                        
+                    })
+                    .ignoresSafeArea()
+                   // SearchBar(text: $searchTerm).foregroundColor(Color("BackGroundColor"))
              List {
             
                 ForEach(self.gameList.entries.filter {
